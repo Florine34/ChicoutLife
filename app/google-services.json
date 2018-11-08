@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "658048082133",
+    "firebase_url": "https://chicoutlife-37a65.firebaseio.com",
+    "project_id": "chicoutlife-37a65",
+    "storage_bucket": "chicoutlife-37a65.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:658048082133:android:cbd9119696c5df7d",
+        "android_client_info": {
+          "package_name": "com.example.flo.chicoutlife"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "658048082133-vs1rbg05ft4g5t3ri9i6ldd66em3k5f2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flo.chicoutlife",
+            "certificate_hash": "d29707557528fc507876c8644a33daf33be89cbb"
+          }
+        },
+        {
+          "client_id": "658048082133-159o6pjpbqfrosili5g49n9gthhha7la.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAR9AOqoObW1fojK3XBfLVWtsMbDbZTOb0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "658048082133-159o6pjpbqfrosili5g49n9gthhha7la.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,288 @@
+<resources>
+	<string-array name="domaine_arrays">
+		<item>Sciences_fondamentales_biologie_chimie</item>
+		<item>Sciences_économiques_et_administratives</item>
+		<item>Sciences_de_l_éducation</item>
+		<item>Sciences_humaines_et_socials</item>
+		<item>Sciences_appliquées</item>
+		<item>Arts_et_lettres</item>
+		<item>Informatique_et_mathématique</item>
+		<item>Ecole_de_langue_française_et_de_culture_québécoise</item>
+		<item>Ecole_des_arts_numériques_de_l_animation_et_du_design_nad</item>
+		<item>Sciences_de_la_santé</item>
+	</string-array>
+
+	<string-array name="Sciences_fondamentales_biologie_chimie">
+	        <item>Baccalauréat en biologie</item>
+	        <item>Baccalauréat en chimie des produits naturels</item>
+	        <item>Certificat en sciences de l\'environnement</item>
+	        <item>Diplôme d\'études supérieures spécialisées en cosmétologie</item>
+	        <item>Diplôme d\'études supérieures spécialisées en éco-conseil</item>
+	        <item>Doctorat en biologie - Volet recherche</item>
+	        <item>Doctorat en sciences de l\'environnement - Volet recherche</item>
+	        <item>Maîtrise en ressources renouvelables - Volet recherche</item>
+	        <item>Maîtrise par cumul - Eco conseil</item>
+	        <item>Mineure en sciences de l\'environnement</item>
+	        <item>Programme cour de deuxième cycle en analyse systémique de durabilité</item>
+	        <item>Programme court de deuxième cycle en développement durable appliqué</item>
+	        <item>Programme court de deuxième cycle en gestion durable du carbone</item>
+	        <item>Programme court de premier cycle en biologie pour étudiants en séjour d\'études</item>
+	        <item>Programme court de premier cycle en chimie des produits naturels pour étudiants en séjour d\'études</item>
+	</string-array>
+	
+	<string-array name="Sciences_économiques_et_administratives">
+		<item>Baccalauréat en administration</item>
+		<item>Baccalauréat en sciences comptables</item>
+		<item>Certificat en administration</item>
+		<item>Certificat en coaching</item>
+		<item>Certificat en gestion de l\'hôtellerie et de la restauration des terroirs</item>
+		<item>Certificat en gestion des ressources humaines</item>
+		<item>Certificat en gestion du transport aérien</item>
+		<item>Certificat en marketing</item>
+		<item>Certificat en planification financière - Général</item>
+		<item>Certificat en planification financière - Mouvement Desjardins</item>
+		<item>Certificat en santé et sécurité au travail</item>
+		<item>Certificat en sciences comptables</item>
+		<item>Diplôme d\'études supérieures spécialisées en gestion de projet </item>
+		<item>Diplôme d\'étutdes supérieures spécialisées en sciences comptables </item>
+		<item>Doctorat en management de projets - Volet recherche</item>
+		<item>Maîtrise en administration des affaires</item>
+		<item>Maîtrise en gestion de projet - Volet recherche</item>
+		<item>Maîtrise en gestion de projet</item>
+		<item>Maîtrise en gestion des organisations</item>
+		<item>Maîtrise en gestion des organisations - Volet recherche</item>
+		<item>Maîtrise par cumul</item>
+		<item>Mineure en administration</item>
+		<item>Mineure en gestion des ressources humaines</item>
+		<item>Mineure en marketing</item>
+		<item>Mineure en sciences comptables</item>
+		<item>Programme court de deuxième cycle en gestion de projet</item>
+		<item>Programme court de deuxième cycle en information financière et organisationnelle</item>
+		<item>Programme court de premier cycle de gestion en contexte de sécurité civile</item>
+		<item>Programme court de premier cucle en administration pour étudiants en séjour d\'études</item>
+		<item>Programme court de premier cucle en gestion du transport aérien</item>
+		<item>Programme court de premier cycle en gestion stratégique du transport aérien</item>
+		<item>Programme court de troisième cycle en management de projets</item>
+	</string-array>
+
+	<string-array name="Sciences_de_l_éducation">
+	        <item>Baccalauréat en éducation préscolaire et en enseignement primaire</item>
+	        <item>Baccalauréat en enseignement de l\'éducation physique et à la santé</item>
+	        <item>Baccalauréat en enseignement en adaptation scolaire et sociale</item>
+	        <item>Baccalauréat en enseignement professionnel</item>
+	        <item>Baccalauréat en enseignement secondaire - profil français</item>
+	        <item>Baccalauréat en enseignement secondaire - profil mathématique</item>
+	        <item>Baccalauréat en enseignement secondaire - profil science et technologie</item>
+	        <item>Baccalauréat en enseignement secondaire - profil univers social</item>
+	        <item>Baccalauréat en enseignement secondaire - profil univers social et développement personnel</item>
+	        <item>Certificat d\'interv. en contexte édu. auprès des personnes ayant un trouble du spectre de l\'autisme ou une déficience intellec</item>
+	        <item>Certificat en sciences de l\'activité physique</item>
+	        <item>Diplôme d\'études supérieures spécialisées en administration scolaire</item>
+	        <item>Diplôme d\'études supérieures spécialisées en enseignement collégial</item>
+	        <item>Diplôme d\'études supérieures spécialisées en intervention éducative</item>
+	        <item>Diplôme d\'études supérieures spécialisées en orthopédagogie</item>
+	        <item>Doctorat en éducation - Volet recherche</item>
+	        <item>Maîtrise en éducation</item>
+	        <item>Maîtrise en éducation - Volet recherche</item>
+			<item>Mineure en sciences de l\'activité physique</item>
+	        <item>Prog. court deuxième cycle en intervention dans les petites écoles et classes multiâges en réseau</item>
+	        <item>Progr. court de premier cycle en intervention en contexte éducatif auprès des personnes ayant des troubles du spectre de l\'autisme</item>
+	        <item>Programme court de deuxième cycle en éducation et développement durable</item>
+	        <item>Programme court de premier cycle en adaptation scolaire et sociale pour enseignants en exercice</item>
+	        <item>Programme court de premier cycle en éducation au préscolaire et en enseignement au primaire pour étudiants en séjour d\'études</item>
+	        <item>Programme court de premier cycle en enseignement secondaire pour étudiants en séjour d\'études</item>
+	        <item>Programme court d\'études supérieures en intervention éducative</item>
+	        <item>Programme court en intégration sociocommunautaire des personnes ayant une déficience intellectuelle</item>
+	        <item>Programme court sur les modèles et approches d\'intervention en contexte éducatif auprès des personnes présentant un TSA ou une DI</item>
+	</string-array>
+
+	<string-array name="Sciences_humaines_et_socials">
+		<item>Baccalauréat en géographie et en aménagement durable</item>
+		<item>Baccalauréat en histoire</item>
+		<item>Baccalauréat en intervention plein air</item>
+		<item>Baccalauréat en science politique</item>
+		<item>Baccalauréat en sociologie appliquée</item>
+		<item>Baccalauréat en travail social </item>
+		<item>Certificat en archéologie</item>
+		<item>Certificat en coopération international</item>
+		<item>Certificat en géographie</item>
+		<item>Certificat en gestion des documents et des archives</item>
+		<item>Certificat en histoire </item>
+		<item>Certificat en intervention communautaire</item>
+		<item>Certificat en intervention jeunesse</item>
+		<item>Certificat en science politique</item>
+		<item>Certificat en sociologie</item>
+		<item>Certificat en toxicomanies et autres indépendances</item>
+		<item>Diplôme d\'études supérieurs spécialisées en éthique </item>
+		<item>Diplôme d\'études supérieures spécialisées en intervention par la nature et l\'aventure</item>
+		<item>Doctorat en développement régional - Volet recherche</item>
+		<item>Maîtrise en études et interventions régionales - Volet recherche</item>
+		<item>Maîtrise en études et interventions régionales</item>
+		<item>Maîtrise en travail social</item>
+		<item>Maîtrise en travail social - Volet recherche</item> 
+		<item>Mineure en archéologie</item>
+		<item>Mineure en coopération internationale</item>
+		<item>Mineure en géographie</item>
+		<item>Mineure en gestions des documents et des archives</item>
+		<item>Mineure en histoire</item>
+		<item>Mineure en intervention jeunesse</item>
+		<item>Mineure en science politique</item>
+		<item>Programme court de deuxième cycle en bioéthique</item>
+		<item>Programme court de deuxième cycle en éthique professionnelle et organisationnelle</item>
+		<item>Programme court de deuxième cycle en études régionales</item>
+		<item>Programme court de premier cycle en intervention rituelle et symbolique</item>
+		<item>Programme court de premier cycle en sciences humaines pour étudiants en séjour d\'études</item>
+	</string-array>
+
+	<string-array name="Sciences_appliquées">
+		<item>Baccalauréat en génie civil</item>
+		<item>Baccalauréat en génie éléctrique</item>
+		<item>Baccalauréat en génie géologique</item>
+		<item>Baccalauréat en génie informatique</item>
+		<item>Baccalauréat e génie mécanique</item>
+		<item>Baccalauréat en géologie</item>
+		<item>Doctorat en ingénierie - Volet recherche</item>
+		<item>Doctorat en sciences de la Terre et de l\'atmosphère - Volet recherche</item>
+		<item>Maîtrise en géologie et génie géologique</item>
+		<item>Maîtrise en géologie et génie géologique - Volet recherche</item>
+		<item>Maîtrise en ingénierie - Volet recherche</item>
+		<item>Maîtrise en ingénierie</item>
+		<item>Microprogramme de stage de premier cycle en génie et en géologie I</item>
+		<item>Microprogramme de stage de premier cycle en génie et en géologie II</item>
+		<item>Microprogramme de stage de premier cycle en génie et en géologie III</item>
+		<item>Microprogramme de stage de premier cycle en génie et en géologie IV</item>
+		<item>Microprogramme de stage de premier cycle en génie et en géologie V</item>
+		<item>Microprogramme de stage de premier cycle en génie I</item>
+		<item>Microprogramme de stage de premier cycle en génie II</item>
+		<item>Microprogramme de stage de premier cycle en génie III</item>
+		<item>Microprogramme de stage de premier cycle en génie IV</item>
+		<item>Microprogramme de stage de premier cycle en génie V</item>
+		<item>Programme court de 2e cycle en développement professionnel en sciences et génie d\'exploration minérale</item>
+		<item>Programme court de deuxième cycle en ingénierie pour étudiants en séjour d\'études</item>
+		<item>Programme court de deuxieème cycle pour l\'utilisation du matériau bois dans la construction</item>
+		<item>Programme court de premier cycle en génie pour étudants en séjour d\'études</item>
+		<item>Programme court de premier cycle en sciences de la Terre pour étudiants en séjour d\'études</item>
+	</string-array>
+
+	<string-array name="Arts_et_lettres">
+		<item>Baccalauréat avec majeure en études littéraires françaises</item>
+		<item>Baccalauréat en communication interculturelle et médiatique</item>
+		<item>Baccalauréat en enseignement des arts</item>
+		<item>Baccalauréat en enseignement des langues secondes</item>
+		<item>Baccalauréat en études littéraires françaises</item>
+		<item>Baccalauréat en langues modernes</item>
+		<item>Baccalauréat en linguistique et langue française</item>
+		<item>>Baccalauréat interdisciplinaire en arts</item>
+		<item>Certificat de perfectionnement en formation artistique</item>
+		<item>Certificat en anglais langue seconde</item>
+		<item>Certificat en arts numériques</item>
+		<item>Certificat en arts visuels</item>
+		<item>Certificat en cinéma et en vidéo</item>
+		<item>Certificat en création littéraire</item>
+		<item>Certificat en espagnol</item>
+		<item>Certificat en médiation et transmission culturelle en arts</item>
+		<item>Certificat en rédaction - communications</item>
+		<item>Certificat en théâtre</item>
+		<item>Doctorat en lettres - Volet recherche</item>
+		<item>Maîtrise en art - Volet recherche</item>
+		<item>Maîtrise en lettres - Volet recherche</item>
+		<item>Maîtrise en linguistique - Volet recherche</item>
+		<item>Mineure en anglais langue seconde</item>
+		<item>Mineure en arts numériques</item>
+		<item>Mineure en arts visuels</item>
+		<item>Mineure en cinéma et en vidéo</item>
+		<item>Mineure en création littéraire</item>
+		<item>Mineure en espagnol</item>
+		<item>Mineure en rédaction - communications</item>
+		<item>Mineure en théâtre</item>
+		<item>Programme court de premier cycle en arts pour étudiants en séjour d\'études</item>
+		<item>Programme court de premier cycle en langue espagnole</item>
+		<item>Programme court de premier cycle en langues modernes pour étudiants en séjour d\'études</item>
+		<item>Programme court de premier cycle en lettres françaises et québécoises pour étudiants en séjour d\'études</item>
+		<item>Programme court en anglais langue seconde</item>
+	</string-array>
+	
+	<string-array name="Informatique_et_mathématique">
+		<item>Baccalauréat avec majeure en concepion de jeux vidéo</item>
+		<item>Baccalauréat avec majeure en mathématique</item>
+		<item>Baccalauréat en informatique</item>
+		<item>Baccalauréat en informatique de gestion</item>
+		<item>Certificat en informatique</item>
+		<item>Certificat en informatique appliquée</item>
+		<item>Certificat en informatique de gestion</item>
+		<item>Certificat en mathématique</item>
+		<item>Diplôme de deuxième cycle en informatique appliquée</item>
+		<item>Doctorat en sciences et technologies de l\'information - Volet recherche</item>
+		<item>Maîtrise en informatique - Volet recherche</item>
+		<item>Maîtrise en informatique</item>
+		<item>Maîtrise en informatique - Jeux vidéo</item>
+		<item>Mineure en informatique</item>
+		<item>Mineure en informatique appliquée</item>
+		<item>Mineure en informatique de gestion</item>
+		<item>Mineure en mathématique</item>
+		<item>Programme court de deuxième cycle en informatique pour étudiants en séjour d\'études</item>
+		<item>Programme court de premier cycle en informatique pour étudiants en séjour d\'études</item>
+	</string-array>
+
+	<string-array name="Ecole_de_langue_française_et_de_culture_québécoise">
+		<item>Baccalauréat en éducation préscolaire et en enseignement primaire</item>
+		<item>Certificat de perfectionnement en transmission d\'une langue autochtone</item>
+		<item>Certificat en études pluridisciplinaires</item>
+		<item>Certificat en formation d\'aides enseignants en milieu autochtone</item>
+		<item>Certificat en formation de suppléants en milieu scolaire autochtone</item>
+		<item>Certificat en français langue seconde ou étrangère : culture, études et travail</item>
+		<item>Certificat en intervention et en prévention des dépendances chez les jeunes des Premières Nations</item>
+		<item>Certificat en technolinguistique autochtone</item>
+		<item>Microprogramme de deuxième cycle en gestion publique en contexte autochtone</item>
+		<item>Programme court d\'apprentissage du français parlé et écrit pour non-francophones</item>
+		<item>Programme court de deuxième cycle en gestion publique en contexte autochtone</item>
+		<item>Programme court de premier cycle d\'apprentissage du français parlé et écrit pour non francophones II</item>
+		<item>Programme court de premier cycle d\'apprentissage du français parlé et écrit pour non francophones III</item>
+		<item>Programme court de premier cycle de formation de passeurs culturels des arts des Premières Nations</item>
+		<item>Programme court de premier cycle de perfectionnement en français écrit</item>
+		<item>Programme court de premier cycle d\'intervention en apprentissage d\'une langue autochtone</item>
+		<item>Programme court de premier cycle en archéologie pour les Premières Nations</item>
+		<item>Programme court de premier cycle en comptabilité financière</item>
+		<item>Programme court de premier cycle en développement du langage chez les enfants des Premières Nations</item>
+		<item>Programme court de premier cycle en développement socioéconomique</item>
+		<item>Programme court de premier cycle en français écrit langue seconde pour les Premières Nations</item>
+		<item>Programme court de premier cycle en intervention jeunesse autochtone</item>
+		<item>Programme court de premier cycle en prévenion des dépendances chez les jeunes des Premières Nations</item>
+		<item>Programme court de premier cycle en relation d\'aide</item>
+		<item>Programme court en histoire et culture des Premières Nations du nord-est de l\'Amérique du Nord</item>
+		<item>Programme court en intervention plein air pour les Premières Nations</item>
+		<item>Programme court en production audiovisuelle des Premières Nations</item>
+	</string-array>
+	
+	<string-array name="Ecole_des_arts_numériques_de_l_animation_et_du_design_nad">
+		<item>Baccalauréat en animation 3D et en design numérique</item>
+		<item>Certificat en animation 3D et en design numérique</item>
+		<item>Diplôme d\'études supérieures spécialisées en design de jeux vidéo narratif</item>
+	</string-array>
+
+	<string-array name="Sciences_de_la_santé">
+		<item>Baccalauréat en kinésiologie</item>
+		<item>Baccalauréat en psychologie</item>
+		<item>Baccalauréat en sciences - Réadaptation</item>
+		<item>Baccalauréat en sciences infirmières - Cheminement formation initiale</item>
+		<item>Baccalauréat en sciences infirmières - Cheminement infirmière en exercice - Volet intégré</item>
+		<item>Baccalauréat en sciences infirmières - Cheminement infirmière en exercice - Volet perfectionnement</item>
+		<item>Certificat d\'optimisation en pratique infirmière</item>
+		<item>Certificat en kinésiologie</item>
+		<item>Certificat en psychologie</item>
+		<item>Certificat en psychologie du travail et des organisations</item>
+		<item>Diplôme d\'études supérieures spécialisées en sciences infirmières</item>
+		<item>Diplôme d\'études supérieures spécialisées en sciences infirmières - IPS soins de première ligne</item>
+		<item>Doctorat en psychologie - Volet recherche - Profil Psychologie clinique</item>
+		<item>Doctorat en psychologie - Volet recherche - Profil Neuropsychologie</item>
+		<item>Maîtrise en sciences cliniques et biomédicales - Volet recherche </item>
+		<item>Maîtrise en sciences infirmières</item>
+		<item>Maîtrise en sciences infirmières - Volet recherche</item>
+		<item>Maîtrise en sciences infirmières - IPS soins de première ligne</item>
+		<item>Maîtrise en sciences infirmières - Santé mentale et soins psychiatriques</item>
+		<item>Maîtrise en sciences appliquées en physiothérapie</item>
+		<item>Mineure en kinésiologie</item>
+		<item>Mineure en psychologie</item>
+		<item>Mineure en psychologie du travail et des organisations</item>
+	</string-array>
+</resources>

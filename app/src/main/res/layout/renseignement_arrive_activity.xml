@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/arriveRenseign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Renseignements pour votre arrivée"
+            android:textStyle="bold"
+            android:textSize="15pt"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/paysQ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="De quel pays venez vous ?" />
+
+        <Spinner
+            android:id="@+id/spinnerPays"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/country_arrays"/>
+
+        <TextView
+            android:id="@+id/DomainQ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Quel est votre domaine d'étude ?" />
+
+        <Spinner
+            android:id="@+id/spinnerDomaineEtude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/domaine_arrays" />
+
+        <TextView
+            android:id="@+id/programmeQ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Quel est votre programme d'étude ?" />
+
+        <Spinner
+            android:id="@+id/spinnerProgramme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/arriveQ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Quel est vrotre trimestre d'admission ?" />
+
+        <RadioGroup
+            android:id="@+id/sessionArrivee"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginVertical="5dp">
+
+            <RadioButton
+                android:id="@+id/automne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Automne"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/hiver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Hiver" />
+
+            <RadioButton
+                android:id="@+id/ete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Été" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/tempsQ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Combient de session restez vous ?" />
+
+        <EditText
+            android:id="@+id/numberText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number" />
+
+        <Switch
+            android:id="@+id/permisEtude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Avez vous un Permis d'étude ?"
+            android:showText="true"
+            android:textOff="Non"
+            android:textOn="Oui"
+            android:layout_marginVertical="5dp"/>
+
+        <Switch
+            android:id="@+id/echangeSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Faites vous partie d'un échange universitaire ?"
+            android:showText="true"
+            android:textOff="Non"
+            android:textOn="Oui"
+            android:layout_marginVertical="5dp"/>
+
+        <Switch
+            android:id="@+id/iciSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Êtes-vous déjà à Chicoutimi ?"
+            android:showText="true"
+            android:textOff="Non"
+            android:textOn="Oui"
+            android:layout_marginVertical="5dp"/>
+
+        <Switch
+            android:id="@+id/travailSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Souhaitez vous travailler pendant votre séjour ?"
+            android:showText="true"
+            android:textOff="Non"
+            android:textOn="Oui"
+            android:layout_marginVertical="5dp"/>
+
+        <Button
+            android:id="@+id/valider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Valider"
+            android:layout_gravity="center_horizontal" />
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

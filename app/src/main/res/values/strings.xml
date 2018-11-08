@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Chicout Life</string>
+    <!-- FireBase -->
+    <string name="email_id">adresse email</string>
+    <string name="password">password</string>
+    <string name="login">Login</string>
+    <string name="failed">Authentication failed</string>
+    <string name="create_a_new_account">Create a new Account!</string>
+
+    <!-- TO DO LIST -->
+    <string name="qcourse">Faire les courses</string>
+    <string name="qappart">Trouver un appartement</string>
+    <string name="qhiver">Avoir des vêtements d\'hiver</string>
+    <string name="qinscription">S\'inscrire à l\'UQAC</string>
+    <string name="qasso">Trouver son association (au salon de la rentrée</string>
+    <string name="qcarteetu">Faire sa carte étudiante</string>
+    <string name="qcartebus">Faire sa carte de bus</string>
+    <string name="qcasier">Prendre un casier</string>
+    <string name="qramq">Faire sa RAMQ</string>
+    <string name="qbancaire">Ouvrir un compte bancaire</string>
+    <string name="qnas">Faire son NAS</string>
+    <string name="qattest">Faire signé son attestation d\'arriver</string>
+    <string name="qbilletavion">Acheter ses billets d\'avions</string>
+    <string name="qitineraire">Trouver un itinérqire de votre ville d\'arrivé à Chicoutimi</string>
+    <string name="qpermisetude">Faire son permis d\'étude</string>
+    <string name="qcaq">Faire son CAQ</string>
+    <string name="qaccueilp">S\'inscrire au programme Accueil +</string>
+    <string name="qave">Faire son AVE (Visa Touristique)</string>
+
+    <!-- Pays -->
+    <string-array name="country_arrays">
+        <item>Malaysia</item>
+        <item>United States</item>
+        <item>Indonesia</item>
+        <item>France</item>
+        <item>Italy</item>
+        <item>Singapore</item>
+        <item>New Zealand</item>
+        <item>India</item>
+    </string-array>
+</resources>
