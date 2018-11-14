@@ -5,13 +5,15 @@ public class ToDo {
     private String tache;
     private boolean check;
     private int id;
+    private String cheminBdd   ;
 
     public ToDo() {
     }
 
-    public ToDo(String tache,boolean check){
+    public ToDo(String tache,boolean check,String cheminBdd){
         this.tache = tache;
         this.check = check;
+        this.cheminBdd = cheminBdd;
     }
     public String getToDoTache() {
         return tache;
@@ -39,5 +41,21 @@ public class ToDo {
 
     public void toggleChecked() {
         check = !check;
+    }
+
+    public String getCheminBdd() {
+        return cheminBdd;
+    }
+
+    public void setCheminBdd(String cheminBdd) {
+        this.cheminBdd = cheminBdd;
+    }
+
+    public String getTache() {
+        return tache;
+    }
+
+    public void setTache(String tache) {
+        this.tache = tache;
     }
 }

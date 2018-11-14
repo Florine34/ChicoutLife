@@ -36,34 +36,43 @@ public class ToDoListActivity extends AppCompatActivity {
 
     private ArrayAdapter<ToDo> listAdapteraFaire = null;
     private ArrayAdapter<ToDo> listAdapterFait = null;
-    DatabaseReference tbRacine ;
+    DatabaseReference tbToDolist ;
+    DatabaseReference racine ;
     FirebaseDatabase database;
     Context context;
 
+    final Tache[] t = new Tache[1];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.todo_list_activity);
         context = this;
         /*Ouverture base de donnees*/
-        database = FirebaseDatabase.getInstance();/*A revoir ou placer correctement*/
-        tbRacine = database.getReference("inf872-chicoutlife");/*A revoir ou placer correctement*/
 
-        /*Cas pour A FAIRE */
+        database = FirebaseDatabase.getInstance();
+        tbToDolist = database.getReference("ToDoList");
+        racine = tbToDolist.getParent();
+        Log.d("passage"," il est passer dans onCreate");
 
-        //Adapter qui liste les taches a faire de l'utilisateur
 
+        //Adapters qui liste les taches a faire  et fait de l'utilisateur
         ListViewaFaire = findViewById(R.id.linearafaire2);
         ListViewFait = findViewById(R.id.linearfait2);
-        createAdaptersTaches();
 
+        createAdaptersTaches();//Gestion des donnees des adapters
+        Log.d("passage"," qvqnt item click");
         /*Ecoute les item de l adapter pour changer la valeur dans le modele*/
         ListViewaFaire.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View item, int position, long id) {
-                /*TODO changer dans la base de donnees m pas toggle check*/
                 ToDo tache = listAdapteraFaire.getItem(position);
-                tache.toggleChecked();
+
+                /*Change donnees de la todolist de l'utilisateur*/
+
+                racine.child("ToDoList").child("iduser1").child("AFaire").child(tache.getCheminBdd()).removeValue();
+                racine.child("ToDoList").child("iduser1").child("Fait").child(tache.getCheminBdd()).setValue(true);
+                Log.d("passage"," usertodolist remove");
+                tache.toggleChecked();//TODO voir si utile
                 TacheViewHolder viewHolder = (TacheViewHolder) item.getTag();
                 viewHolder.getCheckBox().setChecked(tache.isCheck());
             }
@@ -71,20 +80,21 @@ public class ToDoListActivity extends AppCompatActivity {
         ListViewFait.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View item, int position, long id) {
-                /*TODO changer dans la base de donnees m pas toggle check*/
+
                 ToDo tache = listAdapterFait.getItem(position);
+
+                /*Change donnees de la todolist de l'utilisateur*/
+                racine.child("ToDoList").child("iduser1").child("Fait").child(tache.getCheminBdd()).removeValue();
+                racine.child("ToDoList").child("iduser1").child("AFaire").child(tache.getCheminBdd()).setValue(false);
+
                 tache.toggleChecked();
                 TacheViewHolder viewHolder = (TacheViewHolder) item.getTag();
                 viewHolder.getCheckBox().setChecked(tache.isCheck());
             }
         });
-
-        /* cas pour FAIRE */
-
     }
 
     @Override
-
     //create the menu
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -112,63 +122,50 @@ public class ToDoListActivity extends AppCompatActivity {
         }
     }
 
+
+    /*Fonction qui remplit les adapters afaire et fait*/
     public void createAdaptersTaches(){
-
-
-
         // taches = (ArrayList<Tache>) getLastNonConfigurationInstance();
-        /*lister les questions */
 
-        tachesaFaire = new ArrayList<>();
-        tachesFait = new ArrayList<>();
-
-        tbRacine.addValueEventListener(new ValueEventListener() {//Liste des taches de l user
+        racine.addValueEventListener(new ValueEventListener() {//Liste des taches de l user
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                /*Re/initialise les listes pour les adapters*/
+                tachesaFaire = new ArrayList<>();
+                tachesFait = new ArrayList<>();
                 listAdapteraFaire = new TacheArrayAdapter(context,tachesaFaire);
                 listAdapterFait = new TacheArrayAdapter(context,tachesFait);
+                Log.d("passage"," il est passer dans on DataChange");
+                DataSnapshot tbToDoListUser = dataSnapshot.child("ToDoList").child("iduser1");//TODO modifier pour authentification user
+                DataSnapshot aFaire = tbToDoListUser.child("AFaire");
+                DataSnapshot fait = tbToDoListUser.child("Fait");
+                DataSnapshot dataTache = dataSnapshot.child("Taches");
 
-                DataSnapshot tbToDoList = dataSnapshot.child("ToDoList").child("iduser1");//TODO modifier pour authentification user
-                DataSnapshot aFaire = tbToDoList.child("AFaire");
-                DataSnapshot fait = dataSnapshot.child("Fait");
-
-                Log.d("test avant fct" , "test avant fct afaire "+aFaire.child("Tache001").toString());
-                Log.d("test avant fct" , "test avant fct afaire "+tbToDoList.getChildrenCount());
+                /*Cas pour les taches a faire*/
                 for(DataSnapshot tacheaFaire : aFaire.getChildren()){
+                    Log.d("passage"," debut boucle tqchesqfqire");
                     String cheminTacheAFaire = tacheaFaire.getKey();
-                    Log.d("test avant fct" , "test noom taches recup "+tacheaFaire.getKey());
-                    DataSnapshot tachebdd = dataSnapshot.child(cheminTacheAFaire);
-                    Tache t =tachebdd.getValue(Tache.class);
-                    tachesaFaire.add(new ToDo(t.getCheminString(),false));
+                    DataSnapshot dataTacheChild = dataTache.child(cheminTacheAFaire);
+
+                    Tache t = dataTacheChild.getValue(Tache.class);
+                    tachesaFaire.add(new ToDo(t.getNom(),false,cheminTacheAFaire));
+                    Log.d("passage"," fin boucle tache a faire t.getNom" + t.getNom() + t.getType());
                 }
+
+                /*Cas pour les taches faites*/
                 for(DataSnapshot tacheFait : fait.getChildren()){
-                    String cheminTacheFait = tacheFait.toString();
-
-                    DataSnapshot tache2bdd = dataSnapshot.child(cheminTacheFait);
-                    Tache t2 =tache2bdd.getValue(Tache.class);
-                    tachesaFaire.add(new ToDo(t2.getCheminString(),false));
+                    Log.d("passage"," debut boucle tqchesfait");
+                    String cheminTacheFait = tacheFait.getKey();
+                    DataSnapshot dataTacheChild = dataTache.child(cheminTacheFait);
+                    Tache t2 = dataTacheChild.getValue(Tache.class);
+                    tachesFait.add(new ToDo(t2.getNom(),true,cheminTacheFait));
+                    Log.d("passage","finboucle tache fait");
                 }
 
-
-               // Log.d("test avant fct" , "test avant fct ");
-                //for (DataSnapshot question : dataSnapshot.getChildren()){
-                  //  String cheminTachebdd = question.getKey();
-                   // DatabaseReference idtaches = database.getReference(cheminTachebdd);
-
-                    //Log.d("test ERREUR" , "test qpres q");
-                    //Log.d("test"," mess"+q);
-                    /*tmp test , TODO ajouter differents chemin page et valeur bdd pour repartir*/
-                    //if(q!=null)
-                    //tachesaFaire.add(new ToDo(q.getCheminString(),false));
-                    //tachesFait.add(new ToDo(q.getCheminString(),true));
-
-                //}
                 ListViewaFaire.setAdapter(listAdapteraFaire);
                 ListViewFait.setAdapter(listAdapterFait);
-               // listAdapter = new TacheArrayAdapter(context,taches);
-                //ppListView.setAdapter(listAdapter);
-
+                Log.d("passage"," fin fct");
             }
 
             @Override
@@ -176,8 +173,5 @@ public class ToDoListActivity extends AppCompatActivity {
 
             }
         });
-
-
-
     }
 }

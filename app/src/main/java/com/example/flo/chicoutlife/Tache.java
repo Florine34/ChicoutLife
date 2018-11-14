@@ -1,25 +1,25 @@
 package com.example.flo.chicoutlife;
 
 public class Tache {
-    private String cheminString;
+    private String nom;
     private String idbutton;
     private int type;
 
     public Tache() {
     }
 
-    public Tache(String cheminString, String idbutton, int type) {
-        this.cheminString = cheminString;
+    public Tache(String nom , String idbutton, int type) {
+        this.nom = nom;
         this.idbutton = idbutton;
         this.type = type;
     }
 
-    public String getCheminString() {
-        return cheminString;
+    public String getNom() {
+        return nom;
     }
 
-    public void setCheminString(String cheminString) {
-        this.cheminString = cheminString;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
     public String getIdbutton() {
