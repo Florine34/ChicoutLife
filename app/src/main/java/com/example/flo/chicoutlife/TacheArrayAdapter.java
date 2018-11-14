@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +55,7 @@ public class TacheArrayAdapter extends ArrayAdapter<ToDo> {
 
         }
             String text= tache.getToDoTache();
+        Log.d("passage","dans array adapter text :" + text);
 
             int id = getStringIdentifier(context, text);
             /*Checkbox*/
