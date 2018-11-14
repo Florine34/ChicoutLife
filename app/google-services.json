@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "658048082133-tj8bu939742hs7bcub7tg0ddmkkglt6o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flo.chicoutlife",
+            "certificate_hash": "36731d753f9f97ad62ee1a675177e517990a7a75"
+          }
+        },
+        {
           "client_id": "658048082133-159o6pjpbqfrosili5g49n9gthhha7la.apps.googleusercontent.com",
           "client_type": 3
         }
