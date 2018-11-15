@@ -23,6 +23,7 @@
         <activity android:name=".ToDoListActivity"/>
         <activity android:name=".InscriptionActivity"/>
         <activity android:name=".RenseignementActivity"/>
+        <activity android:name=".InfoActivity"/>
     </application>
 
 </manifest>
