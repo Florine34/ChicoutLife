@@ -14,6 +14,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.List;
 
 import static android.R.drawable.ic_menu_send;
@@ -33,7 +39,7 @@ public class TacheArrayAdapter extends ArrayAdapter<ToDo> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
-        ToDo tache = (ToDo) this.getItem(position);
+        final ToDo tache = (ToDo) this.getItem(position);
         CheckBox checkBox;
         final ImageButton imageButton;
 
@@ -65,13 +71,37 @@ public class TacheArrayAdapter extends ArrayAdapter<ToDo> {
 
             /*ImageButton*/
             imageButton.setId(id);
+            //TODO  recup nom tache trouver correspondance ds bdd info pusher consequence, type 0 1 2
             imageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                    switch (tache.getType()){
+                        case 0://Cas page informations
+
+                            Intent infoPagepOpen = new Intent(context,InfoActivity.class);
+                            infoPagepOpen.putExtra("NOM_PAGE", tache.getCheminBdd());
+                            context.startActivity(infoPagepOpen);
+                            ((Activity)context).finish();
+
+
+                            break;
+                        case 1://Cas page annonces
+
+                            break;
+                        case 2://Cas des deux
+
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    /*
                     Toast.makeText(context,Integer.toString(imageButton.getId()),LENGTH_LONG).show();
                     Intent intentAccueil = new Intent(context, MainActivity.class);
                     context.startActivity(intentAccueil);
-                    ((Activity)context).finish();
+                    ((Activity)context).finish();*/
                 }
             });
 
