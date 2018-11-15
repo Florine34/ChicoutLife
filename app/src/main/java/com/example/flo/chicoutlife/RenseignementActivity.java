@@ -40,7 +40,7 @@ public class RenseignementActivity extends AppCompatActivity {
     private Switch switchPE, switchEchange, switchIci, switchTravail;
     private Button btnSubmit;
     private ArrayAdapter<CharSequence> adapter;
-    private DatabaseReference rUserDatabase = FirebaseDatabase.getInstance().getReference("RUser");;
+    private DatabaseReference rUserDatabase = FirebaseDatabase.getInstance().getReference("RUser");
     private FirebaseAuth mAuth;
 
     @Override
