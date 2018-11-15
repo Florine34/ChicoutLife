@@ -1,15 +1,15 @@
 <resources>
 	<string-array name="domaine_arrays">
-		<item>Sciences_fondamentales_biologie_chimie</item>
-		<item>Sciences_économiques_et_administratives</item>
-		<item>Sciences_de_l_éducation</item>
-		<item>Sciences_humaines_et_socials</item>
-		<item>Sciences_appliquées</item>
-		<item>Arts_et_lettres</item>
-		<item>Informatique_et_mathématique</item>
-		<item>Ecole_de_langue_française_et_de_culture_québécoise</item>
-		<item>Ecole_des_arts_numériques_de_l_animation_et_du_design_nad</item>
-		<item>Sciences_de_la_santé</item>
+		<item>Sciences fondamentales biologie chimie</item>
+		<item>Sciences économiques et administratives</item>
+		<item>Sciences de l\'éducation</item>
+		<item>Sciences humaines et socials</item>
+		<item>Sciences appliquées</item>
+		<item>Arts et lettres</item>
+		<item>Informatique et mathématique</item>
+		<item>Ecole de langue française et de culture québécoise</item>
+		<item>Ecole des arts numériques de l\'animation et du design NAD</item>
+		<item>Sciences de la santé</item>
 	</string-array>
 
 	<string-array name="Sciences_fondamentales_biologie_chimie">

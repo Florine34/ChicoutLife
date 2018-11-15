@@ -17,6 +17,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Switch;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -40,6 +41,7 @@ public class RenseignementActivity extends AppCompatActivity {
     private Button btnSubmit;
     private ArrayAdapter<CharSequence> adapter;
     private DatabaseReference rUserDatabase = FirebaseDatabase.getInstance().getReference("RUser");;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,43 +69,43 @@ public class RenseignementActivity extends AppCompatActivity {
                     spinProg = (Spinner) findViewById(R.id.spinnerProgramme);
                     List<String> list = new ArrayList<String>();
                     switch (res){
-                        case "Sciences_fondamentales_biologie_chimie":
+                        case "Sciences fondamentales biologie chimie":
                             Log.i("DOMAINE","Domaine choisit : Sciences");
                             adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.Sciences_fondamentales_biologie_chimie, android.R.layout.simple_spinner_item);
                             break;
-                        case "Sciences_économiques_et_administratives":
+                        case "Sciences économiques et administratives":
                             Log.i("DOMAINE","Domaine choisit : Info");
                             adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.Sciences_économiques_et_administratives, android.R.layout.simple_spinner_item);
                             break;
-                        case "Sciences_de_l_éducation":
+                        case "Sciences de l\'éducation":
                             Log.i("DOMAINE","Domaine choisit : Sport");
                             adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.Sciences_de_l_éducation, android.R.layout.simple_spinner_item);
                             break;
-                        case "Sciences_humaines_et_socials":
+                        case "Sciences humaines et socials":
                             Log.i("DOMAINE","Domaine choisit : Histoire");
                             adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.Sciences_humaines_et_socials, android.R.layout.simple_spinner_item);
                             break;
-                        case "Sciences_appliquées":
+                        case "Sciences appliquées":
                             Log.i("DOMAINE","Domaine choisit : Sciences");
                             adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.Sciences_appliquées, android.R.layout.simple_spinner_item);
                             break;
-                        case "Arts_et_lettres":
+                        case "Arts et lettres":
                             Log.i("DOMAINE","Domaine choisit : Info");
                             adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.Arts_et_lettres, android.R.layout.simple_spinner_item);
                             break;
-                        case "Informatique_et_mathématique":
+                        case "Informatique et mathématique":
                             Log.i("DOMAINE","Domaine choisit : Sport");
                             adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.Informatique_et_mathématique, android.R.layout.simple_spinner_item);
                             break;
-                        case "Ecole_de_langue_française_et_de_culture_québécoise":
+                        case "Ecole de langue française et de culture québécoise":
                             Log.i("DOMAINE","Domaine choisit : Histoire");
                             adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.Ecole_de_langue_française_et_de_culture_québécoise, android.R.layout.simple_spinner_item);
                             break;
-                        case "Ecole_des_arts_numériques_de_l_animation_et_du_design_nad":
+                        case "Ecole des arts numériques de l\'animation et du design NAD":
                             Log.i("DOMAINE","Domaine choisit : Sport");
                             adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.Ecole_des_arts_numériques_de_l_animation_et_du_design_nad, android.R.layout.simple_spinner_item);
                             break;
-                        case "Sciences_de_la_santé":
+                        case "Sciences de la santé":
                             Log.i("DOMAINE","Domaine choisit : Histoire");
                             adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.Sciences_de_la_santé, android.R.layout.simple_spinner_item);
                             break;
@@ -172,10 +174,6 @@ public class RenseignementActivity extends AppCompatActivity {
 
                 EditText numberSession = (EditText) findViewById(R.id.numberText);
 
-                /**
-                 * A la place du toast il faut insérer les informations dans la base pour chaque user
-                 * Pour le moment il insère les users avec des Id incorrectes donc il faudra changer pour avoir l'id de l'utilisateur
-                 */
                 writeNewRUser(String.valueOf(spinnerPay.getSelectedItem()), String.valueOf(spinnerDomaine.getSelectedItem()), String.valueOf(spinProg.getSelectedItem()), String.valueOf(radioButton.getText()),
                         Integer.parseInt(numberSession.getText().toString()), switchPE.isChecked(), switchEchange.isChecked(), switchIci.isChecked(), switchTravail.isChecked());
 
@@ -190,13 +188,16 @@ public class RenseignementActivity extends AppCompatActivity {
 
     private void writeNewRUser(String pays, String domaineEtude, String progEtude, String sessionAdmi, int nbSession, boolean permisEtude, boolean echangeUni, boolean localisationChicout, boolean travailler) {
 
-        String key = rUserDatabase.push().getKey(); // Changer pour utiliser l'id utilisateur
+        // Get User's ID
+        mAuth = FirebaseAuth.getInstance();
+
+        String key = mAuth.getUid();
         RUser user = new RUser(pays, domaineEtude, progEtude, sessionAdmi, nbSession, permisEtude, echangeUni, localisationChicout, travailler);
 
-        Map<String, Object> postValues = user.toMap();
+        Map<String, Object> userToAdd = user.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put(key, postValues);
+        childUpdates.put(key, userToAdd);
         rUserDatabase.updateChildren(childUpdates);
     }
 
