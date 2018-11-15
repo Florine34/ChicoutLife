@@ -1,5 +1,7 @@
 package com.example.flo.chicoutlife;
 
+import android.util.Log;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -14,8 +16,8 @@ public class WriteToDoListBDD {
     private DatabaseReference toDoListDatabase = FirebaseDatabase.getInstance().getReference("ToDoList");
     private DatabaseReference tacheDatabase = FirebaseDatabase.getInstance().getReference("Taches");
 
-    private Map<String, String> mapAfaire;
-    private Map<String, String> mapFait;
+    private HashMap<String, String> mapAfaire = new HashMap<>();
+    private HashMap<String, String> mapFait = new HashMap<>();
 
     private String[][] tab; // 0 = true 1 = false
 
@@ -32,8 +34,23 @@ public class WriteToDoListBDD {
      * Créer un new objet ToDoList (java)
      * en faire un Map ... Update children (voir code renseignementActivity) (ou juste au dessus)
      */
-    public void insertInDB(){
+    public void insertInBDD(){
 
+        /**
+         *
+         Trouver son association (au salon de la rentrée)
+         Faire sa carte étudiante
+         Faire sa carte de bus
+         Prendre un casier
+         Faire sa RAMQ
+         Ouvrir un compte bancaire
+
+         */
+
+        putMapAfaire("Tache001", "false");
+        putMapAfaire("Tache002", "false");
+        putMapAfaire("Tache003", "false");
+        putMapAfaire("Tache004", "false");
 
         if(user.getBoolEchangeUniversitaire() == true){
             //
@@ -80,7 +97,7 @@ public class WriteToDoListBDD {
 
         //A continuer
 
-        if(compteur == 1){
+        if(compteur == 1){ // Quand il a traité tous les renseignement
             writeNewToDoList(mapAfaire, mapFait);
         }
 
@@ -95,7 +112,6 @@ public class WriteToDoListBDD {
         String key = mAuth.getUid();
 
         ToDoList tdl = new ToDoList(mafaire, mfait);
-
 
         Map<String, Object> userToAdd = tdl.toMap();
 

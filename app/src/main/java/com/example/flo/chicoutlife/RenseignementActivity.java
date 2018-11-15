@@ -199,6 +199,8 @@ public class RenseignementActivity extends AppCompatActivity {
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put(key, userToAdd);
         rUserDatabase.updateChildren(childUpdates);
+        WriteToDoListBDD writeBDD = new WriteToDoListBDD(user);
+        writeBDD.insertInBDD();
     }
 
     //create the menu

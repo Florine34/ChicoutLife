@@ -14,10 +14,9 @@ public class ToDoList {
 
     }
 
-    // IdUser :     Afaire :        Tache1 : false
-    //              fait   :        Tache45 : true
     public ToDoList(Map<String, String> afaire, Map<String, String> fait){
-
+        this.afaire = afaire;
+        this.fait = fait;
     }
 
     @Exclude
