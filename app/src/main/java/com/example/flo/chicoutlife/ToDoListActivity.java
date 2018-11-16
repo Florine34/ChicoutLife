@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ToDoListActivity extends AppCompatActivity {
-
+    FirebaseAuth mAuth;
     private ListView ListViewaFaire = null;
     private ListView ListViewFait = null;
 
@@ -52,7 +53,7 @@ public class ToDoListActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         tbToDolist = database.getReference("ToDoList");
         racine = tbToDolist.getParent();
-        Log.d("passage"," il est passer dans onCreate");
+      //  Log.d("passage"," il est passer dans onCreate");
 
 
         //Adapters qui liste les taches a faire  et fait de l'utilisateur
@@ -60,7 +61,7 @@ public class ToDoListActivity extends AppCompatActivity {
         ListViewFait = findViewById(R.id.linearfait2);
 
         createAdaptersTaches();//Gestion des donnees des adapters
-        Log.d("passage"," qvqnt item click");
+       // Log.d("passage"," qvqnt item click");
         /*Ecoute les item de l adapter pour changer la valeur dans le modele*/
         ListViewaFaire.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -71,7 +72,7 @@ public class ToDoListActivity extends AppCompatActivity {
 
                 racine.child("ToDoList").child("iduser1").child("AFaire").child(tache.getCheminBdd()).removeValue();
                 racine.child("ToDoList").child("iduser1").child("Fait").child(tache.getCheminBdd()).setValue(true);
-                Log.d("passage"," usertodolist remove");
+                //Log.d("passage"," usertodolist remove");
                 tache.toggleChecked();//TODO voir si utile
                 TacheViewHolder viewHolder = (TacheViewHolder) item.getTag();
                 viewHolder.getCheckBox().setChecked(tache.isCheck());
@@ -137,7 +138,7 @@ public class ToDoListActivity extends AppCompatActivity {
                 listAdapteraFaire = new TacheArrayAdapter(context,tachesaFaire);
                 listAdapterFait = new TacheArrayAdapter(context,tachesFait);
                 Log.d("passage"," il est passer dans on DataChange");
-                DataSnapshot tbToDoListUser = dataSnapshot.child("ToDoList").child("iduser1");//TODO modifier pour authentification user
+                DataSnapshot tbToDoListUser = dataSnapshot.child("ToDoList").child("iduser1");//TODO mAuth.getUid() / modifier pour authentification user
                 DataSnapshot aFaire = tbToDoListUser.child("AFaire");
                 DataSnapshot fait = tbToDoListUser.child("Fait");
                 DataSnapshot dataTache = dataSnapshot.child("Taches");
@@ -149,7 +150,7 @@ public class ToDoListActivity extends AppCompatActivity {
                     DataSnapshot dataTacheChild = dataTache.child(cheminTacheAFaire);
 
                     Tache t = dataTacheChild.getValue(Tache.class);
-                    tachesaFaire.add(new ToDo(t.getNom(),false,cheminTacheAFaire));
+                    tachesaFaire.add(new ToDo(t.getNom(),false,t.getType(),cheminTacheAFaire));
                     Log.d("passage"," fin boucle tache a faire t.getNom" + t.getNom() + t.getType());
                 }
 
@@ -159,7 +160,7 @@ public class ToDoListActivity extends AppCompatActivity {
                     String cheminTacheFait = tacheFait.getKey();
                     DataSnapshot dataTacheChild = dataTache.child(cheminTacheFait);
                     Tache t2 = dataTacheChild.getValue(Tache.class);
-                    tachesFait.add(new ToDo(t2.getNom(),true,cheminTacheFait));
+                    tachesFait.add(new ToDo(t2.getNom(),true,t2.getType(),cheminTacheFait));
                     Log.d("passage","finboucle tache fait");
                 }
 
