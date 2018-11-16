@@ -53,6 +53,8 @@ public class ToDoListActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         tbToDolist = database.getReference("ToDoList");
         racine = tbToDolist.getParent();
+        mAuth = FirebaseAuth.getInstance();
+        mAuth.getCurrentUser();
       //  Log.d("passage"," il est passer dans onCreate");
 
 
@@ -70,8 +72,8 @@ public class ToDoListActivity extends AppCompatActivity {
 
                 /*Change donnees de la todolist de l'utilisateur*/
 
-                racine.child("ToDoList").child("iduser1").child("AFaire").child(tache.getCheminBdd()).removeValue();
-                racine.child("ToDoList").child("iduser1").child("Fait").child(tache.getCheminBdd()).setValue(true);
+                racine.child("ToDoList").child(mAuth.getUid()).child("AFaire").child(tache.getCheminBdd()).removeValue();
+                racine.child("ToDoList").child(mAuth.getUid()).child("Fait").child(tache.getCheminBdd()).setValue(true);
                 //Log.d("passage"," usertodolist remove");
                 tache.toggleChecked();//TODO voir si utile
                 TacheViewHolder viewHolder = (TacheViewHolder) item.getTag();
@@ -85,8 +87,8 @@ public class ToDoListActivity extends AppCompatActivity {
                 ToDo tache = listAdapterFait.getItem(position);
 
                 /*Change donnees de la todolist de l'utilisateur*/
-                racine.child("ToDoList").child("iduser1").child("Fait").child(tache.getCheminBdd()).removeValue();
-                racine.child("ToDoList").child("iduser1").child("AFaire").child(tache.getCheminBdd()).setValue(false);
+                racine.child("ToDoList").child(mAuth.getUid()).child("Fait").child(tache.getCheminBdd()).removeValue();
+                racine.child("ToDoList").child(mAuth.getUid()).child("AFaire").child(tache.getCheminBdd()).setValue(false);
 
                 tache.toggleChecked();
                 TacheViewHolder viewHolder = (TacheViewHolder) item.getTag();
@@ -138,7 +140,7 @@ public class ToDoListActivity extends AppCompatActivity {
                 listAdapteraFaire = new TacheArrayAdapter(context,tachesaFaire);
                 listAdapterFait = new TacheArrayAdapter(context,tachesFait);
                 Log.d("passage"," il est passer dans on DataChange");
-                DataSnapshot tbToDoListUser = dataSnapshot.child("ToDoList").child("iduser1");//TODO mAuth.getUid() / modifier pour authentification user
+                DataSnapshot tbToDoListUser = dataSnapshot.child("ToDoList").child(mAuth.getUid());//TODO mAuth.getUid() / modifier pour authentification user
                 DataSnapshot aFaire = tbToDoListUser.child("AFaire");
                 DataSnapshot fait = tbToDoListUser.child("Fait");
                 DataSnapshot dataTache = dataSnapshot.child("Taches");
