@@ -45,7 +45,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".AccountActivity"></activity>
-        <activity android:name=".InfoActivity"/>
+        <activity android:name=".InfoActivity"
+             android:theme="@style/Base.Widget.AppCompat.ActionBar"/>
     </application>
 
 </manifest>

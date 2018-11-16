@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.SpannableString;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -71,6 +73,33 @@ public class InfoActivity extends Activity {
 
                 }
             });
+        }
+    }
+
+    //create the menu
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_goBack:
+                Intent intentAccueil = new Intent(InfoActivity.this, MainActivity.class);
+                startActivity(intentAccueil);
+                finish();
+                return true;
+
+            case R.id.action_quit:
+                finish();
+                System.exit(0);
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
         }
     }
 }
