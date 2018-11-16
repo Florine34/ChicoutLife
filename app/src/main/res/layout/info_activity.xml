@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<LinearLayout
     android:layout_height="match_parent"
+    android:layout_width="wrap_content"
     android:orientation="vertical"
-    >
+    android:background="@color/gris"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
 
     <TextView
         android:layout_width="match_parent"
@@ -13,28 +14,58 @@
         android:id="@+id/titreInfoPage"
         android:textAlignment="center"
         android:textSize="23pt"
-        android:background="@drawable/buttons_form"
-        android:textColor="@color/red"
+        android:background="@color/vertT20"
+        android:fontFamily="@font/emmasophia"
         />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
 
-        android:id="@+id/contenuInfopage"/>
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/whiteT45"
+            android:layout_margin="5dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/contenuInfopage"
+                android:background="@color/orange"
+                android:padding="20dp"
+                android:layout_margin="15dp"
+                android:minHeight="100dp"
+                />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/linearLienWeb"
-        android:padding="10dp"
-        android:background="@drawable/box_orange"
-        android:gravity="bottom"
-        >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/linearLienWeb"
+                android:background="@color/jaune"
+                android:gravity="bottom"
+                android:padding="20dp"
+                android:layout_margin="15dp"
+                android:minHeight="100dp"
+                >
 
-    </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/linearCommentaire"
+                    android:background="@color/vert"
+                    android:gravity="bottom"
+                    android:padding="20dp"
+                    android:layout_margin="15dp"
+                    android:minHeight="300dp"
+                    >
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
-
