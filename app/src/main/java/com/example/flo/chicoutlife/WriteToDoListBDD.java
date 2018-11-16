@@ -14,79 +14,29 @@ public class WriteToDoListBDD {
     private RUser user;
     private FirebaseAuth mAuth;
     private DatabaseReference toDoListDatabase = FirebaseDatabase.getInstance().getReference("ToDoList");
-    private DatabaseReference tacheDatabase = FirebaseDatabase.getInstance().getReference("Taches");
 
     private HashMap<String, String> mapAfaire = new HashMap<>();
     private HashMap<String, String> mapFait = new HashMap<>();
-
-    private String[][] tab; // 0 = true 1 = false
-
-    private int compteur = 0;
 
     public WriteToDoListBDD(RUser u){
         this.user = u;
     }
 
-    /**
-     * Fonction qui écrit les tache à faire suivant les renseigments pris par l'utilisateur
-     *
-     * Recuperer la base ToDoList
-     * Créer un new objet ToDoList (java)
-     * en faire un Map ... Update children (voir code renseignementActivity) (ou juste au dessus)
-     */
-    public void insertInBDD(){
+    public void sortData(){
 
-        /**
-         *
-         Trouver son association (au salon de la rentrée)
-         Faire sa carte étudiante
-         Faire sa carte de bus
-         Prendre un casier
-         Faire sa RAMQ
-         Ouvrir un compte bancaire
+        putMapAfaire("Tache001", "false"); // Course
+        putMapAfaire("Tache002", "false"); // Appartement
+        putMapAfaire("Tache003", "false"); // Vetement hiver
+        putMapAfaire("Tache004", "false"); // Inscription
+        putMapAfaire("Tache005", "false"); // Asso
+        putMapAfaire("Tache006", "false"); // Bus
+        putMapAfaire("Tache007", "false"); // Carte etudiante
+        putMapAfaire("Tache008", "false"); // Casier
+        putMapAfaire("Tache010", "false"); // Compte bancaire
 
-         */
-
-        putMapAfaire("Tache001", "false");
-        putMapAfaire("Tache002", "false");
-        putMapAfaire("Tache003", "false");
-        putMapAfaire("Tache004", "false");
-
-        if(user.getBoolEchangeUniversitaire() == true){
-            //
-
-        }
-        else {
-            //
-        }
-
-        if(user.getBoolPermisEtude() == true){
-            // mettre les taches qu'il faut tache015
-            putMapAfaire("Tache015", "false");
-            compteur++;
-        }
-        else {
-            //
-            putMapFait("Tache015", "true");
-            compteur++;
-        }
-
-        if(user.getBoolLocalisationChicout() == true){
-            //
-        }
-        else{
-            //
-        }
-
-        if(user.getBoolTravail() == true){
-            //
-        }
-        else {
-            //
-        }
-
-        switch (user.getDomaineEtude()){
-            case "Sciences_fondamentales_biologie_chimie":{
+        // Suivant le pays Ramq ou pas ?
+        switch (user.getPays()){
+            case "France":{
                 //
                 break;
             }
@@ -95,12 +45,42 @@ public class WriteToDoListBDD {
             }
         }
 
-        //A continuer
-
-        if(compteur == 1){ // Quand il a traité tous les renseignement
-            writeNewToDoList(mapAfaire, mapFait);
+        // PE + Job = NAS
+        if(user.getBoolPermisEtude() == true && user.getBoolTravail() == true){
+            putMapAfaire("Tache011", "false"); // NAS
         }
 
+        // !Chicout + !Canadien = Avion + Itinéraire (suivant d'ou il vient : pays !Canada)
+        if(user.getBoolLocalisationChicout() == false && user.getPays() != "Canada"){
+            putMapAfaire("Tache013", "false"); // Avion
+            putMapAfaire("Tache014", "false"); // Itinéraire après l'avion
+
+            // ! Canada ! Canadien 1 session = CAQ + AVE
+            if (user.getNbSession() == 1){
+                putMapAfaire("Tache016", "false"); // CAQ
+                putMapAfaire("Tache018", "false"); // AVE
+            }
+            // ! Canada ! Canadien >1 session = CAQ + PE + Accueil+
+            else if(user.getNbSession() > 1){
+                putMapAfaire("Tache016", "false"); // CAQ
+                putMapAfaire("Tache015", "false"); // Permis Etude
+                putMapAfaire("Tache017", "false"); // Accueil+
+            }
+        }
+
+        // Canadien pas à chicout
+        if(user.getBoolLocalisationChicout() == false && user.getPays() == "Canada"){
+            putMapAfaire("Tache014", "false"); // Itinéraire après l'avion
+        }
+
+        // Echange Universitaire
+        if(user.getBoolEchangeUniversitaire() == true){
+            // Papier de l'université d'echange + Bourse ?
+        }
+
+        //A continuer
+
+        writeNewToDoList(mapAfaire, mapFait);
     }
 
     // Insère dans la base de données

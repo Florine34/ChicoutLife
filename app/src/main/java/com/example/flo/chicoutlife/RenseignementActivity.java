@@ -199,8 +199,10 @@ public class RenseignementActivity extends AppCompatActivity {
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put(key, userToAdd);
         rUserDatabase.updateChildren(childUpdates);
+
+        // Trie les données et les insèrent dans la base
         WriteToDoListBDD writeBDD = new WriteToDoListBDD(user);
-        writeBDD.insertInBDD();
+        writeBDD.sortData();
     }
 
     //create the menu
