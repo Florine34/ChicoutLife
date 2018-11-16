@@ -24,6 +24,7 @@ public class WriteToDoListBDD {
 
     public void sortData(){
 
+        // Pour tout le monde
         putMapAfaire("Tache001", "false"); // Course
         putMapAfaire("Tache002", "false"); // Appartement
         putMapAfaire("Tache003", "false"); // Vetement hiver
@@ -45,11 +46,6 @@ public class WriteToDoListBDD {
             }
         }
 
-        // PE + Job = NAS
-        if(user.getBoolPermisEtude() == true && user.getBoolTravail() == true){
-            putMapAfaire("Tache011", "false"); // NAS
-        }
-
         // !Chicout + !Canadien = Avion + Itinéraire (suivant d'ou il vient : pays !Canada)
         if(user.getBoolLocalisationChicout() == false && user.getPays() != "Canada"){
             putMapAfaire("Tache013", "false"); // Avion
@@ -65,6 +61,11 @@ public class WriteToDoListBDD {
                 putMapAfaire("Tache016", "false"); // CAQ
                 putMapAfaire("Tache015", "false"); // Permis Etude
                 putMapAfaire("Tache017", "false"); // Accueil+
+
+                // PE + Job = NAS
+                if(user.getBoolTravail() == true){
+                    putMapAfaire("Tache011", "false"); // NAS
+                }
             }
         }
 
@@ -77,8 +78,6 @@ public class WriteToDoListBDD {
         if(user.getBoolEchangeUniversitaire() == true){
             // Papier de l'université d'echange + Bourse ?
         }
-
-        //A continuer
 
         writeNewToDoList(mapAfaire, mapFait);
     }
