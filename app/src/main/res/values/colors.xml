@@ -6,9 +6,11 @@
     <color name="white">#FFFFFF</color>
     <color name="red">#e20c0c</color>
     <color name="orange">#80ef5933</color>
-    <color name="jaune">#80f2e338</color>
+    <color name="jaune">#80d7c92d</color>
     <color name="vert">#803a9e2b</color>
     <color name="gris">#494141</color>
     <color name="whiteT45">#80FFFFFF</color>
+    <color name="beige">#f1c77b</color>
     <color name="vertT20">#333a9e2b</color>
+    <color name="blueT45">#73123456</color>
 </resources>

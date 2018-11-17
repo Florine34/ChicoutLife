@@ -28,6 +28,11 @@
     <string name="qcaq">Faire son CAQ</string>
     <string name="qaccueilp">S\'inscrire au programme Accueil +</string>
     <string name="qave">Faire son AVE (Visa Touristique)</string>
+    <string name="fait">Fait :</string>
+    <string name="a_faire">A faire :</string>
+    <string name="informations_utiles">Informations utiles</string>
+    <string name="adresses_utiles">Adresses utiles</string>
+    <string name="commentaires">Commentaires</string>
 
     <!-- Pays -->
     <string-array name="country_arrays">

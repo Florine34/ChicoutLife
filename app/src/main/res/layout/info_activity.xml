@@ -26,46 +26,117 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@color/whiteT45"
+            android:background="@color/beige"
             android:layout_margin="5dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/contenuInfopage"
-                android:background="@color/orange"
-                android:padding="20dp"
-                android:layout_margin="15dp"
-                android:minHeight="100dp"
-                />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:id="@+id/linearLienWeb"
-                android:background="@color/jaune"
-                android:gravity="bottom"
-                android:padding="20dp"
+                android:background="@color/orange"
                 android:layout_margin="15dp"
-                android:minHeight="100dp"
                 >
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/titrecontenu"
+                    android:padding="20dp"
+                    android:text="@string/informations_utiles"
+                    android:fontFamily="@font/emmasophia"
+                    android:layout_margin="2dp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/contenuInfopage"
+                    android:background="@color/orange"
+                    android:paddingBottom="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingLeft="20dp"
+                    android:layout_margin="5dp"
+                    android:minHeight="100dp"
+                    />
+
+
             </LinearLayout>
+
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/blueT45"
+
+                android:layout_margin="15dp"
+
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/titreAdresse"
+                    android:padding="20dp"
+                    android:text="@string/adresses_utiles"
+                    android:fontFamily="@font/emmasophia"
+                    android:layout_margin="2dp"
+                    />
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:id="@+id/linearCommentaire"
-                    android:background="@color/vert"
-                    android:gravity="bottom"
-                    android:padding="20dp"
-                    android:layout_margin="15dp"
-                    android:minHeight="300dp"
+
+                    android:background="@color/blueT45"
+                    android:id="@+id/linearLienWeb"
+                    android:paddingBottom="20dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:layout_margin="5dp"
+                    android:minHeight="100dp"
                     >
 
+
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                android:background="@color/vert"
+                android:gravity="bottom"
+                android:layout_margin="15dp"
+                >
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/titreCpmmentaires"
+                    android:padding="20dp"
+                    android:text="@string/commentaires"
+                    android:fontFamily="@font/emmasophia"
+                    android:layout_margin="2dp"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+
+                    android:background="@color/jaune"
+                    android:id="@+id/linearCommentaire"
+                    android:paddingBottom="20dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:layout_margin="5dp"
+                    android:minHeight="100dp"
+                    >
+
+
+                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
+
     </ScrollView>
 
 </LinearLayout>

@@ -14,13 +14,15 @@
 
         <TextView
             android:id="@+id/titletodo"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="TO DO List"
             android:textSize="10pt"
             android:textStyle="bold"
-            android:fontFamily="@font/emmasophia"/>
+            android:fontFamily="@font/emmasophia"
+            android:background="@color/vert"
+            android:textAlignment="center"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,18 +33,21 @@
 
             <TextView
                 android:id="@+id/titleafaire"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="A faire :"
+                android:text="@string/a_faire"
                 android:textSize="10pt"
                 android:textStyle="bold"
-                android:fontFamily="@font/emmasophia"/>
+                android:fontFamily="@font/emmasophia"
+                android:background="@color/vertT20"
+                android:textAlignment="center"/>
 
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/linearafaire2"
+                android:background="@color/beige"
                 >
 
 
@@ -61,18 +66,21 @@
 
             <TextView
                 android:id="@+id/titlefait"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="Fait :"
+                android:text="@string/fait"
                 android:textSize="8pt"
                 android:textStyle="bold"
-                android:fontFamily="@font/emmasophia"/>
+                android:fontFamily="@font/emmasophia"
+                android:background="@color/vertT20"
+                android:textAlignment="center"/>
 
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/linearfait2">
+                android:id="@+id/linearfait2"
+                android:background="@color/beige">
 
 
             </ListView>

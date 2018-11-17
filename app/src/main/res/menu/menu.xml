@@ -11,7 +11,7 @@
     <item
         android:id="@+id/action_quit"
         android:icon="@drawable/ic_quit"
-        android:title="Retour"
+        android:title="Quitter"
         app:showAsAction="ifRoom" />
 
 </menu>
