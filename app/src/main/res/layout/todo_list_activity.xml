@@ -10,6 +10,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="42dp"
+        android:background="@color/gris"
         tools:layout_editor_absoluteY="0dp">
 
         <TextView
@@ -21,7 +22,7 @@
             android:textSize="10pt"
             android:textStyle="bold"
             android:fontFamily="@font/emmasophia"
-            android:background="@color/vert"
+            android:background="@color/vertT20"
             android:textAlignment="center"/>
 
         <LinearLayout
@@ -51,7 +52,8 @@
                 >
 
 
-            </ListView>
+            </ListView
+>
 
 
 
