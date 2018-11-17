@@ -55,7 +55,7 @@ public class singin_activity extends AppCompatActivity {
     FirebaseAuth.AuthStateListener mAuthListner;
 
     // --------- FACEBOOK ------- //
-    private LoginButton loginButton;
+    private LoginButton loginButtonFacebook;
     private CallbackManager callbackManager;
 
     // --------------------------------- //
@@ -74,12 +74,6 @@ public class singin_activity extends AppCompatActivity {
         mAuth.removeAuthStateListener(mAuthListner);
     }
 
-    public void goMainScreen(){
-        Intent intent = new Intent(this, ToDoListActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    }
-
     // --------------------------------- //
 
 
@@ -87,22 +81,21 @@ public class singin_activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(singin_activity.this.getApplicationContext());
-
         mAuth = FirebaseAuth.getInstance();
 
-        //check the current user
+        /*check the current user
         if (mAuth.getCurrentUser() != null) {
             startActivity(new Intent(singin_activity.this, Home_screen.class));
             finish();
-        }
+        } */
 
         setContentView(R.layout.activity_singin_activity);
 
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
-        Button ahlogin = (Button) findViewById(R.id.ah_login);
+        Button login = (Button) findViewById(R.id.login);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        Button btnSignIn = (Button) findViewById(R.id.sign_in_button);
+        Button createAccount = (Button) findViewById(R.id.create_account_button);
         button = (SignInButton) findViewById(R.id.sign_in_google);
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -113,7 +106,7 @@ public class singin_activity extends AppCompatActivity {
         });
 
 
-        btnSignIn.setOnClickListener(new View.OnClickListener() {
+        createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(singin_activity.this, singup_activity.class));
@@ -124,7 +117,7 @@ public class singin_activity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         // Checking the email id and password is Empty
-        ahlogin.setOnClickListener(new View.OnClickListener() {
+        login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email = inputEmail.getText().toString();
@@ -155,9 +148,6 @@ public class singin_activity extends AppCompatActivity {
                                     Intent intentAccueil = new Intent(singin_activity.this, ToDoListActivity.class);
                                     startActivity(intentAccueil);
                                     finish();
-                                    /*Intent intent = new Intent(singin_activity.this, Home_screen.class);
-                                    startActivity(intent);
-                                    finish();*/
 
                                 } else {
                                     Log.d(TAG, "singInWithEmail:Fail");
@@ -174,11 +164,10 @@ public class singin_activity extends AppCompatActivity {
         mAuthListner = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if (firebaseAuth.getCurrentUser() != null) {
-                    Intent intentAccueil = new Intent(singin_activity.this, ToDoListActivity.class);
+               if (firebaseAuth.getCurrentUser() != null) {
+                    Intent intentAccueil = new Intent(singin_activity.this, Home_screen.class);
                     startActivity(intentAccueil);
                     finish();
-                    //startActivity(new Intent(singin_activity.this, Home_screen.class));
                 }
 
             }
@@ -196,10 +185,10 @@ public class singin_activity extends AppCompatActivity {
 
         callbackManager = CallbackManager.Factory.create();
 
-        loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButtonFacebook = (LoginButton) findViewById(R.id.login_button_facebook);
 
-        loginButton.setReadPermissions(Arrays.asList("email"));
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+        loginButtonFacebook.setReadPermissions(Arrays.asList("email"));
+        loginButtonFacebook.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 handleFacebookAccessToken(loginResult.getAccessToken());
@@ -215,17 +204,6 @@ public class singin_activity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_SHORT).show();
             }
         });
-
-        mAuth = FirebaseAuth.getInstance();
-        mAuthListner = new FirebaseAuth.AuthStateListener(){
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user != null){
-                    goMainScreen();
-                }
-            }
-        };
 
         // ------------------------------------------------------ //
 
@@ -266,18 +244,14 @@ public class singin_activity extends AppCompatActivity {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
-
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e);
-                // ...
             }
         }
 
         // --------------------- FACEBOOK ------------------------- //
         callbackManager.onActivityResult(requestCode,resultCode,data);
         // ------------------------------------------------------ //
-
-
 
     }
 
@@ -290,16 +264,13 @@ public class singin_activity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            //updateUI(user);
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             Toast.makeText(singin_activity.this, "Aut Fail", Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
                         }
 
-                        // ...
                     }
                 });
     }

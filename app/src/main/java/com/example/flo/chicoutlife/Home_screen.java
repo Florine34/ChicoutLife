@@ -49,20 +49,32 @@ public class Home_screen extends AppCompatActivity {
             }
         };
 
-        final Button buttonInscription = findViewById(R.id.renseignement);
-        buttonInscription.setOnClickListener(new View.OnClickListener() {
+        // Bouton renseignement
+        final Button buttonRenseignement = findViewById(R.id.renseignement);
+        buttonRenseignement.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intentAccueil = new Intent(Home_screen.this, RenseignementActivity.class);
-                startActivity(intentAccueil);
+                Intent intentRenseignement = new Intent(Home_screen.this, RenseignementActivity.class);
+                startActivity(intentRenseignement);
                 finish();
             }
         });
 
+        // Bouton renseignement remplis
+        final Button buttonRenseignementRemplis = findViewById(R.id.renseignement_remplis);
+        buttonRenseignementRemplis.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intentToDoList = new Intent(Home_screen.this, ToDoListActivity.class);
+                startActivity(intentToDoList);
+                finish();
+            }
+        });
+
+
+        // Button logout
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mAuth.signOut();
-
 
             }
         });

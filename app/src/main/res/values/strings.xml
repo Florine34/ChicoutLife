@@ -3,9 +3,9 @@
     <!-- FireBase -->
     <string name="email_id">adresse email</string>
     <string name="password">password</string>
-    <string name="login">Login</string>
-    <string name="failed">Authentication failed</string>
-    <string name="create_a_new_account">Create a new Account!</string>
+    <string name="login">Se connecter</string>
+    <string name="failed">Authentication incorrecte</string>
+    <string name="create_a_new_account">Créer un compte!</string>
     <string name="facebook_app_id">315866035682558</string>
     <string name="fb_login_protocol_scheme">fb315866035682558</string>
     <string name="firebase_error_login">Firebase Login Error</string>
