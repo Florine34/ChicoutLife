@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.SpannableString;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -60,8 +61,10 @@ public class InfoActivity extends Activity {
                         TextView lienX  = new TextView(context);
                         lienX.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                                 LinearLayout.LayoutParams.WRAP_CONTENT));
+
+                        lienX.setAutoLinkMask(Linkify.ALL);
                         lienX.setText((String)lien.getValue());
-                        
+
 
                         linearLienWeb.addView(lienX);
                     }
@@ -85,7 +88,7 @@ public class InfoActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_goBack:
-                Intent intentAccueil = new Intent(InfoActivity.this, MainActivity.class);
+                Intent intentAccueil = new Intent(InfoActivity.this, ToDoListActivity.class);
                 startActivity(intentAccueil);
                 finish();
                 return true;
