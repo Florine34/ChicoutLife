@@ -145,9 +145,11 @@ public class singin_activity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     // there was an error
                                     Log.d(TAG, "signInWithEmail:success");
+                                    /* Pas besoins de mettre ça vu que tu test si c'est connecter (ligne 166)
+                                    Toast.makeText(singin_activity.this,"Va a HOME avec EMAIL", Toast.LENGTH_LONG).show();
                                     Intent intentAccueil = new Intent(singin_activity.this, Home_screen.class);
                                     startActivity(intentAccueil);
-                                    finish();
+                                    finish();*/
 
                                 } else {
                                     Log.d(TAG, "singInWithEmail:Fail");
@@ -165,6 +167,8 @@ public class singin_activity extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                if (firebaseAuth.getCurrentUser() != null) {
+                   Toast.makeText(singin_activity.this,"Va a HOME avec mAuthListner", Toast.LENGTH_LONG).show();
+
                     Intent intentAccueil = new Intent(singin_activity.this, Home_screen.class);
                     startActivity(intentAccueil);
                     finish();
