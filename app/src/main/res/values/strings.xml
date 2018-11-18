@@ -33,6 +33,7 @@
     <string name="informations_utiles">Informations utiles</string>
     <string name="adresses_utiles">Adresses utiles</string>
     <string name="commentaires">Commentaires</string>
+    <string name="annonces">Annonces</string>
 
     <!-- Pays -->
     <string-array name="country_arrays">

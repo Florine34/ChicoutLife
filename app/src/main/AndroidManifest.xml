@@ -47,6 +47,8 @@
         <activity android:name=".AccountActivity"></activity>
         <activity android:name=".InfoActivity"
              android:theme="@style/Base.Widget.AppCompat.ActionBar"/>
+        <activity android:name=".ChoiceAnnonce"
+            android:theme="@style/Base.Widget.AppCompat.ActionBar"/>
     </application>
 
 </manifest>
