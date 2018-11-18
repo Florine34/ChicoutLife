@@ -6,7 +6,7 @@
     <item
         android:id="@+id/action_goHome"
         android:icon="@drawable/home"
-        android:title="Retour"
+        android:title="Accueil"
         app:showAsAction="ifRoom" />
 
     <item
