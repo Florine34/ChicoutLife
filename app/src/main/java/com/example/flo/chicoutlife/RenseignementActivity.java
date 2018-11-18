@@ -205,6 +205,7 @@ public class RenseignementActivity extends AppCompatActivity {
         writeBDD.sortData();
     }
 
+    @Override
     //create the menu
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -213,9 +214,14 @@ public class RenseignementActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_goBack:
-                Intent intentAccueil = new Intent(RenseignementActivity.this, MainActivity.class);
+            case R.id.action_goHome:
+                Intent intentAccueil = new Intent(RenseignementActivity.this, Home_screen.class);
                 startActivity(intentAccueil);
+                finish();
+                return true;
+            case R.id.action_goBack:
+                Intent intentRetour = new Intent(RenseignementActivity.this, Home_screen.class); // TODO
+                startActivity(intentRetour);
                 finish();
                 return true;
 

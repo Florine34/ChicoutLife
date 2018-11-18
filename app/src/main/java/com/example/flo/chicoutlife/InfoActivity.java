@@ -28,7 +28,7 @@ public class InfoActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.info_activity);
-
+        
         FirebaseDatabase database;
         final DatabaseReference infoPage;
 
@@ -79,6 +79,8 @@ public class InfoActivity extends Activity {
         }
     }
 
+
+    @Override
     //create the menu
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -87,9 +89,15 @@ public class InfoActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_goBack:
-                Intent intentAccueil = new Intent(InfoActivity.this, ToDoListActivity.class);
+            case R.id.action_goHome:
+                Intent intentAccueil = new Intent(InfoActivity.this, Home_screen.class);
                 startActivity(intentAccueil);
+                finish();
+                return true;
+
+            case R.id.action_goBack:
+                Intent intentRetour = new Intent(InfoActivity.this, ToDoListActivity.class);
+                startActivity(intentRetour);
                 finish();
                 return true;
 

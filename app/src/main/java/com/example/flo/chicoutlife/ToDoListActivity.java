@@ -106,9 +106,14 @@ public class ToDoListActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_goBack:
-                Intent intentAccueil = new Intent(ToDoListActivity.this, MainActivity.class);
+            case R.id.action_goHome:
+                Intent intentAccueil = new Intent(ToDoListActivity.this, Home_screen.class);
                 startActivity(intentAccueil);
+                finish();
+                return true;
+            case R.id.action_goBack:
+                Intent intentRetour = new Intent(ToDoListActivity.this, Home_screen.class); // TODO
+                startActivity(intentRetour);
                 finish();
                 return true;
 
