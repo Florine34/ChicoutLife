@@ -145,7 +145,7 @@ public class singin_activity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     // there was an error
                                     Log.d(TAG, "signInWithEmail:success");
-                                    Intent intentAccueil = new Intent(singin_activity.this, ToDoListActivity.class);
+                                    Intent intentAccueil = new Intent(singin_activity.this, Home_screen.class);
                                     startActivity(intentAccueil);
                                     finish();
 
