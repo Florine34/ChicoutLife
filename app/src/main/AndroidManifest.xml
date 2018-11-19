@@ -21,7 +21,6 @@
         <activity android:name=".AccountActivity"/>
         <activity android:name=".ChoiceAnnonce"/>
         <activity android:name=".Home_screen" />
-        <activity android:name=".InfoActivity" />
         <activity android:name=".InscriptionActivity" />
         <activity android:name=".singup_activity" />
         <activity android:name=".ToDoListActivity" />
