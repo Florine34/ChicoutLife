@@ -207,9 +207,9 @@ public class ChoiceAnnonce extends Activity {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context ,Annonce.class);
-                    intent.putExtra("NOM_PAGE", min.getCheminAnnonceBdd());
+                   // intent.putExtra("NOM_PAGE", min.getCheminAnnonceBdd());
                     context.startActivity(intent);
-                    ((Activity)context).finish();
+
                     }
             }
             );

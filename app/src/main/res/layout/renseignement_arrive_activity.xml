@@ -56,7 +56,7 @@
             android:id="@+id/arriveQ"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Quel est vrotre trimestre d'admission ?" />
+            android:text="Quel est votre trimestre d'admission ?" />
 
         <RadioGroup
             android:id="@+id/sessionArrivee"
@@ -92,7 +92,7 @@
             android:id="@+id/tempsQ"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Combient de session restez vous ?" />
+            android:text="Combien de session restez-vous ?" />
 
         <EditText
             android:id="@+id/numberText"
@@ -105,7 +105,7 @@
             android:id="@+id/permisEtude"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Avez vous un Permis d'étude ?"
+            android:text="Avez-vous un Permis d'étude ?"
             android:showText="true"
             android:textOff="Non"
             android:textOn="Oui"
