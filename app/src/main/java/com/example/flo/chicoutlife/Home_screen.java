@@ -87,17 +87,12 @@ public class Home_screen extends AppCompatActivity {
     @Override
     //create the menu
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
+        getMenuInflater().inflate(R.menu.menu_home, menu);
         return true;
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_goHome:
-                Intent intentAccueil = new Intent(Home_screen.this, Home_screen.class);
-                startActivity(intentAccueil);
-                finish();
-                return true;
 
             case R.id.action_quit:
                 finish();

@@ -79,7 +79,6 @@ public class InfoActivity extends Activity {
         }
     }
 
-
     @Override
     //create the menu
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -94,7 +93,6 @@ public class InfoActivity extends Activity {
                 startActivity(intentAccueil);
                 finish();
                 return true;
-
             case R.id.action_goBack:
                 Intent intentRetour = new Intent(InfoActivity.this, ToDoListActivity.class);
                 startActivity(intentRetour);
@@ -110,7 +108,6 @@ public class InfoActivity extends Activity {
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
-
         }
     }
 }
