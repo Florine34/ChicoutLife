@@ -18,12 +18,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".AccountActivity"/>
+        <activity android:name=".ChoiceAnnonce"/>
         <activity android:name=".Home_screen" />
+        <activity android:name=".InfoActivity" />
+        <activity android:name=".InscriptionActivity" />
         <activity android:name=".singup_activity" />
         <activity android:name=".ToDoListActivity" />
-        <activity android:name=".InscriptionActivity" />
         <activity android:name=".RenseignementActivity" />
-        <activity android:name=".InfoActivity" />
+
 
         <activity android:name="com.facebook.FacebookActivity"
             android:configChanges=
@@ -31,7 +34,6 @@
             />
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
 
-        <activity android:name=".AccountActivity"></activity>
 
     </application>
 
