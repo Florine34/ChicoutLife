@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".AccountActivity"/>
-        <activity android:name=".ChoiceAnnonce"/>
+        <activity android:name=".ChoiceAnnonce"
+            android:theme="@style/Base.Widget.AppCompat.ActionBar"/>
         <activity android:name=".Home_screen" />
         <activity android:name=".InscriptionActivity" />
         <activity android:name=".singup_activity" />
