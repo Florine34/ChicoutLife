@@ -33,6 +33,8 @@
             android:configChanges=
                 "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             />
+        <activity android:name=".Annonce"
+            android:theme="@style/Base.Widget.AppCompat.ActionBar"/>
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
 
 
