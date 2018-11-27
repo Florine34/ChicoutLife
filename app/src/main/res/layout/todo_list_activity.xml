@@ -21,7 +21,6 @@
             android:text="TO DO List"
             android:textSize="10pt"
             android:textStyle="bold"
-            android:fontFamily="@font/emmasophia"
             android:background="@color/vertT20"
             android:textAlignment="center"/>
 
@@ -40,7 +39,6 @@
                 android:text="@string/a_faire"
                 android:textSize="10pt"
                 android:textStyle="bold"
-                android:fontFamily="@font/emmasophia"
                 android:background="@color/vertT20"
                 android:textAlignment="center"/>
 
@@ -74,7 +72,6 @@
                 android:text="@string/fait"
                 android:textSize="8pt"
                 android:textStyle="bold"
-                android:fontFamily="@font/emmasophia"
                 android:background="@color/vertT20"
                 android:textAlignment="center"/>
 

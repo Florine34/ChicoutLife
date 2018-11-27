@@ -18,7 +18,6 @@
             android:textAlignment="center"
             android:textSize="23pt"
             android:background="@color/vertT20"
-            android:fontFamily="@font/emmasophia"
             />
 
 
@@ -46,7 +45,6 @@
                         android:id="@+id/titrecontenu"
                         android:padding="20dp"
                         android:text="@string/informations_utiles"
-                        android:fontFamily="@font/emmasophia"
                         android:layout_margin="2dp"
                         />
 
@@ -80,7 +78,6 @@
                         android:id="@+id/titreAdresse"
                         android:padding="20dp"
                         android:text="@string/adresses_utiles"
-                        android:fontFamily="@font/emmasophia"
                         android:layout_margin="2dp"
                         />
                     <LinearLayout
@@ -117,7 +114,6 @@
                         android:id="@+id/titreCpmmentaires"
                         android:padding="20dp"
                         android:text="@string/commentaires"
-                        android:fontFamily="@font/emmasophia"
                         android:layout_margin="2dp"
                         />
                     <LinearLayout

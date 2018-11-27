@@ -3,45 +3,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:gravity="top"
     android:orientation="vertical"
-    android:padding="24dp"
     tools:context=".Home_screen">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:src="@drawable/logo"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+        android:layout_marginBottom="50dp"/>
 
-    <TextView
-        android:id="@+id/textView"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="After Login "
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/infoMail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="InfoMail "
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        >
 
 
-    <Button
-        android:id="@+id/renseignement"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Remplir renseignement" />
+        <Button
+            android:id="@+id/renseignement_remplis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Accéder à la TO DO LIST"
+            android:layout_marginBottom="60dp"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:background="@drawable/buttons_form"/>
 
-    <Button
-        android:id="@+id/renseignement_remplis"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="J'ai déjà remplis mes renseignements" />
+        <Button
+            android:id="@+id/renseignement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Editer mes renseignements"
+            android:layout_marginBottom="10dp"
+            android:padding="5dp"
+            android:textSize="10dp"
+            android:background="@drawable/buttons_form2"/>
 
-    <Button
-        android:id="@+id/signout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Se déconnecter" />
+        <Button
+            android:id="@+id/signout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Se déconnecter"
+            android:textSize="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/buttons_form2"/>
+        </LinearLayout>
 
 </LinearLayout>
