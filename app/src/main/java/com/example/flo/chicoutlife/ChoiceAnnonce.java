@@ -65,7 +65,6 @@ public class ChoiceAnnonce extends Activity {
 
     public  List<ModelAnnonce> fillWithAnnonce(){
 
-
         annonces = database.getReference("Annonces");
         annonces.addValueEventListener(new ValueEventListener() {
             @Override
@@ -81,48 +80,26 @@ public class ChoiceAnnonce extends Activity {
                     StorageReference imageRef = mStorageRef.child(cheminImg);
 
 
-                    Log.d("passage" , "chemin image" + imageRef.getPath());
-
-
-                    /*File localFile = null;
-                    try {
-                        localFile = File.createTempFile("/IMG_20170930_154757", "jpg");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    mStorageRef.getFile(localFile)
-                            .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                                @Override
-                                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                    // Successfully downloaded data to local file
-                                    // ...
-                                    Log.d("passage","ici");
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            // Handle failed download
-                            // ...
-                        }
-                    });*/
-
                     final long ONE_MEGABYTE = 4096 * 4096;
                     imageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                         @Override
                         public void onSuccess(byte[] bytes) {
-                            // Data for "images/island.jpg" is returns, use this as needed
-                            ;
-                            Log.d("passage","onsucess dans choiceAnnonce ");
+
+                            /*Recuperation des donnes textes dans la base de donnee*/
                             String modelTitre = (String) annonce.child("Titre").getValue();
                             String modelDescription = (String) annonce.child("Description").getValue();
+
+                            /*Recuperation du chemin de l'annonce pour la redirection lors du OnClick*/
                             String cheminAnnonceBdd = annonce.getKey();
                             Bitmap imageAnnonce =null;
+
+                            /*Recuperation de l'image dans la base de donnee*/
                             imageAnnonce = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                             imageAnnonce = Bitmap.createScaledBitmap(imageAnnonce,360,240,false);
                             ModelAnnonce model = new ModelAnnonce(modelTitre, modelDescription,imageAnnonce,cheminAnnonceBdd);
                             modelsAnnonces.add(model);
 
-                            Log.d("passage","taille fin boucle fill" + modelsAnnonces.size());
+                            /*Sert pour le recyclerView , sinon la taille est initialiser a zero et le recycler ne se remplit pas*/
                             verticalAdapter.notifyDataSetChanged();
 
                         }
@@ -159,15 +136,12 @@ public class ChoiceAnnonce extends Activity {
         Context context;
 
         public VerticalAdapter(List<ModelAnnonce> verticalList,Context context){
-            Log.d("passage","est dans verticalAdapter");
             this.verticalList = verticalList;
             this.context = context;
         }
 
         @Override
         public int getItemCount() {
-            Log.d("passage","est dans getItemCount" + verticalList.size());
-
             return verticalList.size();
         }
 
@@ -179,7 +153,7 @@ public class ChoiceAnnonce extends Activity {
 
             public MyViewHolder(View view){
                 super(view);
-                Log.d("passage","est dans myviewholder");
+                 /*Lier avec les view du xml*/
                 imageViewAnnonce =(ImageView) view.findViewById(R.id.imageMiniatureAnnonce);
                 titre = (TextView) view.findViewById(R.id.titreMiniatureAnnonce);
                 description = (TextView) view.findViewById(R.id.descriptionMiniatureAnnonce);
@@ -195,12 +169,14 @@ public class ChoiceAnnonce extends Activity {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-            Log.d("passage","est dans bindViewHolder position" + position);
+        public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
+
+            /*Set des donnes sur le holder*/
             holder.imageViewAnnonce.setImageBitmap(verticalList.get(position).getImageAnnonce());
             holder.titre.setText(verticalList.get(position).getModelTitre());
             holder.description.setText(verticalList.get(position).getModelDescription());
 
+            /*Ajout du OnClick pour rediriger vers l'annonce*/
             final ModelAnnonce min = verticalList.get(position);
             holder.imageViewAnnonce.setOnClickListener(new View.OnClickListener() {
 
@@ -208,6 +184,7 @@ public class ChoiceAnnonce extends Activity {
                 public void onClick(View view) {
                     Intent intent = new Intent(context ,Annonce.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//sinon erreur
+                    intent.putExtra("CHEMIN_ANNONCE",verticalList.get(position).getCheminAnnonceBdd());
                    // intent.putExtra("NOM_PAGE", min.getCheminAnnonceBdd());
                     context.startActivity(intent);
 
@@ -233,7 +210,7 @@ public class ChoiceAnnonce extends Activity {
                 finish();
                 return true;
             case R.id.action_goBack:
-                Intent intentRetour = new Intent(ChoiceAnnonce.this, Home_screen.class); // TODO
+                Intent intentRetour = new Intent(ChoiceAnnonce.this, ToDoListActivity.class); // TODO
                 startActivity(intentRetour);
                 finish();
                 return true;

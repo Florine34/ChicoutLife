@@ -37,6 +37,7 @@
     <string name="commentaires">Commentaires</string>
     <string name="annonces">Annonces</string>
     <string name="annonce">Annonce</string>
+    <string name="contacter_vendeur">Contacter le vendeur</string>
 
     <!-- Pays -->
     <string-array name="country_arrays">
