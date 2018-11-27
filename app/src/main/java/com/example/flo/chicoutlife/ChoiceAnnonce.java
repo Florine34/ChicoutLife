@@ -207,6 +207,7 @@ public class ChoiceAnnonce extends Activity {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context ,Annonce.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//sinon erreur
                    // intent.putExtra("NOM_PAGE", min.getCheminAnnonceBdd());
                     context.startActivity(intent);
 
