@@ -25,7 +25,8 @@
         <activity android:name=".InscriptionActivity" />
         <activity android:name=".singup_activity" />
         <activity android:name=".ToDoListActivity" />
-        <activity android:name=".RenseignementActivity" />
+        <activity android:name=".RenseignementActivity"
+            android:configChanges="screenSize|orientation|screenLayout|navigation"/>
         <activity android:name=".InfoActivity"
             android:theme="@style/Base.Widget.AppCompat.ActionBar"/>
 
