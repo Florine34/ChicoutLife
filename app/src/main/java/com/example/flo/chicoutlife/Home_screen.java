@@ -1,6 +1,7 @@
 package com.example.flo.chicoutlife;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -63,6 +64,26 @@ public class Home_screen extends AppCompatActivity {
                 startActivity(intentToDoList);
                 finish();
             }
+        });
+
+        // Bouton choose menu
+        final Button buttonTest= findViewById(R.id.test);
+        buttonTest.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent send = new Intent(Intent.ACTION_SENDTO);
+                String uriText = "mailto:" + Uri.encode("email@gmail.com") +
+                        "?subject=" + Uri.encode("the subject") +
+                        "&body=" + Uri.encode("the body of the message");
+                Uri uri = Uri.parse(uriText);
+
+                send.setData(uri);
+                startActivity(Intent.createChooser(send, "Send mail..."));
+
+
+                finish();
+            }
+
+
         });
 
 
