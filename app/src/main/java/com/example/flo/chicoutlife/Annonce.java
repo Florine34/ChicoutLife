@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -81,7 +82,7 @@ public class Annonce  extends Activity {
                                 /*Recuperation de l'image dans la base de donnee*/
                                 Bitmap imageAnnonce =null;
                                 imageAnnonce = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                                imageAnnonce = Bitmap.createScaledBitmap(imageAnnonce,640,480,false);
+                                imageAnnonce = Bitmap.createScaledBitmap(imageAnnonce,480,360,false);//640 480
                                 viewImage.setImageBitmap(imageAnnonce);
 
 
