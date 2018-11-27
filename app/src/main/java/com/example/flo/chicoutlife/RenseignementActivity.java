@@ -33,7 +33,6 @@ import java.util.Map;
  * Classe qui gère :
  *      la page Renseignement (départ/arrivée)
  *      la page Renseignement_Arrivée
- * => Faire une condition au Oncreate pour savoir quelle page on fait
  */
 
 public class RenseignementActivity extends  AppCompatActivity { // Activity
