@@ -1,6 +1,8 @@
 package com.example.flo.chicoutlife;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -16,6 +18,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -33,7 +36,7 @@ import java.util.Map;
  * => Faire une condition au Oncreate pour savoir quelle page on fait
  */
 
-public class RenseignementActivity extends AppCompatActivity {
+public class RenseignementActivity extends  AppCompatActivity { // Activity
     public static final String INDEX_RENSEIGNEMENT = "Index";
     private Spinner spinnerPay, spinnerDomaine, spinProg;
     private RadioGroup radioGroup;
@@ -42,11 +45,21 @@ public class RenseignementActivity extends AppCompatActivity {
     private ArrayAdapter<CharSequence> adapter;
     private DatabaseReference rUserDatabase = FirebaseDatabase.getInstance().getReference("RUser");
     private FirebaseAuth mAuth;
+    private boolean intentValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(getIntent().getBooleanExtra(RenseignementActivity.INDEX_RENSEIGNEMENT, false) == true){ // Renseignement arrive
+
+        intentValue = getIntent().getBooleanExtra(RenseignementActivity.INDEX_RENSEIGNEMENT, false);
+        if (savedInstanceState != null)
+        {
+            intentValue = savedInstanceState.getBoolean("intentValue");
+        }
+
+       // Toast.makeText(this, "Valeur de intent : "+intentValue, Toast.LENGTH_LONG).show();
+
+        if(intentValue == true ){ // Renseignement arrive
             setContentView(R.layout.renseignement_arrive_activity);
 
             final Button buttonValider = findViewById(R.id.valider);
@@ -206,6 +219,30 @@ public class RenseignementActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean("intentValue", getIntent().getBooleanExtra(RenseignementActivity.INDEX_RENSEIGNEMENT, false));
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig)
+    {
+        // Je n'ai pas trouvé d'autre solution ... Désolée
+        super.onConfigurationChanged(newConfig);
+        int orientation = newConfig.orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT && intentValue == true) {
+            Intent intent = getIntent();
+            finish();
+            startActivity(intent);
+        }
+        else if (orientation == Configuration.ORIENTATION_LANDSCAPE && intentValue == true){
+            Intent intent = getIntent();
+            finish();
+            startActivity(intent);
+        }
+    }
+
+    @Override
     //create the menu
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -220,7 +257,7 @@ public class RenseignementActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.action_goBack:
-                Intent intentRetour = new Intent(RenseignementActivity.this, Home_screen.class); // TODO
+                Intent intentRetour = new Intent(RenseignementActivity.this, Home_screen.class);
                 startActivity(intentRetour);
                 finish();
                 return true;
