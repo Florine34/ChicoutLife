@@ -66,25 +66,7 @@ public class Home_screen extends AppCompatActivity {
             }
         });
 
-        // Bouton choose menu
-        final Button buttonTest= findViewById(R.id.test);
-        buttonTest.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent send = new Intent(Intent.ACTION_SENDTO);
-                String uriText = "mailto:" + Uri.encode("email@gmail.com") +
-                        "?subject=" + Uri.encode("the subject") +
-                        "&body=" + Uri.encode("the body of the message");
-                Uri uri = Uri.parse(uriText);
 
-                send.setData(uri);
-                startActivity(Intent.createChooser(send, "Send mail..."));
-
-
-                finish();
-            }
-
-
-        });
 
 
         // Button logout
