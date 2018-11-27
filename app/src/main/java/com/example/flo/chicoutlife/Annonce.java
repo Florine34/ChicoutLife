@@ -20,6 +20,8 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,6 +36,8 @@ public class Annonce  extends Activity {
     DatabaseReference annonce;
     FirebaseStorage storage ;
     private StorageReference mStorageRef;
+    String idUser ;
+    String titre;
 
 
 
@@ -56,9 +60,10 @@ public class Annonce  extends Activity {
                 annonce.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        String titre= (String)dataSnapshot.child("Titre").getValue();
+                        titre= (String)dataSnapshot.child("Titre").getValue();
                         String description = (String)dataSnapshot.child("Description").getValue();
                         String prix = (String) dataSnapshot.child("Prix").getValue();
+                        idUser = (String) dataSnapshot.child("idVendeur").getValue();
 
                         Log.d("passage","Dans annonce titre " + titre +" description" + description);
                         TextView viewTitre = (TextView)findViewById(R.id.titreAnnonce);
@@ -119,14 +124,29 @@ public class Annonce  extends Activity {
         final Button btnContacterVendeur= findViewById(R.id.contactVendeurBtn);
         btnContacterVendeur.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent send = new Intent(Intent.ACTION_SENDTO);
-                String uriText = "mailto:" + Uri.encode("email@gmail.com") +
-                        "?subject=" + Uri.encode("the subject") +
-                        "&body=" + Uri.encode("the body of the message");
-                Uri uri = Uri.parse(uriText);
+                DatabaseReference userVendeur = database.getReference("RUser").child(idUser);
+                userVendeur.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        String email = (String) dataSnapshot.child("email").getValue();
+                        Intent send = new Intent(Intent.ACTION_SENDTO);
+                        String uriText = "mailto:" + Uri.encode(email) +
+                                "?subject=" + Uri.encode("Annonce : " + titre) +
+                                "&body=" + Uri.encode("Bonjour, Je suis intéressé par votre annonce "+titre);
+                        Uri uri = Uri.parse(uriText);
 
-                send.setData(uri);
-                startActivity(Intent.createChooser(send, "Send mail..."));
+                        send.setData(uri);
+                        startActivity(Intent.createChooser(send, "Send mail..."));
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Log.d("OnCancelledEmail","Echec récupération email");
+                    }
+                });
+
+
+
             }
 
 

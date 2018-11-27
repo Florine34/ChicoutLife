@@ -7,6 +7,7 @@ import java.util.Map;
 
 public class RUser {
 
+    private String email;
     private String pays;
     private String domaineEtude;
     private String progEtude;
@@ -20,7 +21,8 @@ public class RUser {
     public RUser() {
     }
 
-    public RUser(String m_pays, String m_domaineEtude, String m_progEtude, String m_sessionAdmi, int m_nbSession, boolean m_permisEtude, boolean m_echangeUni, boolean m_localisationChicout, boolean m_travailler) {
+    public RUser(String m_email, String m_pays, String m_domaineEtude, String m_progEtude, String m_sessionAdmi, int m_nbSession, boolean m_permisEtude, boolean m_echangeUni, boolean m_localisationChicout, boolean m_travailler) {
+        this.email = m_email;
         this.pays = m_pays;
         this.domaineEtude = m_domaineEtude;
         this.progEtude = m_progEtude;
@@ -35,6 +37,7 @@ public class RUser {
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
+        result.put("email", email);
         result.put("pays", pays);
         result.put("domaineEtude", domaineEtude);
         result.put("progEtude", progEtude);

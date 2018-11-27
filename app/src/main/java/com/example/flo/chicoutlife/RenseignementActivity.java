@@ -186,7 +186,8 @@ public class RenseignementActivity extends  AppCompatActivity { // Activity
 
                 EditText numberSession = (EditText) findViewById(R.id.numberText);
 
-                writeNewRUser(String.valueOf(spinnerPay.getSelectedItem()), String.valueOf(spinnerDomaine.getSelectedItem()), String.valueOf(spinProg.getSelectedItem()), String.valueOf(radioButton.getText()),
+                mAuth = FirebaseAuth.getInstance();
+                writeNewRUser(mAuth.getCurrentUser().getEmail(), String.valueOf(spinnerPay.getSelectedItem()), String.valueOf(spinnerDomaine.getSelectedItem()), String.valueOf(spinProg.getSelectedItem()), String.valueOf(radioButton.getText()),
                         Integer.parseInt(numberSession.getText().toString()), switchPE.isChecked(), switchEchange.isChecked(), switchIci.isChecked(), switchTravail.isChecked());
 
                 Intent intentRenseignement = new Intent(RenseignementActivity.this, ToDoListActivity.class);
@@ -198,13 +199,13 @@ public class RenseignementActivity extends  AppCompatActivity { // Activity
         });
     }
 
-    private void writeNewRUser(String pays, String domaineEtude, String progEtude, String sessionAdmi, int nbSession, boolean permisEtude, boolean echangeUni, boolean localisationChicout, boolean travailler) {
+    private void writeNewRUser(String email, String pays, String domaineEtude, String progEtude, String sessionAdmi, int nbSession, boolean permisEtude, boolean echangeUni, boolean localisationChicout, boolean travailler) {
 
         // Get User's ID
         mAuth = FirebaseAuth.getInstance();
 
         String key = mAuth.getUid();
-        RUser user = new RUser(pays, domaineEtude, progEtude, sessionAdmi, nbSession, permisEtude, echangeUni, localisationChicout, travailler);
+        RUser user = new RUser(email, pays, domaineEtude, progEtude, sessionAdmi, nbSession, permisEtude, echangeUni, localisationChicout, travailler);
 
         Map<String, Object> userToAdd = user.toMap();
 
