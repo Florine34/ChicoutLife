@@ -88,7 +88,11 @@ public class ChoiceAnnonce extends Activity {
                             /*Recuperation des donnes textes dans la base de donnee*/
                             String modelTitre = (String) annonce.child("Titre").getValue();
                             String modelDescription = (String) annonce.child("Description").getValue();
-
+                            if(modelDescription.length()>150){
+                                modelDescription=modelDescription.substring(0,149);
+                                modelDescription = modelDescription + "...";
+                            }
+                            ;
                             /*Recuperation du chemin de l'annonce pour la redirection lors du OnClick*/
                             String cheminAnnonceBdd = annonce.getKey();
                             Bitmap imageAnnonce =null;
