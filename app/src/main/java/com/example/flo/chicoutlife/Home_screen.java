@@ -35,12 +35,6 @@ public class Home_screen extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        mMailTextView = (TextView) findViewById(R.id.infoMail);
-        mMailTextView.setText("Email User: "+mAuth.getCurrentUser().getEmail());
-
-        mIdTextView = (TextView) findViewById(R.id.textView);
-        mIdTextView.setText("ID User: "+mAuth.getUid());
-
         mAuthListner = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
