@@ -18,7 +18,6 @@ public class InscriptionActivity extends AppCompatActivity {
         final Button buttonContinuer = findViewById(R.id.buttonRenseignement);
         buttonContinuer.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.i("DICJ","mainactivity.choixPerso");
                 Intent intentAccueil = new Intent(InscriptionActivity.this, RenseignementActivity.class);
                 startActivity(intentAccueil);
                 finish();

@@ -78,7 +78,7 @@ public class singup_activity extends AppCompatActivity {
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d(TAG, "createUserWithEmail:success");
                                     FirebaseUser user = mAuth.getCurrentUser();
-                                    Intent intent = new Intent(singup_activity.this, Home_screen.class);
+                                    Intent intent = new Intent(singup_activity.this, RenseignementActivity.class);
                                     startActivity(intent);
                                     finish();
                                 } else {
