@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.method.ScrollingMovementMethod;
@@ -28,20 +29,20 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-public class Annonce  extends Activity {
+public class Annonce  extends AppCompatActivity {
 
     FirebaseDatabase database;
     DatabaseReference annonce;
     FirebaseStorage storage ;
     private StorageReference mStorageRef;
-
+    Intent intent;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.annonces_pages);
-        Intent intent = getIntent();
+        intent = getIntent();
 
         if (intent != null){
             Log.d("passage","Dans annonce intent non null");
@@ -53,6 +54,7 @@ public class Annonce  extends Activity {
                 storage =  FirebaseStorage.getInstance();
                 annonce = database.getReference("Annonces").child(intent.getStringExtra("CHEMIN_ANNONCE"));
                 Log.d("passage","Dans annonce nom chemin : " + intent.getStringExtra("CHEMIN_ANNONCE"));
+
                 annonce.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -150,7 +152,8 @@ public class Annonce  extends Activity {
                 finish();
                 return true;
             case R.id.action_goBack:
-                Intent intentRetour = new Intent(Annonce.this, ChoiceAnnonce.class); // TODO
+                Intent intentRetour = new Intent(Annonce.this, ConteneurInfosAnnonces.class); // TODO
+                intentRetour.putExtra("NOM_PAGE",intent.getStringExtra("NOM_PAGE"));
                 startActivity(intentRetour);
                 finish();
                 return true;

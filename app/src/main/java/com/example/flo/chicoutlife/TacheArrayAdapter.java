@@ -79,7 +79,7 @@ public class TacheArrayAdapter extends ArrayAdapter<ToDo> {
                     switch (tache.getType()){
                         case 0://Cas page informations
 
-                            Intent infoPagepOpen = new Intent(context,InfoActivity.class);
+                            Intent infoPagepOpen = new Intent(context,  ConteneurInfosAnnonces.class);
                             infoPagepOpen.putExtra("NOM_PAGE", tache.getCheminBdd());
                             context.startActivity(infoPagepOpen);
                             ((Activity)context).finish();
@@ -88,8 +88,9 @@ public class TacheArrayAdapter extends ArrayAdapter<ToDo> {
                             break;
                         case 1://Cas page annonces
 
-                            Intent annoncePagepOpen = new Intent(context,ChoiceAnnonce.class);
-                           // annoncePagepOpen.putExtra("NOM_PAGE", tache.getCheminBdd());
+                            Intent annoncePagepOpen = new Intent(context,ConteneurInfosAnnonces.class);
+
+                            annoncePagepOpen.putExtra("NOM_PAGE", tache.getCheminBdd());
                             context.startActivity(annoncePagepOpen);
                             ((Activity)context).finish();
 
