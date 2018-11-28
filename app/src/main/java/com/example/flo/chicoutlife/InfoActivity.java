@@ -5,11 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.text.SpannableString;
 import android.text.util.Linkify;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,19 +25,42 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
-public class InfoActivity extends Activity {
+public class InfoActivity extends Fragment {
+    ViewGroup racine;
+    Context context ;
+    static Intent intentInfoActivity;
 
-    Context context = this;
+
+    public static Fragment newInstance(Intent intent){
+        intentInfoActivity = intent ;
+        return new InfoActivity();
+    }
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.info_activity);
+       // setContentView(R.layout.info_activity);
         
+
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        ViewGroup racineView =(ViewGroup) inflater.inflate(R.layout.info_activity,container,false);
+        racine = racineView;
+        return racine;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
         FirebaseDatabase database;
         final DatabaseReference infoPage;
 
-        Intent intent= getIntent();
-        Bundle b = intent.getExtras();
+        //Intent intent= getActivity().getIntent();
+        Bundle b = intentInfoActivity.getExtras();
+        context = getContext();
 
         if(b!=null)
         {
@@ -49,13 +76,14 @@ public class InfoActivity extends Activity {
                     String titre = (String) dataSnapshot.child("Titre").getValue();
                     String texte = (String) dataSnapshot.child("Texte").getValue();
 
-                    TextView viewTitre = (TextView)findViewById(R.id.titreInfoPage);
+                    TextView viewTitre = (TextView)getActivity().findViewById(R.id.titreInfoPage);
+                    Log.d("passage","titre: " + titre);
                     viewTitre.setText(titre);
 
-                    TextView viewTexte = (TextView)findViewById(R.id.contenuInfopage);
+                    TextView viewTexte = (TextView)getActivity().findViewById(R.id.contenuInfopage);
                     viewTexte.setText(texte);
 
-                    LinearLayout linearLienWeb = (LinearLayout) findViewById(R.id.linearLienWeb);
+                    LinearLayout linearLienWeb = (LinearLayout) getActivity().findViewById(R.id.linearLienWeb);
                     DataSnapshot liens = dataSnapshot.child("LiensWeb");
                     for(DataSnapshot lien : liens.getChildren()){
                         TextView lienX  = new TextView(context);
@@ -76,38 +104,6 @@ public class InfoActivity extends Activity {
 
                 }
             });
-        }
-    }
-
-    @Override
-    //create the menu
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_goHome:
-                Intent intentAccueil = new Intent(InfoActivity.this, Home_screen.class);
-                startActivity(intentAccueil);
-                finish();
-                return true;
-            case R.id.action_goBack:
-                Intent intentRetour = new Intent(InfoActivity.this, ToDoListActivity.class);
-                startActivity(intentRetour);
-                finish();
-                return true;
-
-            case R.id.action_quit:
-                finish();
-                System.exit(0);
-                return true;
-
-            default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                return super.onOptionsItemSelected(item);
         }
     }
 }

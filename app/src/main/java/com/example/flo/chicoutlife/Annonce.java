@@ -21,8 +21,6 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,13 +38,14 @@ public class Annonce  extends AppCompatActivity {
     String idUser ;
     String titre;
 
+    Intent intent;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.annonces_pages);
-        Intent intent = getIntent();
+        intent = getIntent();
 
         if (intent != null){
             Log.d("passage","Dans annonce intent non null");
@@ -58,6 +57,7 @@ public class Annonce  extends AppCompatActivity {
                 storage =  FirebaseStorage.getInstance();
                 annonce = database.getReference("Annonces").child(intent.getStringExtra("CHEMIN_ANNONCE"));
                 Log.d("passage","Dans annonce nom chemin : " + intent.getStringExtra("CHEMIN_ANNONCE"));
+
                 annonce.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -171,7 +171,8 @@ public class Annonce  extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.action_goBack:
-                Intent intentRetour = new Intent(Annonce.this, ChoiceAnnonce.class);
+                Intent intentRetour = new Intent(Annonce.this, ConteneurInfosAnnonces.class); // TODO
+                intentRetour.putExtra("NOM_PAGE",intent.getStringExtra("NOM_PAGE"));
                 startActivity(intentRetour);
                 finish();
                 return true;
@@ -188,7 +189,4 @@ public class Annonce  extends AppCompatActivity {
 
         }
     }
-
-
-
 }

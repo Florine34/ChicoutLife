@@ -1,6 +1,6 @@
 package com.example.flo.chicoutlife;
 
-import android.app.Activity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -8,6 +8,8 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -37,7 +39,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ChoiceAnnonce extends AppCompatActivity {
+public class ChoiceAnnonce extends Fragment {
 
     RecyclerView recyclerView;
     VerticalAdapter verticalAdapter;
@@ -47,20 +49,43 @@ public class ChoiceAnnonce extends AppCompatActivity {
     DatabaseReference annonces;
     FirebaseStorage storage ;
     private StorageReference mStorageRef;
+    private View racine;
+    private static Intent intentAnnonce;
+
+    public static Fragment newInstance(){return new ChoiceAnnonce();}
+
+
+    public static Fragment newInstance(Intent intent){
+        intentAnnonce = intent;
+        return new ChoiceAnnonce();}
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.choix_annonces);
+       // setContentView(R.layout.choix_annonces);
+
+
+
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        ViewGroup racineView =(ViewGroup) inflater.inflate(R.layout.choix_annonces,container,false);
+        racine = racineView;
+        return racine;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
         database = FirebaseDatabase.getInstance();
         storage =  FirebaseStorage.getInstance();
 
         //TODO faire en recevant des parametres cocher selon type si non general
-        recyclerView = (RecyclerView) findViewById(R.id.linearMiniaturesAnnonces);
+        recyclerView = (RecyclerView) racine.findViewById(R.id.linearMiniaturesAnnonces);
 
         modelsAnnonces = fillWithAnnonce();
-
-
 
     }
 
@@ -74,7 +99,7 @@ public class ChoiceAnnonce extends AppCompatActivity {
                 for(final DataSnapshot annonce : dataSnapshot.getChildren()){
 
                     modelsAnnonces = new ArrayList<>();
-                    verticalAdapter = new VerticalAdapter(modelsAnnonces,getApplicationContext());
+                    verticalAdapter = new VerticalAdapter(modelsAnnonces,getContext());
 
                     String cheminImg = (String)annonce.child("Image").getValue();
                     mStorageRef =  storage.getReference();
@@ -120,7 +145,7 @@ public class ChoiceAnnonce extends AppCompatActivity {
                 }
                 Log.d("passage","taille din datachange" + modelsAnnonces.size());
 
-                LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
+                LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
                 recyclerView.setLayoutManager(verticalLayoutManager);
                 recyclerView.setAdapter(verticalAdapter);
 
@@ -190,6 +215,7 @@ public class ChoiceAnnonce extends AppCompatActivity {
                     Intent intent = new Intent(context ,Annonce.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//sinon erreur
                     intent.putExtra("CHEMIN_ANNONCE",verticalList.get(position).getCheminAnnonceBdd());
+                    intent.putExtra("NOM_PAGE",intentAnnonce.getStringExtra("NOM_PAGE"));
                    // intent.putExtra("NOM_PAGE", min.getCheminAnnonceBdd());
                     context.startActivity(intent);
 
@@ -200,36 +226,5 @@ public class ChoiceAnnonce extends AppCompatActivity {
         }
     }
 
-    @Override
-    //create the menu
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_goHome:
-                Intent intentAccueil = new Intent(ChoiceAnnonce.this, Home_screen.class);
-                startActivity(intentAccueil);
-                finish();
-                return true;
-            case R.id.action_goBack:
-                Intent intentRetour = new Intent(ChoiceAnnonce.this, ToDoListActivity.class); // TODO
-                startActivity(intentRetour);
-                finish();
-                return true;
 
-            case R.id.action_quit:
-                finish();
-                System.exit(0);
-                return true;
-
-            default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                return super.onOptionsItemSelected(item);
-
-        }
-    }
 }
