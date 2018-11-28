@@ -64,7 +64,7 @@ public class Annonce  extends AppCompatActivity {
                         titre= (String)dataSnapshot.child("Titre").getValue();
                         String description = (String)dataSnapshot.child("Description").getValue();
                         String prix = (String) dataSnapshot.child("Prix").getValue();
-                        idUser = (String) dataSnapshot.child("idVendeur").getValue();
+                        idUser = (String) dataSnapshot.child("IdVendeur").getValue();
 
                         Log.d("passage","Dans annonce titre " + titre +" description" + description);
                         TextView viewTitre = (TextView)findViewById(R.id.titreAnnonce);
@@ -173,6 +173,7 @@ public class Annonce  extends AppCompatActivity {
             case R.id.action_goBack:
                 Intent intentRetour = new Intent(Annonce.this, ConteneurInfosAnnonces.class); // TODO
                 intentRetour.putExtra("NOM_PAGE",intent.getStringExtra("NOM_PAGE"));
+                intentRetour.putExtra("NOMBRE_PAGE","2");
                 startActivity(intentRetour);
                 finish();
                 return true;
