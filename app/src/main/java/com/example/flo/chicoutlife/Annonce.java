@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.method.ScrollingMovementMethod;
@@ -30,7 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-public class Annonce  extends Activity {
+public class Annonce  extends AppCompatActivity {
 
     FirebaseDatabase database;
     DatabaseReference annonce;
@@ -170,7 +171,7 @@ public class Annonce  extends Activity {
                 finish();
                 return true;
             case R.id.action_goBack:
-                Intent intentRetour = new Intent(Annonce.this, ChoiceAnnonce.class); // TODO
+                Intent intentRetour = new Intent(Annonce.this, ChoiceAnnonce.class);
                 startActivity(intentRetour);
                 finish();
                 return true;
@@ -187,4 +188,7 @@ public class Annonce  extends Activity {
 
         }
     }
+
+
+
 }

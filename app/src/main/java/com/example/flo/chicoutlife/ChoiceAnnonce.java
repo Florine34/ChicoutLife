@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -36,7 +37,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ChoiceAnnonce extends Activity {
+public class ChoiceAnnonce extends AppCompatActivity {
 
     RecyclerView recyclerView;
     VerticalAdapter verticalAdapter;
