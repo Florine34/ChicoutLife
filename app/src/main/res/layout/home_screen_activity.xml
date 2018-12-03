@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:gravity="top"
     android:orientation="vertical"
-    tools:context=".Home_screen">
+    tools:context=".Home_screen"
+    android:background="@color/beige">
 
     <ImageView
         android:layout_width="match_parent"

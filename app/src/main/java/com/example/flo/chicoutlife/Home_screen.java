@@ -30,7 +30,6 @@ public class Home_screen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_screen_activity);
-
         Button button = (Button) findViewById(R.id.signout);
 
 

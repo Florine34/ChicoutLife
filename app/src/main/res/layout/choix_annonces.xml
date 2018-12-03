@@ -14,8 +14,8 @@
 
         android:padding="20dp"
         android:text="@string/annonces"
-        android:textSize="22pt"
-        android:background="@color/vertT20"
+        android:textSize="18pt"
+        android:background="@color/red"
         />
 
     <LinearLayout

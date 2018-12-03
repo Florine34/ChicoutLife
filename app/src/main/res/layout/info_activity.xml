@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:orientation="vertical"
-        android:background="@color/gris"
+        android:background="@color/beige"
         xmlns:android="http://schemas.android.com/apk/res/android">
 
 
@@ -16,8 +16,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/titreInfoPage"
             android:textAlignment="center"
-            android:textSize="23pt"
-            android:background="@color/vertT20"
+            android:textSize="18pt"
+            android:background="@color/red"
             />
 
 
