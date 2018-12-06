@@ -1,6 +1,7 @@
 package com.example.flo.chicoutlife;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,12 +13,15 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -47,10 +51,12 @@ public class ChoiceAnnonce extends Fragment {
 
     FirebaseDatabase database;
     DatabaseReference annonces;
+    DatabaseReference infoPages;
     FirebaseStorage storage ;
     private StorageReference mStorageRef;
     private View racine;
     private static Intent intentAnnonce;
+    ArrayList<String> tableauParametre;
 
     public static Fragment newInstance(){return new ChoiceAnnonce();}
 
@@ -63,8 +69,6 @@ public class ChoiceAnnonce extends Fragment {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
        // setContentView(R.layout.choix_annonces);
-
-
 
     }
 
@@ -82,6 +86,11 @@ public class ChoiceAnnonce extends Fragment {
         database = FirebaseDatabase.getInstance();
         storage =  FirebaseStorage.getInstance();
 
+        remplirTableauParametres();
+
+        /*Ajout d'un listener pour recharger la page quand des parametres sont choisi*/
+        Button boutonRecherche = ajoutBoutonRecherche() ;
+
         //TODO faire en recevant des parametres cocher selon type si non general
         recyclerView = (RecyclerView) racine.findViewById(R.id.linearMiniaturesAnnonces);
 
@@ -91,6 +100,7 @@ public class ChoiceAnnonce extends Fragment {
 
     public  List<ModelAnnonce> fillWithAnnonce(){
 
+        //Annonces choisie a afficher
         annonces = database.getReference("Annonces");
         annonces.addValueEventListener(new ValueEventListener() {
             @Override
@@ -101,45 +111,58 @@ public class ChoiceAnnonce extends Fragment {
                     modelsAnnonces = new ArrayList<>();
                     verticalAdapter = new VerticalAdapter(modelsAnnonces,getContext());
 
+                    DataSnapshot dataTags = annonce.child("Tags");
+                    ArrayMap mapTags= new ArrayMap<>();
+
+
+                    //Liste des tags de l'annonce en cours
+                    for(DataSnapshot Tag : dataTags.getChildren()){
+                            mapTags.put((String) Tag.getKey() , Tag.getValue());
+                    }
+
+
                     String cheminImg = (String)annonce.child("Image").getValue();
                     mStorageRef =  storage.getReference();
                     StorageReference imageRef = mStorageRef.child(cheminImg);
 
+                    if(annonceValidateByParameter(mapTags,tableauParametre)) {
 
-                    final long ONE_MEGABYTE = 4096 * 4096;
-                    imageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                        @Override
-                        public void onSuccess(byte[] bytes) {
+                        final long ONE_MEGABYTE = 4096 * 4096;
+                        imageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                            @Override
+                            public void onSuccess(byte[] bytes) {
 
-                            /*Recuperation des donnes textes dans la base de donnee*/
-                            String modelTitre = (String) annonce.child("Titre").getValue();
-                            String modelDescription = (String) annonce.child("Description").getValue();
-                            if(modelDescription.length()>150){
-                                modelDescription=modelDescription.substring(0,149);
-                                modelDescription = modelDescription + "...";
+                                /*Recuperation des donnes textes dans la base de donnee*/
+                                String modelTitre = (String) annonce.child("Titre").getValue();
+                                String modelDescription = (String) annonce.child("Description").getValue();
+                                if (modelDescription.length() > 150) {
+                                    modelDescription = modelDescription.substring(0, 149);
+                                    modelDescription = modelDescription + "...";
+                                }
+                                ;
+
+                                /*Recuperation du chemin de l'annonce pour la redirection lors du OnClick*/
+                                String cheminAnnonceBdd = annonce.getKey();
+                                Bitmap imageAnnonce = null;
+
+                                /*Recuperation de l'image dans la base de donnee*/
+                                imageAnnonce = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                imageAnnonce = Bitmap.createScaledBitmap(imageAnnonce, 360, 240, false);
+                                ModelAnnonce model = new ModelAnnonce(modelTitre, modelDescription, imageAnnonce, cheminAnnonceBdd);
+                                modelsAnnonces.add(model);
+
+                                /*Sert pour le recyclerView , sinon la taille est initialiser a zero et le recycler ne se remplit pas*/
+                                verticalAdapter.notifyDataSetChanged();
+
                             }
-                            ;
-                            /*Recuperation du chemin de l'annonce pour la redirection lors du OnClick*/
-                            String cheminAnnonceBdd = annonce.getKey();
-                            Bitmap imageAnnonce =null;
-
-                            /*Recuperation de l'image dans la base de donnee*/
-                            imageAnnonce = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                            imageAnnonce = Bitmap.createScaledBitmap(imageAnnonce,360,240,false);
-                            ModelAnnonce model = new ModelAnnonce(modelTitre, modelDescription,imageAnnonce,cheminAnnonceBdd);
-                            modelsAnnonces.add(model);
-
-                            /*Sert pour le recyclerView , sinon la taille est initialiser a zero et le recycler ne se remplit pas*/
-                            verticalAdapter.notifyDataSetChanged();
-
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            // Handle any errors
-                            Log.e("passage","failure dans choiceAnnonce " + exception.getMessage());
-                        }
-                    });
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                // Handle any errors
+                                Log.e("passage", "failure dans choiceAnnonce " + exception.getMessage());
+                            }
+                        });
+                    }
 
 
                 }
@@ -226,5 +249,86 @@ public class ChoiceAnnonce extends Fragment {
         }
     }
 
+    public void remplirTableauParametres(){
+
+        //Parametres de la page de base choisie
+
+        if (intentAnnonce.getStringExtra("TYPE_INTENT").equals("accesbyintent")) {
+            tableauParametre = new ArrayList<String>();
+            infoPages = database.getReference("InfosPages");
+            infoPages.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    DataSnapshot tagsPage = dataSnapshot.child(intentAnnonce.getStringExtra("NOM_PAGE")).child("Tags");
+                    for (DataSnapshot dataTagsPage : tagsPage.getChildren()) {
+                        tableauParametre.add(dataTagsPage.getKey());
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }else{
+            //Parametres choisie par l'utilisateur
+
+            tableauParametre = intentAnnonce.getStringArrayListExtra("TAB_PARAM");
+        }
+
+    }
+    public boolean annonceValidateByParameter(ArrayMap arrayMap , ArrayList<String> parametreRequest){
+
+
+       //Parametre de l'objet a afficher
+
+        int nbrParam = parametreRequest.size();
+        int i;
+
+        Log.d("passage","dansAnnonceValidateByParameter taille param " + parametreRequest.size());
+        for(i= 0 ; i<nbrParam; i++){
+//            Log.d("passage" , "Dans annonceValidateByParameter" +arrayMap.get(parametreRequest.get(i)).getClass());
+            if(!(boolean)arrayMap.get(parametreRequest.get(i)) ){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public Button ajoutBoutonRecherche(){
+        Button boutonRecherche = racine.findViewById(R.id.idRechercherAnnonces);
+        boutonRecherche.setOnClickListener(new Button.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+
+                Intent intentRecherche = new Intent(racine.getContext(),ConteneurInfosAnnonces.class);
+
+                intentRecherche.putExtra("NOM_PAGE", intentAnnonce.getStringExtra("NOM_PAGE"));
+                intentRecherche.putExtra("NOMBRE_PAGE", intentAnnonce.getStringExtra("NOMBRE_PAGE"));
+                intentRecherche.putExtra("TYPE_INTENT","accesbyparam");
+
+                List<CheckBox> items = new ArrayList<CheckBox>();
+                items.add((CheckBox)racine.findViewById(R.id.checkBoxTagAppartement));
+                items.add((CheckBox)racine.findViewById(R.id.checkBoxTagElectronique));
+                items.add((CheckBox)racine.findViewById(R.id.checkBoxTagNourriture));
+                items.add((CheckBox)racine.findViewById(R.id.checkBoxTagVetements));
+
+                tableauParametre = new ArrayList<String>();
+                for (CheckBox item : items){
+                    if(item.isChecked())
+                        tableauParametre.add((String)item.getContentDescription());
+                }
+
+                intentRecherche.putExtra("TAB_PARAM",tableauParametre);
+
+                racine.getContext().startActivity(intentRecherche);
+                ((Activity)racine.getContext()).finish();
+
+
+            }
+        });
+        return  boutonRecherche;
+    }
 
 }

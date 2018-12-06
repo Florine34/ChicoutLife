@@ -39,6 +39,16 @@
     <string name="annonces">Annonces</string>
     <string name="annonce">Annonce</string>
     <string name="contacter_vendeur">Contacter le vendeur</string>
+    <string name="param_recherche">Paramètres recherche</string>
+
+    <!-- Tags -->
+    <string name="electronique">Electronique</string>
+    <string name="vetements">Vêtements</string>
+    <string name="nourriture">Nourriture</string>
+    <string name="appartements">Appartements</string>
+    <string name="rechercher">Rechercher</string>
+    <string name="appartement">Appartement</string>
+    <string name="vetement">Vetements</string>
 
     <!-- Pays -->
     <string-array name="country_arrays">

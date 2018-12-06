@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static android.R.drawable.ic_menu_send;
@@ -91,8 +92,14 @@ public class TacheArrayAdapter extends ArrayAdapter<ToDo> {
 
                             Intent annoncePagepOpen = new Intent(context,ConteneurInfosAnnonces.class);
 
+
+                            //TODO Faire par rapport a la tache dans InfosPages , ajouter les taches
+
+
                             annoncePagepOpen.putExtra("NOM_PAGE", tache.getCheminBdd());
                             annoncePagepOpen.putExtra("NOMBRE_PAGE", "2");
+                            annoncePagepOpen.putExtra("TYPE_INTENT","accesbyintent");
+
                             context.startActivity(annoncePagepOpen);
                             ((Activity)context).finish();
 

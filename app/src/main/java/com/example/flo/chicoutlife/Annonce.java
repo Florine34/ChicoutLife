@@ -174,6 +174,8 @@ public class Annonce  extends AppCompatActivity {
                 Intent intentRetour = new Intent(Annonce.this, ConteneurInfosAnnonces.class); // TODO
                 intentRetour.putExtra("NOM_PAGE",intent.getStringExtra("NOM_PAGE"));
                 intentRetour.putExtra("NOMBRE_PAGE","2");
+                intentRetour.putExtra("TYPE_INTENT","accesbyintent");
+
                 startActivity(intentRetour);
                 finish();
                 return true;
