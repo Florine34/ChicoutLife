@@ -14,8 +14,8 @@
         android:layout_gravity="top"
         android:padding="20dp"
         android:text="@string/annonce"
-        android:textSize="22pt"
-        android:background="@color/vertT20"
+        android:textSize="18pt"
+        android:background="@color/rouge"
         />
 
     <LinearLayout
@@ -48,6 +48,7 @@
                 android:id="@+id/contactVendeurBtn"
                 android:textAlignment="center"
                 android:text="@string/contacter_vendeur"
+                android:background="@drawable/box_orange"
                 />
         </LinearLayout>
 
