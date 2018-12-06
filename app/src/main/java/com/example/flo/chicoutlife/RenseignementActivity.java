@@ -139,11 +139,10 @@ public class RenseignementActivity extends  AppCompatActivity { // Activity
         }else{
             setContentView(R.layout.renseignement_activity);
 
-            final ImageButton buttonDepart = findViewById(R.id.arrive);
+            final ImageButton buttonDepart = findViewById(R.id.depart);
             buttonDepart.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    Intent intentRenseignement = new Intent(RenseignementActivity.this, RenseignementActivity.class);
-                    intentRenseignement.putExtra(INDEX_RENSEIGNEMENT, false);
+                    Intent intentRenseignement = new Intent(RenseignementActivity.this, CreateAnnonce.class);
                     startActivity(intentRenseignement);
                     finish();
                 }
