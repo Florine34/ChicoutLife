@@ -20,6 +20,7 @@
         </activity>
         <activity android:name=".ChoiceAnnonce"/>
         <activity android:name=".Home_screen" />
+        <activity android:name=".CreateAnnonce" />
         <activity android:name=".singup_activity" />
         <activity android:name=".ToDoListActivity" />
         <activity android:name=".RenseignementActivity"
