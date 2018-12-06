@@ -29,13 +29,13 @@ public class WriteToDoListBDD {
         putMapAfaire("Tache002", "false"); // Appartement
         putMapAfaire("Tache003", "false"); // Vetement hiver
         putMapAfaire("Tache004", "false"); // Inscription
-        putMapAfaire("Tache005", "false"); // Asso
+        putMapAfaire("Tache005", "false"); // Associations
         putMapAfaire("Tache006", "false"); // Bus
         putMapAfaire("Tache007", "false"); // Carte etudiante
         putMapAfaire("Tache008", "false"); // Casier
         putMapAfaire("Tache010", "false"); // Compte bancaire
 
-        // Suivant le pays Ramq ou pas ?
+        // Suivant les pays qui ont droit à la RAMQ
         switch (user.getPays()){
             case "Belgique":{
                 putMapAfaire("Tache019", "false");
