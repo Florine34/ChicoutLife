@@ -1,6 +1,7 @@
 package com.example.flo.chicoutlife;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -19,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -68,8 +70,6 @@ public class ChoiceAnnonce extends Fragment {
         super.onCreate(savedInstanceState);
        // setContentView(R.layout.choix_annonces);
 
-
-
     }
 
     @Nullable
@@ -87,6 +87,10 @@ public class ChoiceAnnonce extends Fragment {
         storage =  FirebaseStorage.getInstance();
 
         remplirTableauParametres();
+
+        /*Ajout d'un listener pour recharger la page quand des parametres sont choisi*/
+        Button boutonRecherche = ajoutBoutonRecherche() ;
+
         //TODO faire en recevant des parametres cocher selon type si non general
         recyclerView = (RecyclerView) racine.findViewById(R.id.linearMiniaturesAnnonces);
 
@@ -95,11 +99,6 @@ public class ChoiceAnnonce extends Fragment {
     }
 
     public  List<ModelAnnonce> fillWithAnnonce(){
-
-
-
-
-
 
         //Annonces choisie a afficher
         annonces = database.getReference("Annonces");
@@ -114,6 +113,8 @@ public class ChoiceAnnonce extends Fragment {
 
                     DataSnapshot dataTags = annonce.child("Tags");
                     ArrayMap mapTags= new ArrayMap<>();
+
+
                     //Liste des tags de l'annonce en cours
                     for(DataSnapshot Tag : dataTags.getChildren()){
                             mapTags.put((String) Tag.getKey() , Tag.getValue());
@@ -139,6 +140,7 @@ public class ChoiceAnnonce extends Fragment {
                                     modelDescription = modelDescription + "...";
                                 }
                                 ;
+
                                 /*Recuperation du chemin de l'annonce pour la redirection lors du OnClick*/
                                 String cheminAnnonceBdd = annonce.getKey();
                                 Bitmap imageAnnonce = null;
@@ -251,13 +253,13 @@ public class ChoiceAnnonce extends Fragment {
 
         //Parametres de la page de base choisie
 
-        if (intentAnnonce.getStringArrayExtra("TYPE_INTENT").equals("accesbyintent")) {
+        if (intentAnnonce.getStringExtra("TYPE_INTENT").equals("accesbyintent")) {
+            tableauParametre = new ArrayList<String>();
             infoPages = database.getReference("InfosPages");
             infoPages.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     DataSnapshot tagsPage = dataSnapshot.child(intentAnnonce.getStringExtra("NOM_PAGE")).child("Tags");
-                    tableauParametre = new ArrayList<String>();
                     for (DataSnapshot dataTagsPage : tagsPage.getChildren()) {
                         tableauParametre.add(dataTagsPage.getKey());
                     }
@@ -271,18 +273,7 @@ public class ChoiceAnnonce extends Fragment {
         }else{
             //Parametres choisie par l'utilisateur
 
-            List<CheckBox> items = new ArrayList<CheckBox>();
-            items.add((CheckBox)racine.findViewById(R.id.checkBoxTagAppartement));
-            items.add((CheckBox)racine.findViewById(R.id.checkBoxTagElectronique));
-            items.add((CheckBox)racine.findViewById(R.id.checkBoxTagNourriture));
-            items.add((CheckBox)racine.findViewById(R.id.checkBoxTagVetements));
-
-            for (CheckBox item : items){
-                if(item.isChecked())
-                    tableauParametre.add((String)item.getContentDescription());
-            }
-
-
+            tableauParametre = intentAnnonce.getStringArrayListExtra("TAB_PARAM");
         }
 
     }
@@ -293,13 +284,51 @@ public class ChoiceAnnonce extends Fragment {
 
         int nbrParam = parametreRequest.size();
         int i;
+
+        Log.d("passage","dansAnnonceValidateByParameter taille param " + parametreRequest.size());
         for(i= 0 ; i<nbrParam; i++){
-            Log.d("passage" , "Dans annonceValidateByParameter" +arrayMap.get(parametreRequest.get(i)).getClass());
+//            Log.d("passage" , "Dans annonceValidateByParameter" +arrayMap.get(parametreRequest.get(i)).getClass());
             if(!(boolean)arrayMap.get(parametreRequest.get(i)) ){
                 return false;
             }
         }
         return true;
+    }
+
+    public Button ajoutBoutonRecherche(){
+        Button boutonRecherche = racine.findViewById(R.id.idRechercherAnnonces);
+        boutonRecherche.setOnClickListener(new Button.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+
+                Intent intentRecherche = new Intent(racine.getContext(),ConteneurInfosAnnonces.class);
+
+                intentRecherche.putExtra("NOM_PAGE", intentAnnonce.getStringExtra("NOM_PAGE"));
+                intentRecherche.putExtra("NOMBRE_PAGE", intentAnnonce.getStringExtra("NOMBRE_PAGE"));
+                intentRecherche.putExtra("TYPE_INTENT","accesbyparam");
+
+                List<CheckBox> items = new ArrayList<CheckBox>();
+                items.add((CheckBox)racine.findViewById(R.id.checkBoxTagAppartement));
+                items.add((CheckBox)racine.findViewById(R.id.checkBoxTagElectronique));
+                items.add((CheckBox)racine.findViewById(R.id.checkBoxTagNourriture));
+                items.add((CheckBox)racine.findViewById(R.id.checkBoxTagVetements));
+
+                tableauParametre = new ArrayList<String>();
+                for (CheckBox item : items){
+                    if(item.isChecked())
+                        tableauParametre.add((String)item.getContentDescription());
+                }
+
+                intentRecherche.putExtra("TAB_PARAM",tableauParametre);
+
+                racine.getContext().startActivity(intentRecherche);
+                ((Activity)racine.getContext()).finish();
+
+
+            }
+        });
+        return  boutonRecherche;
     }
 
 }

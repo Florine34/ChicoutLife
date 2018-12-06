@@ -98,6 +98,7 @@ public class TacheArrayAdapter extends ArrayAdapter<ToDo> {
 
                             annoncePagepOpen.putExtra("NOM_PAGE", tache.getCheminBdd());
                             annoncePagepOpen.putExtra("NOMBRE_PAGE", "2");
+                            annoncePagepOpen.putExtra("TYPE_INTENT","accesbyintent");
 
                             context.startActivity(annoncePagepOpen);
                             ((Activity)context).finish();
