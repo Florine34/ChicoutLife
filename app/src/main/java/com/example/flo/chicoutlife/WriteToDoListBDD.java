@@ -37,8 +37,44 @@ public class WriteToDoListBDD {
 
         // Suivant le pays Ramq ou pas ?
         switch (user.getPays()){
+            case "Belgique":{
+                putMapAfaire("Tache019", "false");
+                break;
+            }
+            case "Danemark":{
+                putMapAfaire("Tache020", "false");
+                break;
+            }
+            case "Finlande": {
+                putMapAfaire("Tache021", "false");
+                break;
+            }
             case "France":{
-                //
+                putMapAfaire("Tache022", "false");
+                break;
+            }
+            case "Grèce":{
+                putMapAfaire("Tache023", "false");
+                break;
+            }
+            case "Luxembourg":{
+                putMapAfaire("Tache024", "false");
+                break;
+            }
+            case "Norvège":{
+                putMapAfaire("Tache025", "false");
+                break;
+            }
+            case "Portugal":{
+                putMapAfaire("Tache026", "false");
+                break;
+            }
+            case "Roumanie":{
+                putMapAfaire("Tache027", "false");
+                break;
+            }
+            case "Suède":{
+                putMapAfaire("Tache028", "false");
                 break;
             }
             default:{
