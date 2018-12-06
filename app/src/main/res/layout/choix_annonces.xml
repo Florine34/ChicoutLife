@@ -29,14 +29,60 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20dp"
-            android:text="Paramètres recherche"
+            android:text="@string/param_recherche"
             />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/linearParametresRecherche"
             android:orientation="vertical"
             >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+                <CheckBox
+                    android:id="@+id/checkBoxTagElectronique"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/electronique"
+                    android:contentDescription="@string/electronique"/>
+                <CheckBox
+                    android:id="@+id/checkBoxTagVetements"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/vetements"
+                    android:contentDescription="@string/vetement"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+                <CheckBox
+                    android:id="@+id/checkBoxTagNourriture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nourriture"
+                    android:contentDescription="@string/nourriture"/>
+                <CheckBox
+                    android:id="@+id/checkBoxTagAppartement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/appartements"
+                    android:contentDescription="@string/appartement"/>
+
+            </LinearLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/idRechercherAnnonces"
+                android:text="@string/rechercher"
+                android:background="@drawable/box_orange"/>
+
 
         </LinearLayout>
 

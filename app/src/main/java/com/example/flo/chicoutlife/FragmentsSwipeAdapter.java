@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 
 import com.google.android.gms.common.server.converter.StringToIntConverter;
 
@@ -20,6 +21,7 @@ public class FragmentsSwipeAdapter extends FragmentPagerAdapter {
         super(fm);
         this.intentInfoAnnonce= intent;
         this.nombrePages = (Integer.parseInt(intentInfoAnnonce.getStringExtra("NOMBRE_PAGE")));
+        Log.d("passage","Dans fragmentsSwipeAdapter " + intentInfoAnnonce.getStringExtra("NOM_PAGE"));
     }
 
     @Override
