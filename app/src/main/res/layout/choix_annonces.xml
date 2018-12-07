@@ -14,7 +14,7 @@
 
         android:padding="20dp"
         android:text="@string/annonces"
-        android:textSize="18pt"
+        android:textSize="14pt"
         android:background="@color/red"
         />
 
@@ -81,7 +81,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/idRechercherAnnonces"
                 android:text="@string/rechercher"
-                android:background="@drawable/box_orange"/>
+                android:background="@drawable/box_orange"
+                android:layout_margin="5dp"/>
 
 
         </LinearLayout>
