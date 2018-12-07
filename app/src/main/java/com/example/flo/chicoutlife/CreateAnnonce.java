@@ -38,7 +38,7 @@ public class CreateAnnonce  extends AppCompatActivity {
     private DatabaseReference rAnnonceDatabase = FirebaseDatabase.getInstance().getReference("Annonces");
     private FirebaseAuth mAuth;
     private static final int REQUEST_IMAGE = 100;
-    ImageView imageView;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +66,7 @@ public class CreateAnnonce  extends AppCompatActivity {
                 startActivityForResult(intentPhoto, REQUEST_IMAGE);
             }
         });
-        final String imageArticle = null;
+        final String imageArticle = UUID.randomUUID().toString();
 
         // Récupère le Prix
         final EditText textPrix = (EditText) findViewById(R.id.RecupPrixArticle);
@@ -92,10 +92,10 @@ public class CreateAnnonce  extends AppCompatActivity {
                 StorageReference storageRef = storage.getReferenceFromUrl("gs://chicoutlife-37a65.appspot.com");
 
                 // Create a reference to "mountains.jpg"
-                StorageReference mountainsRef = storageRef.child("mountains.jpg");
+                StorageReference mountainsRef = storageRef.child(imageArticle+".jpg");
 
                 // Create a reference to 'images/mountains.jpg'
-                StorageReference mountainImagesRef = storageRef.child("images/mountains.jpg");
+                StorageReference mountainImagesRef = storageRef.child("images/"+imageArticle+".jpg");
 
                 // While the file names are the same, the references point to different files
                 mountainsRef.getName().equals(mountainImagesRef.getName());    // true
@@ -126,7 +126,7 @@ public class CreateAnnonce  extends AppCompatActivity {
 
 
                 // Insert l'objet annonce dans fire base
-                writeNewRAnnonce(dateToday, textDescription.getText().toString(), idVend, imageArticle, textPrix.getText().toString(), appart.isChecked(), electro.isChecked(), nourriture.isChecked(), vetement.isChecked(), textTitre.getText().toString());
+                writeNewRAnnonce(dateToday, textDescription.getText().toString(), idVend, imageArticle + ".jpg", textPrix.getText().toString(), appart.isChecked(), electro.isChecked(), nourriture.isChecked(), vetement.isChecked(), textTitre.getText().toString());
                 Intent intentCreateAnnonce = new Intent(CreateAnnonce.this, CreateAnnonce.class); // Renvoi vers une page de confirmation
                 startActivity(intentCreateAnnonce);
                 finish();
@@ -146,7 +146,7 @@ public class CreateAnnonce  extends AppCompatActivity {
     }
 
     private void writeNewRAnnonce(String dateAjout, String description, String idVendeur, String image, String prix, boolean tag_appartement, boolean tag_electonique, boolean tag_tag_nourriture, boolean tag_vetement, String titre) {
-        String key = UUID.randomUUID().toString();
+        String key = image;
         RAnnonce annonce = new RAnnonce(dateAjout, description, idVendeur, image, prix, tag_appartement, tag_electonique, tag_tag_nourriture, tag_vetement, titre);
 
         Map<String, Object> annonceToAdd = annonce.toMap();
