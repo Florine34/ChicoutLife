@@ -59,7 +59,8 @@ public class Home_screen extends AppCompatActivity {
         final Button buttonRenseignementRemplis = findViewById(R.id.renseignement_remplis);
         buttonRenseignementRemplis.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intentToDoList = new Intent(Home_screen.this, ToDoListActivity.class);
+                //Intent intentToDoList = new Intent(Home_screen.this, ToDoListActivity.class);
+                Intent intentToDoList = new Intent(Home_screen.this, ToDoListInfosAnnonces.class);
                 startActivity(intentToDoList);
                 finish();
             }
