@@ -11,7 +11,7 @@ public class RAnnonce {
     private String dateAjout;
     private String description;
     private String idVendeur;
-    private Bitmap image;
+    private String image;
     private String prix;
     private boolean tag_appartement;
     private boolean tag_electronque;
@@ -23,7 +23,7 @@ public class RAnnonce {
 
     }
 
-    public RAnnonce(String m_dateAjout, String m_descr, String m_idVendeur, Bitmap m_image, String m_prix, boolean m_tag_appartement, boolean m_tag_electo, boolean m_tag_tag_nourriture, boolean m_tag_vetement, String m_titre){
+    public RAnnonce(String m_dateAjout, String m_descr, String m_idVendeur, String m_image, String m_prix, boolean m_tag_appartement, boolean m_tag_electo, boolean m_tag_tag_nourriture, boolean m_tag_vetement, String m_titre){
         this.dateAjout = m_dateAjout;
         this.description = m_descr;
         this.idVendeur = m_idVendeur;

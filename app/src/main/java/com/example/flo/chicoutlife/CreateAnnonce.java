@@ -66,7 +66,7 @@ public class CreateAnnonce  extends AppCompatActivity {
                 startActivityForResult(intentPhoto, REQUEST_IMAGE);
             }
         });
-        final Bitmap imageArticle = null;
+        final String imageArticle = null;
 
         // Récupère le Prix
         final EditText textPrix = (EditText) findViewById(R.id.RecupPrixArticle);
@@ -145,7 +145,7 @@ public class CreateAnnonce  extends AppCompatActivity {
         }
     }
 
-    private void writeNewRAnnonce(String dateAjout, String description, String idVendeur, Bitmap image, String prix, boolean tag_appartement, boolean tag_electonique, boolean tag_tag_nourriture, boolean tag_vetement, String titre) {
+    private void writeNewRAnnonce(String dateAjout, String description, String idVendeur, String image, String prix, boolean tag_appartement, boolean tag_electonique, boolean tag_tag_nourriture, boolean tag_vetement, String titre) {
         String key = UUID.randomUUID().toString();
         RAnnonce annonce = new RAnnonce(dateAjout, description, idVendeur, image, prix, tag_appartement, tag_electonique, tag_tag_nourriture, tag_vetement, titre);
 
