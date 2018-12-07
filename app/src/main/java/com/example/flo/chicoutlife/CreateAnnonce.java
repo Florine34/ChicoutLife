@@ -47,12 +47,11 @@ public class CreateAnnonce  extends AppCompatActivity {
 
         // Récupère l'image
         final Button photoAnnonce = (Button) findViewById(R.id.photoAnnonce);
-        ImageView imageView = (ImageView)findViewById(R.id.article);
+        imageView = (ImageView)findViewById(R.id.article);
         photoAnnonce.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intentPhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE); // Renvoi vers une page de confirmation
                 startActivityForResult(intentPhoto, REQUEST_IMAGE);
-                finish();
             }
         });
         final Bitmap imageArticle = null;
