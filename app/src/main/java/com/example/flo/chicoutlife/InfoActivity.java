@@ -81,6 +81,8 @@ public class InfoActivity extends Fragment {
                     viewTitre.setText(titre);
 
                     TextView viewTexte = (TextView)getActivity().findViewById(R.id.contenuInfopage);
+
+                    texte = texte.replace("." , "\n");
                     viewTexte.setText(texte);
 
                     LinearLayout linearLienWeb = (LinearLayout) getActivity().findViewById(R.id.linearLienWeb);
