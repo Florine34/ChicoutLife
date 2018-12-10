@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.SpannableString;
@@ -24,6 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
+
+import java.util.Objects;
 
 public class InfoActivity extends Fragment {
     ViewGroup racine;
@@ -65,47 +68,49 @@ public class InfoActivity extends Fragment {
         if(b!=null)
         {
             String page =(String) b.get("NOM_PAGE");
-            database = FirebaseDatabase.getInstance();
-            infoPage = database.getReference("InfosPages").child(page);
-            Log.d("passage","page : " + page);
-            infoPage.addValueEventListener(new ValueEventListener() {
+            if(page != null) {
+                database = FirebaseDatabase.getInstance();
+                infoPage = database.getReference("InfosPages").child(page);
+                Log.d("passage", "page : " + page);
+                infoPage.addValueEventListener(new ValueEventListener() {
 
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    // This method is called once with the initial value and again
-                    String titre = (String) dataSnapshot.child("Titre").getValue();
-                    String texte = (String) dataSnapshot.child("Texte").getValue();
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        // This method is called once with the initial value and again
+                        String titre = (String) dataSnapshot.child("Titre").getValue();
+                        String texte = (String) dataSnapshot.child("Texte").getValue();
 
-                    TextView viewTitre = (TextView)getActivity().findViewById(R.id.titreInfoPage);
-                    Log.d("passage","titre: " + titre);
-                    viewTitre.setText(titre);
+                        TextView viewTitre = (TextView) (getActivity()).findViewById(R.id.titreInfoPage);
+                        Log.d("passage", "titre: " + titre);
+                        viewTitre.setText(titre);
 
-                    TextView viewTexte = (TextView)getActivity().findViewById(R.id.contenuInfopage);
+                        TextView viewTexte = (TextView) getActivity().findViewById(R.id.contenuInfopage);
 
-                    texte = texte.replace("." , "\n");
-                    viewTexte.setText(texte);
+                        texte = texte.replace(".", "\n");
+                        viewTexte.setText(texte);
 
-                    LinearLayout linearLienWeb = (LinearLayout) getActivity().findViewById(R.id.linearLienWeb);
-                    DataSnapshot liens = dataSnapshot.child("LiensWeb");
-                    for(DataSnapshot lien : liens.getChildren()){
-                        TextView lienX  = new TextView(context);
-                        lienX.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT));
+                        LinearLayout linearLienWeb = (LinearLayout) getActivity().findViewById(R.id.linearLienWeb);
+                        DataSnapshot liens = dataSnapshot.child("LiensWeb");
+                        for (DataSnapshot lien : liens.getChildren()) {
+                            TextView lienX = new TextView(context);
+                            lienX.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                                    LinearLayout.LayoutParams.WRAP_CONTENT));
 
-                        lienX.setAutoLinkMask(Linkify.ALL);
-                        lienX.setText((String)lien.getValue());
+                            lienX.setAutoLinkMask(Linkify.ALL);
+                            lienX.setText((String) lien.getValue());
 
 
-                        linearLienWeb.addView(lienX);
+                            linearLienWeb.addView(lienX);
+                        }
                     }
-                }
 
-                @Override
-                public void onCancelled(DatabaseError error) {
-                    // Failed to read value
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
 
-                }
-            });
+                    }
+                });
+            }
         }
     }
 }

@@ -4,51 +4,65 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 
-public class ToDoListActivity extends AppCompatActivity {
+public class FragmentToDoListAFaire extends Fragment {
+
+
     FirebaseAuth mAuth;
     private ListView ListViewaFaire = null;
     private ListView ListViewFait = null;
 
     private ArrayList<ToDo> tachesaFaire = new ArrayList<ToDo>();
-    private ArrayList<ToDo> tachesFait = new ArrayList<>();
+
 
     private ArrayAdapter<ToDo> listAdapteraFaire = null;
-    private ArrayAdapter<ToDo> listAdapterFait = null;
+
     DatabaseReference tbToDolist ;
     DatabaseReference racine ;
     FirebaseDatabase database;
     Context context;
 
     final Tache[] t = new Tache[1];
+
+    View racineView;
+    public static Fragment newInstance(){return new FragmentToDoListAFaire();}
+
+
+    public static Fragment newInstance(Intent intent){
+
+        return new FragmentToDoListAFaire();}
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.todo_list_activity);
-        context = this;
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        ViewGroup racineView =(ViewGroup) inflater.inflate(R.layout.to_do_list_a_faire,container,false);
+        this.racineView = racineView;
+        return racineView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        context = getContext();
         /*Ouverture base de donnees*/
 
         database = FirebaseDatabase.getInstance();
@@ -56,15 +70,15 @@ public class ToDoListActivity extends AppCompatActivity {
         racine = tbToDolist.getParent();
         mAuth = FirebaseAuth.getInstance();
         mAuth.getCurrentUser();
-      //  Log.d("passage"," il est passer dans onCreate");
+        //  Log.d("passage"," il est passer dans onCreate");
 
 
         //Adapters qui liste les taches a faire  et fait de l'utilisateur
-        ListViewaFaire = findViewById(R.id.linearafaire2);
-        ListViewFait = findViewById(R.id.linearfait2);
+        ListViewaFaire = getActivity().findViewById(R.id.linearafaire2);
+        ListViewFait = getActivity().findViewById(R.id.linearfait2);
 
         createAdaptersTaches();//Gestion des donnees des adapters
-       // Log.d("passage"," qvqnt item click");
+        // Log.d("passage"," qvqnt item click");
         /*Ecoute les item de l adapter pour changer la valeur dans le modele*/
         ListViewaFaire.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -81,56 +95,11 @@ public class ToDoListActivity extends AppCompatActivity {
                 viewHolder.getCheckBox().setChecked(tache.isCheck());
             }
         });
-        ListViewFait.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View item, int position, long id) {
-
-                ToDo tache = listAdapterFait.getItem(position);
-
-                /*Change donnees de la todolist de l'utilisateur*/
-                racine.child("ToDoList").child(mAuth.getUid()).child("Fait").child(tache.getCheminBdd()).removeValue();
-                racine.child("ToDoList").child(mAuth.getUid()).child("AFaire").child(tache.getCheminBdd()).setValue(false);
-
-                tache.toggleChecked();
-                TacheViewHolder viewHolder = (TacheViewHolder) item.getTag();
-                viewHolder.getCheckBox().setChecked(tache.isCheck());
-            }
-        });
     }
 
-    @Override
-    //create the menu
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_goHome:
-                Intent intentAccueil = new Intent(ToDoListActivity.this, Home_screen.class);
-                startActivity(intentAccueil);
-                finish();
-                return true;
-            case R.id.action_goBack:
-                Intent intentRetour = new Intent(ToDoListActivity.this, Home_screen.class); // TODO
-                startActivity(intentRetour);
-                finish();
-                return true;
-
-            case R.id.action_quit:
-                finish();
-                System.exit(0);
-                return true;
-
-            default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                return super.onOptionsItemSelected(item);
-
-        }
-    }
-
 
     /*Fonction qui remplit les adapters afaire et fait*/
     public void createAdaptersTaches(){
@@ -142,9 +111,8 @@ public class ToDoListActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 /*Re/initialise les listes pour les adapters*/
                 tachesaFaire = new ArrayList<>();
-                tachesFait = new ArrayList<>();
                 listAdapteraFaire = new TacheArrayAdapter(context,tachesaFaire);
-                listAdapterFait = new TacheArrayAdapter(context,tachesFait);
+
                 Log.d("passage"," il est passer dans on DataChange");
                 DataSnapshot tbToDoListUser = dataSnapshot.child("ToDoList").child(Objects.requireNonNull(mAuth.getUid()));//TODO mAuth.getUid() / modifier pour authentification user
                 DataSnapshot aFaire = tbToDoListUser.child("AFaire");
@@ -166,22 +134,7 @@ public class ToDoListActivity extends AppCompatActivity {
 
                 }
 
-                /*Cas pour les taches faites*/
-                for(DataSnapshot tacheFait : fait.getChildren()){
-                    Log.d("passage"," debut boucle tqchesfait");
-                    String cheminTacheFait = tacheFait.getKey();
-                    DataSnapshot dataTacheChild = null;
-                    if (cheminTacheFait != null) {
-                        dataTacheChild = dataTache.child(cheminTacheFait);
-                        Tache t2 = dataTacheChild.getValue(Tache.class);
-                        tachesFait.add(new ToDo(t2.getNom(),true,t2.getType(),cheminTacheFait));
-                        Log.d("passage","finboucle tache fait");
-                    }
-
-                }
-
                 ListViewaFaire.setAdapter(listAdapteraFaire);
-                ListViewFait.setAdapter(listAdapterFait);
                 Log.d("passage"," fin fct");
             }
 
