@@ -62,4 +62,5 @@ public class FragmentsSwipeAdapter extends FragmentPagerAdapter {
 
         return nom;
     }
+
 }

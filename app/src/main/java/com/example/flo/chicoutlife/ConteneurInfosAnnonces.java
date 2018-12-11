@@ -13,14 +13,16 @@ public class ConteneurInfosAnnonces  extends AppCompatActivity {
 
     private ViewPager pages;
     private PagerAdapter adapterPages;
+    private  Intent intent;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.infos_annonces);//TODO
+        setContentView(R.layout.infos_annonces);
+        intent = getIntent();
 
         pages = findViewById(R.id.viewPages);
-        adapterPages = new FragmentsSwipeAdapter(getSupportFragmentManager(),getIntent());
+        adapterPages = new FragmentsSwipeAdapter(getSupportFragmentManager(),intent);
         pages.setAdapter(adapterPages);
 
     }
@@ -39,7 +41,10 @@ public class ConteneurInfosAnnonces  extends AppCompatActivity {
                 //finish(); TODO a voir finish
                 return true;
             case R.id.action_goBack:
-                Intent intentRetour = new Intent(this, ToDoListActivity.class); // TODO
+                Intent intentRetour = new Intent(this, ToDoListInfosAnnonces.class); // TODO
+                intentRetour.putExtra("NOM_PAGE", intent.getStringExtra("NOM_PAGE"));
+                intentRetour.putExtra("NOMBRE_PAGE", "2");
+                intentRetour.putExtra("TYPE_INTENT", "accesbyintent");
                 startActivity(intentRetour);
                 // finish();
                 return true;

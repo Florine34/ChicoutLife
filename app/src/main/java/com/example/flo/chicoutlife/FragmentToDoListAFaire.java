@@ -111,17 +111,16 @@ public class FragmentToDoListAFaire extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 /*Re/initialise les listes pour les adapters*/
                 tachesaFaire = new ArrayList<>();
-                listAdapteraFaire = new TacheArrayAdapter(context,tachesaFaire);
+                listAdapteraFaire = new TacheArrayAdapter(getActivity(),context,tachesaFaire);
 
-                Log.d("passage"," il est passer dans on DataChange");
+                Log.d("passage"," il est passer dans on DataChange a faire");
                 DataSnapshot tbToDoListUser = dataSnapshot.child("ToDoList").child(Objects.requireNonNull(mAuth.getUid()));//TODO mAuth.getUid() / modifier pour authentification user
                 DataSnapshot aFaire = tbToDoListUser.child("AFaire");
-                DataSnapshot fait = tbToDoListUser.child("Fait");
                 DataSnapshot dataTache = dataSnapshot.child("Taches");
 
                 /*Cas pour les taches a faire*/
                 for(DataSnapshot tacheaFaire : aFaire.getChildren()){
-                    Log.d("passage"," debut boucle tqchesqfqire");
+
                     String cheminTacheAFaire = tacheaFaire.getKey();
 
                     DataSnapshot dataTacheChild = null;
@@ -129,7 +128,7 @@ public class FragmentToDoListAFaire extends Fragment {
                         dataTacheChild = dataTache.child(cheminTacheAFaire);
                         Tache t = dataTacheChild.getValue(Tache.class);
                         tachesaFaire.add(new ToDo(t.getNom(),false,t.getType(),cheminTacheAFaire));
-                        Log.d("passage"," fin boucle tache a faire t.getNom" + t.getNom() + t.getType());
+
                     }
 
                 }

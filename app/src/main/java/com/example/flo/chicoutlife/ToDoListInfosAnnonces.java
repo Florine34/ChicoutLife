@@ -1,5 +1,6 @@
 package com.example.flo.chicoutlife;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -23,17 +24,35 @@ public class ToDoListInfosAnnonces extends AppCompatActivity {
         int height = metrics.heightPixels;
 
         Log.d("passage","Dans ToDoListInfosAnnonces width " + width + " height " + height);
-        if (width > 1500 || height > 1500){
+        if (width > 800 || height > 800){
             //code for big screen (like tablet)
-            setContentView(R.layout.todolist_et_infoannonces);
-            pages = findViewById(R.id.viewPagerOrientation);
 
-            Intent intent = new Intent();
-            intent.putExtra("NOMBRE_PAGE","2");
-            intent.putExtra("NOM_PAGE" ,"Tache002");
-            intent.putExtra("TYPE_INTENT","accesbyintent");
-            adapterPages = new FragmentsSwipeAdapter(getSupportFragmentManager(),intent);
-            pages.setAdapter(adapterPages);
+            int orientation = getResources().getConfiguration().orientation;
+            Log.d("passage","Dans ToDoListInfosAnnonces cas tablette" + "type orientation : " + orientation);
+            if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+                // TODO A changer faire avec la liste a scinder en deux
+                Log.d("passage","Dans ToDoListInfosAnnonces cas tablette  cas PORTRAIT");
+                setContentView(R.layout.just_todo_list_main_activity);
+                Log.d("passage","Dans ToDoListInfosAnnonces fin setContentView");
+
+            } else {
+
+                setContentView(R.layout.todolist_et_infoannonces);
+                pages = findViewById(R.id.viewPagerOrientation);
+                Intent intent = new Intent();
+                if (getIntent() == null) {
+
+                    intent.putExtra("NOMBRE_PAGE", "2");
+                    intent.putExtra("NOM_PAGE", "Tache002");
+                    intent.putExtra("TYPE_INTENT", "accesbyintent");
+                } else {
+                    intent = getIntent();
+                }
+
+                adapterPages = new FragmentsSwipeAdapter(getSupportFragmentManager(), intent);
+                pages.setAdapter(adapterPages);
+
+            }
         }else{
             //code for small screen (like smartphone)
             setContentView(R.layout.just_todo_list_main_activity);
@@ -44,12 +63,12 @@ public class ToDoListInfosAnnonces extends AppCompatActivity {
                 linearLayout.setOrientation(LinearLayout.HORIZONTAL);
 
 
-            } else {
-                // In portrait
-
             }
 
         }
 
     }
+
 }
+
+

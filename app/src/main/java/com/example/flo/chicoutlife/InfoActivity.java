@@ -1,6 +1,7 @@
 package com.example.flo.chicoutlife;
 
 import android.app.Activity;
+import android.arch.lifecycle.OnLifecycleEvent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ public class InfoActivity extends Fragment {
     ViewGroup racine;
     Context context ;
     static Intent intentInfoActivity;
+    Bundle saved;
 
 
     public static Fragment newInstance(Intent intent){
@@ -42,6 +44,8 @@ public class InfoActivity extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        saved = savedInstanceState;
+
        // setContentView(R.layout.info_activity);
         
 
@@ -65,7 +69,7 @@ public class InfoActivity extends Fragment {
         Bundle b = intentInfoActivity.getExtras();
         context = getContext();
 
-        if(b!=null)
+        if(b!=null && saved == null)//On regarde si le bundle est null sinon InfoActivity Crah a la rotation en mode tablette a gauche du viewPager (mal fermer ?)
         {
             String page =(String) b.get("NOM_PAGE");
             if(page != null) {
@@ -80,7 +84,8 @@ public class InfoActivity extends Fragment {
                         String titre = (String) dataSnapshot.child("Titre").getValue();
                         String texte = (String) dataSnapshot.child("Texte").getValue();
 
-                        TextView viewTitre = (TextView) (getActivity()).findViewById(R.id.titreInfoPage);
+
+                        TextView viewTitre = (TextView) ((getActivity())).findViewById(R.id.titreInfoPage);
                         Log.d("passage", "titre: " + titre);
                         viewTitre.setText(titre);
 
@@ -113,4 +118,5 @@ public class InfoActivity extends Fragment {
             }
         }
     }
+
 }

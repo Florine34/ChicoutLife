@@ -106,22 +106,21 @@ public class FragmentToDoListFait extends Fragment {
                 /*Re/initialise les listes pour les adapters*/
 
                 tachesFait = new ArrayList<>();
-                listAdapterFait = new TacheArrayAdapter(context,tachesFait);
+                listAdapterFait = new TacheArrayAdapter(getActivity(),context,tachesFait);
 
                 DataSnapshot tbToDoListUser = dataSnapshot.child("ToDoList").child(mAuth.getUid());//TODO mAuth.getUid() / modifier pour authentification user
-                DataSnapshot aFaire = tbToDoListUser.child("AFaire");
                 DataSnapshot fait = tbToDoListUser.child("Fait");
                 DataSnapshot dataTache = dataSnapshot.child("Taches");
 
 
                 /*Cas pour les taches faites*/
                 for(DataSnapshot tacheFait : fait.getChildren()){
-                    Log.d("passage"," debut boucle tqchesfait");
+
                     String cheminTacheFait = tacheFait.getKey();
                     DataSnapshot dataTacheChild = dataTache.child(cheminTacheFait);
                     Tache t2 = dataTacheChild.getValue(Tache.class);
                     tachesFait.add(new ToDo(t2.getNom(),true,t2.getType(),cheminTacheFait));
-                    Log.d("passage","finboucle tache fait");
+
                 }
 
                 ListViewFait.setAdapter(listAdapterFait);
