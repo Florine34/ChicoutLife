@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="main_activity_contenu_arrivee" type="layout">@layout/just_todo_list_main_activity</item>
+    <bool name="tablette">false</bool>
+</resources>

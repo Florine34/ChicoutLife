@@ -94,37 +94,32 @@ public class TacheArrayAdapter extends ArrayAdapter<ToDo> {
                 public void onClick(View view) {
                     Log.d("passage" , "dans tacheArrayAdapter onCLICK");
                     int orientation = activity.getResources().getConfiguration().orientation;
+                    boolean tablette = activity.getResources().getBoolean(R.bool.tablette);
                     switch (tache.getType()){
                         case 0://Cas page informations
 
-
-                            if((width>800 || height > 800) && orientation == Configuration.ORIENTATION_LANDSCAPE){
-                                //Mode tablette
-                                    Log.d("passage" , "Mode paysage et tablette");
-                                    Intent infosEtTodo = new Intent(context, ToDoListInfosAnnonces.class);
-                                    lancementIntentClick( tache , infosEtTodo , "1");
+                            if(tablette == true){
+                                Log.d("passage" , "Mode paysage et tablette");
+                                Intent infosEtTodo = new Intent(context, ToDoListInfosAnnonces.class);
+                                lancementIntentClick( tache , infosEtTodo , "1");
 
                             }else{
-                                //Mode Smartphone
                                 Log.d("passage" , "Mode portrait");
                                 Intent infoPagepOpen = new Intent(context,  ConteneurInfosAnnonces.class);
                                 lancementIntentClick( tache , infoPagepOpen , "1");
-                            }
-                            break;
-                        case 1://Cas page les deux
 
-                          //  Intent annoncePagepOpen = new Intent(context,ConteneurInfosAnnonces.class);
-                            if((width>800 || height > 800) && orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                            }
+
+                        case 1://Cas page les deux
+                            if(tablette == true){
                                 Intent annoncesInfosEtTODO = new Intent(context, ToDoListInfosAnnonces.class);
                                 lancementIntentClick( tache , annoncesInfosEtTODO , "2");
-
-                            }
-                            else{
+                            }else{
                                 Intent annoncesEtInfos = new Intent(context, ConteneurInfosAnnonces.class);
                                 lancementIntentClick( tache , annoncesEtInfos , "2");
                             }
+                          //  Intent annoncePagepOpen = new Intent(context,ConteneurInfosAnnonces.class);
 
-                            break;
 
                     }
                 }
