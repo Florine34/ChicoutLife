@@ -74,41 +74,32 @@ public class TacheArrayAdapter extends ArrayAdapter<ToDo> {
                 @Override
                 public void onClick(View view) {
                     Log.d("passage" , "dans tacheArrayAdapter onCLICK");
-                    int orientation = fragmentActivity.getResources().getConfiguration().orientation;
+
                     boolean tablette = fragmentActivity.getResources().getBoolean(R.bool.tablette);
                     switch (tache.getType()){
                         case 0://Cas page informations
 
                             if(tablette == true){
-                                Log.d("passage" , "Mode paysage et tablette que infos");
-                                Bundle infosetTodo = new Bundle();
-                                communicationActivityMain(tache,infosetTodo,"1");
-                                //Intent infosEtTodo = new Intent(context, ToDoListInfosAnnonces.class);
-                                //lancementIntentClick( tache , infosEtTodo , "1");
+                                Log.d("passage" , "Dans TacheArrayAdapter Mode paysage et tablette que infos");
+                                communicationActivityMain(tache,"1");
 
                             }else{
+                                communicationActivityMain(tache,"1");
                                 Log.d("passage" , "Mode portrait cas infos");
-                                Intent infoPagepOpen = new Intent(context,  ConteneurInfosAnnonces.class);
-                                lancementIntentClick( tache , infoPagepOpen , "1");
 
                             }
+                            break;
 
                         case 1://Cas page les deux
                             if(tablette == true){
-                                Log.d("passage" , "Mode paysage et tablette infos et annonces");
-                                Bundle infosetTodo = new Bundle();
-                                communicationActivityMain(tache,infosetTodo,"2");
-                                /*
-                                Intent annoncesInfosEtTODO = new Intent(context, ToDoListInfosAnnonces.class);
-                                lancementIntentClick( tache , annoncesInfosEtTODO , "2");*/
+                                Log.d("passage" , "Mode paysage et tablette infos et annonces nomtache " +tache.getCheminBdd()+ "type" + tache.getType());
+                                communicationActivityMain(tache,"2");
+
                             }else{
                                 Log.d("passage" , "Mode portrait cas infos et annonces");
-                                Intent annoncesEtInfos = new Intent(context, ConteneurInfosAnnonces.class);
-                                lancementIntentClick( tache , annoncesEtInfos , "2");
+                                communicationActivityMain(tache,"2");
+
                             }
-                          //  Intent annoncePagepOpen = new Intent(context,ConteneurInfosAnnonces.class);
-
-
                     }
                 }
             });
@@ -122,22 +113,13 @@ public class TacheArrayAdapter extends ArrayAdapter<ToDo> {
         return context.getResources().getIdentifier(name, "string", context.getPackageName());
     }
 
-    public void lancementIntentClick(ToDo tache , Intent intent , String nombrePages){
-        intent.putExtra("NOM_PAGE", tache.getCheminBdd());
-        intent.putExtra("NOMBRE_PAGE", nombrePages);
-        intent.putExtra("TYPE_INTENT", "accesbyintent");
 
-        context.startActivity(intent);
-        ((Activity) context).finish();
-
-
-    }
-
-
-    public void communicationActivityMain(ToDo tache , Bundle bundle , String nombrePages){
+    public void communicationActivityMain(ToDo tache , String nombrePages){
+        Bundle bundle = new Bundle();
         bundle.putString("NOM_PAGE", tache.getCheminBdd());
         bundle.putString("NOMBRE_PAGE", nombrePages);
         bundle.putString("TYPE_INTENT", "accesbyintent");
+
 
         ToDoListInfosAnnonces activityMain = (ToDoListInfosAnnonces) fragmentActivity;
         activityMain.reinstanciatePageAdapter(bundle);
