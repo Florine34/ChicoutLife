@@ -13,6 +13,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -22,14 +24,15 @@ public class ToDoListInfosAnnonces extends AppCompatActivity {
     private ViewPager pages;
     private PagerAdapter adapterPages;
     private boolean tablette;
+    private  boolean land;
+    private boolean infosAnnonces;// Pour savoir si le viewPager infoAnnonces est afficher
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
         setContentView(R.layout.main_activity_contenu_arrivee);
         tablette = getResources().getBoolean(R.bool.tablette);
+        land= getResources().getBoolean(R.bool.land);
         Log.d("passage","ToDoListInfosAnnonces dans on Create bool tablette " + tablette);
         if(tablette){
 
@@ -42,8 +45,10 @@ public class ToDoListInfosAnnonces extends AppCompatActivity {
                 ((FragmentsSwipeAdapter) adapterPages).addFragmentList(ChoiceAnnonce.newInstance(bundle));
             }
             pages.setAdapter(adapterPages);
+            infosAnnonces = true;
         }
         else{
+            infosAnnonces = false;
             Log.d("passage" , "Dans ToDoListInfosAnnonces.OnCreate fragments support manager?" + getSupportFragmentManager().getFragments().size());
 
         }
@@ -54,26 +59,18 @@ public class ToDoListInfosAnnonces extends AppCompatActivity {
 
         Log.d("passage","est dans ToDoListInfosAnnocnes dans reinstanciatePageAdapter");
         boolean tablette = getResources().getBoolean(R.bool.tablette);
+        pages=findViewById(R.id.viewPagerOrientation);
         if(!tablette) {
 
             findViewById(R.id.viewPagerOrientation).setVisibility(View.VISIBLE);
             findViewById(R.id.nomsPages).setVisibility(View.VISIBLE);
             findViewById(R.id.titletodo).setVisibility(View.GONE);
             findViewById(R.id.fragments_todolist).setVisibility(View.GONE);
-            pages=findViewById(R.id.viewPagerOrientation);
-        }
-        else{
-           /* findViewById(R.id.viewPagerOrientation).setVisibility(View.GONE);
-            findViewById(R.id.nomsPages).setVisibility(View.GONE);
-            findViewById(R.id.titletodo).setVisibility(View.VISIBLE);
-            findViewById(R.id.fragments_todolist).setVisibility(View.VISIBLE);
-            pages=findViewById(R.id.viewPagerOrientation);*/
+            infosAnnonces = true;
 
         }
+
         adapterPages = new FragmentsSwipeAdapter(getSupportFragmentManager(), bundle);
-        //adapterPages.destroyItem(R.layout.info_activity,0,);
-        /*FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.layout.info_activity,InfoActivity.newInstance(bundle));*/
         ((FragmentsSwipeAdapter) adapterPages).removeFragmentAllList();
         ((FragmentsSwipeAdapter) adapterPages).addFragmentList(InfoActivity.newInstance(bundle));
         Log.d("passage", "est dans ToDoListInfosAnnocnes.reinstanciatePageAdapter " + bundle.getString("NOMBRE_PAGE"));
@@ -91,57 +88,52 @@ public class ToDoListInfosAnnonces extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        /*getSupportFragmentManager().
-        ((FragmentsSwipeAdapter) adapterPages).removeFragmentAllList();
-        pages.setAdapter(adapterPages);
-        adapterPages.startUpdate(pages);*/
+        
+    }
+    @Override
+    //create the menu
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
+
+            switch (item.getItemId()) {
+                case R.id.action_quit:
+                    finish();
+                    System.exit(0);
+                    return true;
+                case R.id.action_goHome:
+                    Intent intentAccueil = new Intent(ToDoListInfosAnnonces.this, Home_screen.class);
+                    startActivity(intentAccueil);
+                    finish();
+                    return true;
+                case R.id.action_goBack:
+                    if((!land && !infosAnnonces )|| (land && infosAnnonces)) {//cas portrait todolistjust
+                        Intent intentRetour = new Intent(ToDoListInfosAnnonces.this, Home_screen.class); // TODO
+                        startActivity(intentRetour);
+                        finish();
+                        return true;
+                    }else if(!infosAnnonces){
+                        Intent intentAccueil2 = new Intent(ToDoListInfosAnnonces.this, Home_screen.class);
+                        startActivity(intentAccueil2);
+                        finish();
+                        return true;
+                    }else {
+                        Intent intentRetour = new Intent(ToDoListInfosAnnonces.this, ToDoListInfosAnnonces.class); // TODO
+                        startActivity(intentRetour);
+                        finish();
+                        return true;
+
+                    }
+
+                default:
+                    // If we got here, the user's action was not recognized.
+                    // Invoke the superclass to handle it.
+                    return super.onOptionsItemSelected(item);
+            }
 
     }
 }
-
-
-/*
-        Log.d("passage","Dans ToDoListInfosAnnonces width " + width + " height " + height);
-        if (width > 800 || height > 800){
-            //code for big screen (like tablet)
-
-            int orientation = getResources().getConfiguration().orientation;
-            Log.d("passage","Dans ToDoListInfosAnnonces cas tablette" + "type orientation : " + orientation);
-            if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-                // TODO A changer faire avec la liste a scinder en deux
-                Log.d("passage","Dans ToDoListInfosAnnonces cas tablette  cas PORTRAIT");
-                setContentView(R.layout.just_todo_list_main_activity);
-                Log.d("passage","Dans ToDoListInfosAnnonces fin setContentView");
-
-            } else {
-
-                setContentView(R.layout.todolist_et_infoannonces);
-                pages = findViewById(R.id.viewPagerOrientation);
-                Intent intent = new Intent();
-                if (getIntent() == null) {
-
-                    intent.putExtra("NOMBRE_PAGE", "2");
-                    intent.putExtra("NOM_PAGE", "Tache002");
-                    intent.putExtra("TYPE_INTENT", "accesbyintent");
-                } else {
-                    intent = getIntent();
-                }
-
-                adapterPages = new FragmentsSwipeAdapter(getSupportFragmentManager(), intent);
-                pages.setAdapter(adapterPages);
-
-            }
-        }else{
-            //code for small screen (like smartphone)
-            setContentView(R.layout.just_todo_list_main_activity);
-            int orientation = getResources().getConfiguration().orientation;
-            if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                // TODO A changer faire avec la liste a scinder en deux
-                LinearLayout linearLayout = findViewById(R.id.fragment_todolist);
-                linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-
-
-            }
-
-        }*/

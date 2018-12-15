@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:id="@+id/fragment_todolist">
+        android:id="@+id/fragments_todolist">
 
         <fragment
             class = "com.example.flo.chicoutlife.FragmentToDoListAFaire"
@@ -45,4 +45,23 @@
             >
         </fragment>
     </LinearLayout>
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+
+        android:id="@+id/viewPagerOrientation"
+        android:background="@drawable/bar_fragment"
+        android:visibility="invisible">
+
+        <android.support.v4.view.PagerTabStrip
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:id="@+id/nomsPages"
+            android:background="@drawable/bar_fragment"
+            android:visibility="invisible">
+        </android.support.v4.view.PagerTabStrip>
+
+    </android.support.v4.view.ViewPager>
 </LinearLayout>

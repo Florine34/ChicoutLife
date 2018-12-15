@@ -285,7 +285,7 @@ public class ChoiceAnnonce extends Fragment {
         }else{
             //Parametres choisie par l'utilisateur
 
-            tableauParametre = intentAnnonce.getStringArrayListExtra("TAB_PARAM");
+            tableauParametre = bundleAnnonce.getStringArrayList("TAB_PARAM");
         }
 
     }
@@ -333,31 +333,7 @@ public class ChoiceAnnonce extends Fragment {
                 }
                 bundleRecherche.putStringArrayList("TAB_PARAM",tableauParametre);
                 activityParent.reinstanciatePageAdapter(bundleRecherche);
-                /*
-                Intent intentRecherche = new Intent(racine.getContext(),ConteneurInfosAnnonces.class);
 
-                intentRecherche.putExtra("NOM_PAGE", intentAnnonce.getStringExtra("NOM_PAGE"));
-                intentRecherche.putExtra("NOMBRE_PAGE", intentAnnonce.getStringExtra("NOMBRE_PAGE"));
-                intentRecherche.putExtra("TYPE_INTENT","accesbyparam");
-
-                List<CheckBox> items = new ArrayList<CheckBox>();
-                items.add((CheckBox)racine.findViewById(R.id.checkBoxTagAppartement));
-                items.add((CheckBox)racine.findViewById(R.id.checkBoxTagElectronique));
-                items.add((CheckBox)racine.findViewById(R.id.checkBoxTagNourriture));
-                items.add((CheckBox)racine.findViewById(R.id.checkBoxTagVetements));
-
-                tableauParametre = new ArrayList<String>();
-                for (CheckBox item : items){
-                    if(item.isChecked())
-                        tableauParametre.add((String)item.getContentDescription());
-                }
-
-                intentRecherche.putExtra("TAB_PARAM",tableauParametre);
-
-                racine.getContext().startActivity(intentRecherche);
-                ((Activity)racine.getContext()).finish();
-
-            */
             }
         });
 

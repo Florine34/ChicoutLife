@@ -146,7 +146,7 @@ public class ToDoListActivity extends AppCompatActivity {
                 listAdapteraFaire = new TacheArrayAdapter(context,tachesaFaire);
                 listAdapterFait = new TacheArrayAdapter(context,tachesFait);
                 Log.d("passage"," il est passer dans on DataChange");
-                DataSnapshot tbToDoListUser = dataSnapshot.child("ToDoList").child(Objects.requireNonNull(mAuth.getUid()));//TODO mAuth.getUid() / modifier pour authentification user
+                DataSnapshot tbToDoListUser = dataSnapshot.child("ToDoList").child((mAuth.getUid()));//TODO mAuth.getUid() / modifier pour authentification user
                 DataSnapshot aFaire = tbToDoListUser.child("AFaire");
                 DataSnapshot fait = tbToDoListUser.child("Fait");
                 DataSnapshot dataTache = dataSnapshot.child("Taches");

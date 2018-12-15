@@ -18,7 +18,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChoiceAnnonce"/>
         <activity android:name=".ToDoListInfosAnnonces"/>
         <activity android:name=".Home_screen" />
         <activity android:name=".CreateAnnonce" />

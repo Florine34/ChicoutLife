@@ -2,4 +2,5 @@
 <resources>
     <item name="main_activity_contenu_arrivee" type="layout">@layout/to_do_list_land</item>
     <bool name="tablette">false</bool>
+    <bool name="land">true</bool>
 </resources>
