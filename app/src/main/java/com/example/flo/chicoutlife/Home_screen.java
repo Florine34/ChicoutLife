@@ -63,14 +63,10 @@ public class Home_screen extends AppCompatActivity {
                 bundleToDoList.putString("NOMBRE_PAGE", "1");
                 bundleToDoList.putString("NOM_PAGE","Tache001");
                 bundleToDoList.putString("TYPE_INTENT","accesbyintent");
-                //Intent intentToDoList = new Intent(Home_screen.this, ToDoListActivity.class);
+
                 Intent intentToDoList = new Intent(Home_screen.this, ToDoListInfosAnnonces.class);
                 intentToDoList.putExtras(bundleToDoList);
-                /*
-                intentToDoList.putExtra("NOMBRE_PAGE", "1");
-                intentToDoList.putExtra("NOM_PAGE", "Tache001");
-                intentToDoList.putExtra("TYPE_INTENT", "accesbyintent");
-                */
+
 
                 startActivity(intentToDoList);
                 finish();

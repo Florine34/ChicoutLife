@@ -39,6 +39,7 @@ public class Annonce  extends AppCompatActivity {
     String titre;
 
     Intent intent;
+    Bundle bundleAnnonce;
 
 
     @Override
@@ -46,17 +47,18 @@ public class Annonce  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.annonces_pages);
         intent = getIntent();
+        bundleAnnonce = intent.getExtras();
 
-        if (intent != null){
+        if (bundleAnnonce != null){
             Log.d("passage","Dans annonce intent non null");
-            if (intent.hasExtra("CHEMIN_ANNONCE")){ // vérifie qu'une valeur est associée à la clé “edittext”
+          //  if (intent.hasExtra("CHEMIN_ANNONCE")){ // vérifie qu'une valeur est associée à la clé “edittext”
                 Log.d("passage","Dans annonce intent.hasextra CHEMIN ANNONCE");
                 ImageView imageAnnonce;
 
                 database = FirebaseDatabase.getInstance();
                 storage =  FirebaseStorage.getInstance();
-                annonce = database.getReference("Annonces").child(intent.getStringExtra("CHEMIN_ANNONCE"));
-                Log.d("passage","Dans annonce nom chemin : " + intent.getStringExtra("CHEMIN_ANNONCE"));
+                annonce = database.getReference("Annonces").child(bundleAnnonce.getString("CHEMIN_ANNONCE"));
+                Log.d("passage","Dans annonce nom chemin : " + bundleAnnonce.getString("CHEMIN_ANNONCE"));
 
                 annonce.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -118,7 +120,7 @@ public class Annonce  extends AppCompatActivity {
 
 
 
-            }
+            //}
         }
 
         // Bouton choose menu
@@ -171,10 +173,12 @@ public class Annonce  extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.action_goBack:
-                Intent intentRetour = new Intent(Annonce.this, ConteneurInfosAnnonces.class); // TODO
-                intentRetour.putExtra("NOM_PAGE",intent.getStringExtra("NOM_PAGE"));
-                intentRetour.putExtra("NOMBRE_PAGE","2");
-                intentRetour.putExtra("TYPE_INTENT","accesbyintent");
+                Intent intentRetour = new Intent(Annonce.this,ToDoListInfosAnnonces.class);
+                Bundle bundleAnnonceExtra = new Bundle();
+
+                bundleAnnonceExtra.putString("NOM_PAGE",bundleAnnonce.getString("NOM_PAGE"));
+                bundleAnnonceExtra.putString("NOMBRE_PAGE","2");
+                bundleAnnonceExtra.putString("TYPE_INTENT","accesbyintent");
 
                 startActivity(intentRetour);
                 finish();

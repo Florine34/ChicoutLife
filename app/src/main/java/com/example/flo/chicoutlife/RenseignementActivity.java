@@ -64,7 +64,7 @@ public class RenseignementActivity extends  AppCompatActivity { // Activity
             final Button buttonValider = findViewById(R.id.valider);
             buttonValider.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    Intent intentRenseignement = new Intent(RenseignementActivity.this, ToDoListActivity.class);
+                    Intent intentRenseignement = new Intent(RenseignementActivity.this, ToDoListInfosAnnonces.class);
                     intentRenseignement.putExtra(INDEX_RENSEIGNEMENT, false);
                     startActivity(intentRenseignement);
                     finish();
@@ -189,7 +189,7 @@ public class RenseignementActivity extends  AppCompatActivity { // Activity
                 writeNewRUser(mAuth.getCurrentUser().getEmail(), String.valueOf(spinnerPay.getSelectedItem()), String.valueOf(spinnerDomaine.getSelectedItem()), String.valueOf(spinProg.getSelectedItem()), String.valueOf(radioButton.getText()),
                         Integer.parseInt(numberSession.getText().toString()), switchPE.isChecked(), switchEchange.isChecked(), switchIci.isChecked(), switchTravail.isChecked());
 
-                Intent intentRenseignement = new Intent(RenseignementActivity.this, ToDoListActivity.class);
+                Intent intentRenseignement = new Intent(RenseignementActivity.this, ToDoListInfosAnnonces.class);
                 intentRenseignement.putExtra(INDEX_RENSEIGNEMENT, false);
                 startActivity(intentRenseignement);
                 finish();

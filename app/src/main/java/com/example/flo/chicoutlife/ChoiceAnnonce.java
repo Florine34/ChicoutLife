@@ -247,11 +247,17 @@ public class ChoiceAnnonce extends Fragment {
 
                 @Override
                 public void onClick(View view) {
+                    Bundle bundleAnnonceExtra = new Bundle();
+
+                    bundleAnnonceExtra.putString("NOM_PAGE",bundleAnnonce.getString("NOM_PAGE"));
+                    bundleAnnonceExtra.putString("NOMBRE_PAGE","2");
+                    bundleAnnonceExtra.putString("TYPE_INTENT","accesbyintent");
+                    bundleAnnonceExtra.putString("CHEMIN_ANNONCE",verticalList.get(position).getCheminAnnonceBdd());
+
                     Intent intent = new Intent(context ,Annonce.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//sinon erreur
-                    intent.putExtra("CHEMIN_ANNONCE",verticalList.get(position).getCheminAnnonceBdd());
-                    intent.putExtra("NOM_PAGE",intentAnnonce.getStringExtra("NOM_PAGE"));
-                   // intent.putExtra("NOM_PAGE", min.getCheminAnnonceBdd());
+                    intent.putExtras(bundleAnnonceExtra);
+
                     context.startActivity(intent);
 
                     }

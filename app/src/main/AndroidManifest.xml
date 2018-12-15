@@ -22,7 +22,7 @@
         <activity android:name=".Home_screen" />
         <activity android:name=".CreateAnnonce" />
         <activity android:name=".singup_activity" />
-        <activity android:name=".ToDoListActivity" />
+
         <activity android:name=".RenseignementActivity"
             android:configChanges="screenSize|orientation|screenLayout|navigation"/>
 
@@ -32,7 +32,7 @@
             />
         <activity android:name=".Annonce" />
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-        <activity android:name=".ConteneurInfosAnnonces"/>
+
 
 
     </application>
