@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -13,16 +14,16 @@ public class ConteneurInfosAnnonces  extends AppCompatActivity {
 
     private ViewPager pages;
     private PagerAdapter adapterPages;
-    private  Intent intent;
+    private  Bundle bundle;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
+        Log.d("passage","Dans ConteneurInfosAnnonces onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.infos_annonces);
-        intent = getIntent();
-
+        bundle = getIntent().getExtras();
         pages = findViewById(R.id.viewPages);
-        adapterPages = new FragmentsSwipeAdapter(getSupportFragmentManager(),intent);
+        adapterPages = new FragmentsSwipeAdapter(getSupportFragmentManager(),bundle);
         pages.setAdapter(adapterPages);
 
     }
@@ -42,7 +43,7 @@ public class ConteneurInfosAnnonces  extends AppCompatActivity {
                 return true;
             case R.id.action_goBack:
                 Intent intentRetour = new Intent(this, ToDoListInfosAnnonces.class); // TODO
-                intentRetour.putExtra("NOM_PAGE", intent.getStringExtra("NOM_PAGE"));
+                intentRetour.putExtra("NOM_PAGE", bundle.getString("NOM_PAGE"));
                 intentRetour.putExtra("NOMBRE_PAGE", "2");
                 intentRetour.putExtra("TYPE_INTENT", "accesbyintent");
                 startActivity(intentRetour);

@@ -3,11 +3,9 @@ package com.example.flo.chicoutlife;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,27 +13,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
 import java.util.List;
-
-import static android.R.drawable.ic_menu_send;
-import static android.widget.Toast.LENGTH_LONG;
 
 public class TacheArrayAdapter extends ArrayAdapter<ToDo> {
 
     private LayoutInflater inflater;
-    Context context;
-    int orientation;
-    FragmentActivity activity;
+    private  Context context;
+    private FragmentActivity fragmentActivity;
 
     public TacheArrayAdapter(@NonNull Context context, List<ToDo> tacheList) {
         super(context, R.layout.liste_adapter,tacheList);
@@ -46,7 +31,7 @@ public class TacheArrayAdapter extends ArrayAdapter<ToDo> {
     public TacheArrayAdapter(FragmentActivity activity, @NonNull Context context, List<ToDo> tacheList) {
         super(context, R.layout.liste_adapter,tacheList);
         this.context=context;
-        this.activity = activity;
+        this.fragmentActivity = activity;
         inflater = LayoutInflater.from(context);
     }
 
@@ -56,10 +41,6 @@ public class TacheArrayAdapter extends ArrayAdapter<ToDo> {
         CheckBox checkBox;
         final ImageButton imageButton;
 
-        DisplayMetrics metrics = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        final int width = metrics.widthPixels;
-        final int height = metrics.heightPixels;
 
         if (convertView == null){
 
@@ -93,18 +74,20 @@ public class TacheArrayAdapter extends ArrayAdapter<ToDo> {
                 @Override
                 public void onClick(View view) {
                     Log.d("passage" , "dans tacheArrayAdapter onCLICK");
-                    int orientation = activity.getResources().getConfiguration().orientation;
-                    boolean tablette = activity.getResources().getBoolean(R.bool.tablette);
+                    int orientation = fragmentActivity.getResources().getConfiguration().orientation;
+                    boolean tablette = fragmentActivity.getResources().getBoolean(R.bool.tablette);
                     switch (tache.getType()){
                         case 0://Cas page informations
 
                             if(tablette == true){
-                                Log.d("passage" , "Mode paysage et tablette");
-                                Intent infosEtTodo = new Intent(context, ToDoListInfosAnnonces.class);
-                                lancementIntentClick( tache , infosEtTodo , "1");
+                                Log.d("passage" , "Mode paysage et tablette que infos");
+                                Bundle infosetTodo = new Bundle();
+                                communicationActivityMain(tache,infosetTodo,"1");
+                                //Intent infosEtTodo = new Intent(context, ToDoListInfosAnnonces.class);
+                                //lancementIntentClick( tache , infosEtTodo , "1");
 
                             }else{
-                                Log.d("passage" , "Mode portrait");
+                                Log.d("passage" , "Mode portrait cas infos");
                                 Intent infoPagepOpen = new Intent(context,  ConteneurInfosAnnonces.class);
                                 lancementIntentClick( tache , infoPagepOpen , "1");
 
@@ -112,9 +95,14 @@ public class TacheArrayAdapter extends ArrayAdapter<ToDo> {
 
                         case 1://Cas page les deux
                             if(tablette == true){
+                                Log.d("passage" , "Mode paysage et tablette infos et annonces");
+                                Bundle infosetTodo = new Bundle();
+                                communicationActivityMain(tache,infosetTodo,"2");
+                                /*
                                 Intent annoncesInfosEtTODO = new Intent(context, ToDoListInfosAnnonces.class);
-                                lancementIntentClick( tache , annoncesInfosEtTODO , "2");
+                                lancementIntentClick( tache , annoncesInfosEtTODO , "2");*/
                             }else{
+                                Log.d("passage" , "Mode portrait cas infos et annonces");
                                 Intent annoncesEtInfos = new Intent(context, ConteneurInfosAnnonces.class);
                                 lancementIntentClick( tache , annoncesEtInfos , "2");
                             }
@@ -142,6 +130,17 @@ public class TacheArrayAdapter extends ArrayAdapter<ToDo> {
         context.startActivity(intent);
         ((Activity) context).finish();
 
+
+    }
+
+
+    public void communicationActivityMain(ToDo tache , Bundle bundle , String nombrePages){
+        bundle.putString("NOM_PAGE", tache.getCheminBdd());
+        bundle.putString("NOMBRE_PAGE", nombrePages);
+        bundle.putString("TYPE_INTENT", "accesbyintent");
+
+        ToDoListInfosAnnonces activityMain = (ToDoListInfosAnnonces) fragmentActivity;
+        activityMain.reinstanciatePageAdapter(bundle);
 
     }
 }

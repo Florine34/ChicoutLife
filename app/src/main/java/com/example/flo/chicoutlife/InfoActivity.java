@@ -34,10 +34,17 @@ public class InfoActivity extends Fragment {
     Context context ;
     static Intent intentInfoActivity;
     Bundle saved;
+    static Bundle bundleInfo;
 
 
-    public static Fragment newInstance(Intent intent){
+    public static Fragment newInstance(Intent intent){//TODO a supp
         intentInfoActivity = intent ;
+        return new InfoActivity();
+    }
+
+    public static Fragment newInstance(Bundle bundle){
+        bundleInfo = bundle ;
+        Log.d("passage","Dans InfoActivity.newInstance(bundle) " + bundle.get("NOM_PAGE"));
         return new InfoActivity();
     }
 
@@ -66,16 +73,17 @@ public class InfoActivity extends Fragment {
         final DatabaseReference infoPage;
 
         //Intent intent= getActivity().getIntent();
-        Bundle b = intentInfoActivity.getExtras();
+       // Bundle b = intentInfoActivity.getExtras();
+
         context = getContext();
 
-        if(b!=null && saved == null)//On regarde si le bundle est null sinon InfoActivity Crah a la rotation en mode tablette a gauche du viewPager (mal fermer ?)
+        if(bundleInfo!=null)//On regarde si le bundle est null sinon InfoActivity Crah a la rotation en mode tablette a gauche du viewPager (mal fermer ?)
         {
-            String page =(String) b.get("NOM_PAGE");
+            String page =(String) bundleInfo.get("NOM_PAGE");
             if(page != null) {
                 database = FirebaseDatabase.getInstance();
                 infoPage = database.getReference("InfosPages").child(page);
-                Log.d("passage", "page : " + page);
+                Log.d("passage", " dans infoActivity page : " + page);
                 infoPage.addValueEventListener(new ValueEventListener() {
 
                     @Override

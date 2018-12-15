@@ -58,12 +58,18 @@ public class ChoiceAnnonce extends Fragment {
     private View racine;
     private static Intent intentAnnonce;
     ArrayList<String> tableauParametre;
+    static Bundle bundleAnnonce;
+    static ToDoListInfosAnnonces activityParent;
 
     public static Fragment newInstance(){return new ChoiceAnnonce();}
 
 
     public static Fragment newInstance(Intent intent){
         intentAnnonce = intent;
+        return new ChoiceAnnonce();}
+
+    public static Fragment newInstance(Bundle bundle){
+        bundleAnnonce= bundle;
         return new ChoiceAnnonce();}
 
     @Override
@@ -87,10 +93,11 @@ public class ChoiceAnnonce extends Fragment {
         database = FirebaseDatabase.getInstance();
         storage =  FirebaseStorage.getInstance();
 
+        activityParent = (ToDoListInfosAnnonces) getActivity();//TODO getparent ???
         remplirTableauParametres();
 
         /*Ajout d'un listener pour recharger la page quand des parametres sont choisi*/
-        Button boutonRecherche = ajoutBoutonRecherche() ;
+        ajoutBoutonRecherche() ;
 
         //TODO faire en recevant des parametres cocher selon type si non general
         recyclerView = (RecyclerView) racine.findViewById(R.id.linearMiniaturesAnnonces);
@@ -258,13 +265,13 @@ public class ChoiceAnnonce extends Fragment {
 
         //Parametres de la page de base choisie
 
-        if (intentAnnonce.getStringExtra("TYPE_INTENT").equals("accesbyintent")) {
+        if (bundleAnnonce.getString("TYPE_INTENT").equals("accesbyintent")) {
             tableauParametre = new ArrayList<String>();
             infoPages = database.getReference("InfosPages");
             infoPages.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    DataSnapshot tagsPage = dataSnapshot.child(intentAnnonce.getStringExtra("NOM_PAGE")).child("Tags");
+                    DataSnapshot tagsPage = dataSnapshot.child(bundleAnnonce.getString("NOM_PAGE")).child("Tags");
                     for (DataSnapshot dataTagsPage : tagsPage.getChildren()) {
                         tableauParametre.add(dataTagsPage.getKey());
                     }
@@ -300,13 +307,33 @@ public class ChoiceAnnonce extends Fragment {
         return true;
     }
 
-    public Button ajoutBoutonRecherche(){
+    public void ajoutBoutonRecherche(){
         Button boutonRecherche = racine.findViewById(R.id.idRechercherAnnonces);
         boutonRecherche.setOnClickListener(new Button.OnClickListener(){
 
             @Override
             public void onClick(View view) {
 
+                Bundle bundleRecherche = new Bundle();
+
+                bundleRecherche.putString("NOM_PAGE",bundleAnnonce.getString("NOM_PAGE"));
+                bundleRecherche.putString("NOMBRE_PAGE",bundleAnnonce.getString("NOMBRE_PAGE"));
+                bundleRecherche.putString("TYPE_INTENT","accesbyparam");
+
+                List<CheckBox> items = new ArrayList<CheckBox>();
+                items.add((CheckBox)racine.findViewById(R.id.checkBoxTagAppartement));
+                items.add((CheckBox)racine.findViewById(R.id.checkBoxTagElectronique));
+                items.add((CheckBox)racine.findViewById(R.id.checkBoxTagNourriture));
+                items.add((CheckBox)racine.findViewById(R.id.checkBoxTagVetements));
+
+                tableauParametre = new ArrayList<String>();
+                for (CheckBox item : items){
+                    if(item.isChecked())
+                        tableauParametre.add((String)item.getContentDescription());
+                }
+                bundleRecherche.putStringArrayList("TAB_PARAM",tableauParametre);
+                activityParent.reinstanciatePageAdapter(bundleRecherche);
+                /*
                 Intent intentRecherche = new Intent(racine.getContext(),ConteneurInfosAnnonces.class);
 
                 intentRecherche.putExtra("NOM_PAGE", intentAnnonce.getStringExtra("NOM_PAGE"));
@@ -330,10 +357,10 @@ public class ChoiceAnnonce extends Fragment {
                 racine.getContext().startActivity(intentRecherche);
                 ((Activity)racine.getContext()).finish();
 
-
+            */
             }
         });
-        return  boutonRecherche;
+
     }
 
 }
