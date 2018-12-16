@@ -17,16 +17,17 @@
                 android:id="@+id/arriveRenseign"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Renseignements pour votre arrivée"
+                android:text="@string/titreRenseignementArrivee"
                 android:textAlignment="center"
                 android:textSize="15pt"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:background="@color/red"/>
 
             <TextView
                 android:id="@+id/paysQ"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="De quel pays venez vous ?" />
+                android:text="@string/QuestionPays" />
 
             <Spinner
                 android:id="@+id/spinnerPays"
@@ -38,7 +39,7 @@
                 android:id="@+id/DomainQ"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Quel est votre domaine d'étude ?" />
+                android:text="@string/QuestionDomaine" />
 
             <Spinner
                 android:id="@+id/spinnerDomaineEtude"
@@ -50,7 +51,7 @@
                 android:id="@+id/programmeQ"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Quel est votre programme d'étude ?" />
+                android:text="@string/QuestionProgramme" />
 
             <Spinner
                 android:id="@+id/spinnerProgramme"
@@ -61,7 +62,7 @@
                 android:id="@+id/arriveQ"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Quel est votre trimestre d'admission ?" />
+                android:text="@string/QuestionTrimestre" />
 
             <RadioGroup
                 android:id="@+id/sessionArrivee"
@@ -76,28 +77,28 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:text="Automne" />
+                    android:text="@string/automne" />
 
                 <RadioButton
                     android:id="@+id/hiver"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Hiver" />
+                    android:text="@string/hiver" />
 
                 <RadioButton
                     android:id="@+id/ete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Été" />
+                    android:text="@string/ete" />
             </RadioGroup>
 
             <TextView
                 android:id="@+id/tempsQ"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Combien de session restez-vous ?" />
+                android:text="@string/NombreSessions" />
 
             <EditText
                 android:id="@+id/numberText"
@@ -112,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="5dp"
                 android:showText="true"
-                android:text="Avez-vous un Permis d'étude ?"
+                android:text="@string/QuestionPermisEtude"
                 android:textOff="Non"
                 android:textOn="Oui" />
 
@@ -122,7 +123,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="5dp"
                 android:showText="true"
-                android:text="Faites vous partie d'un échange universitaire ?"
+                android:text="@string/QuestionEchange"
                 android:textOff="Non"
                 android:textOn="Oui" />
 
@@ -132,7 +133,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="5dp"
                 android:showText="true"
-                android:text="Êtes-vous déjà à Chicoutimi ?"
+                android:text="@string/QuestionPresenceChicout"
                 android:textOff="Non"
                 android:textOn="Oui" />
 
@@ -142,7 +143,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="5dp"
                 android:showText="true"
-                android:text="Souhaitez vous travailler pendant votre séjour ?"
+                android:text="@string/QuestionTravail"
                 android:textOff="Non"
                 android:textOn="Oui" />
 

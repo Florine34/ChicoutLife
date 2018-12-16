@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="TO DO List"
+            android:text="@string/to_do_list"
             android:textSize="10pt"
             android:textStyle="bold"
             android:background="@color/rouge"
