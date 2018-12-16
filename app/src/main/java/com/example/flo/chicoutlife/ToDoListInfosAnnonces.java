@@ -33,7 +33,6 @@ public class ToDoListInfosAnnonces extends AppCompatActivity {
         setContentView(R.layout.main_activity_contenu_arrivee);
         tablette = getResources().getBoolean(R.bool.tablette);
         land= getResources().getBoolean(R.bool.land);
-        Log.d("passage","ToDoListInfosAnnonces dans on Create bool tablette " + tablette);
         if(tablette){
 
             Bundle bundle = getIntent().getExtras();
@@ -58,7 +57,6 @@ public class ToDoListInfosAnnonces extends AppCompatActivity {
     }
     public void reinstanciatePageAdapter(Bundle bundle){
 
-        Log.d("passage","est dans ToDoListInfosAnnocnes dans reinstanciatePageAdapter");
         boolean tablette = getResources().getBoolean(R.bool.tablette);
         pages=findViewById(R.id.viewPagerOrientation);
         if(!tablette) {

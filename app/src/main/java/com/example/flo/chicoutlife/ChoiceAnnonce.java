@@ -171,7 +171,7 @@ public class ChoiceAnnonce extends Fragment {
                                     @Override
                                     public void onFailure(@NonNull Exception exception) {
                                         // Handle any errors
-                                        Log.e("passage", "failure dans choiceAnnonce " + exception.getMessage());
+                                        Log.e("failure", "failure dans choiceAnnonce " + exception.getMessage());
                                     }
                                 });
                             }
@@ -180,7 +180,6 @@ public class ChoiceAnnonce extends Fragment {
 
                     }
                 }
-                Log.d("passage","taille din datachange" + modelsAnnonces.size());
 
                 LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
                 recyclerView.setLayoutManager(verticalLayoutManager);
@@ -230,7 +229,6 @@ public class ChoiceAnnonce extends Fragment {
 
         @Override
         public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            Log.d("passage","est onCreateViewHolder");
             View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.model_miniature_annonce,parent,false);
             return new MyViewHolder(itemView);
         }
@@ -305,9 +303,7 @@ public class ChoiceAnnonce extends Fragment {
         int nbrParam = parametreRequest.size();
         int i;
 
-        Log.d("passage","dansAnnonceValidateByParameter taille param " + parametreRequest.size());
         for(i= 0 ; i<nbrParam; i++){
-//            Log.d("passage" , "Dans annonceValidateByParameter" +arrayMap.get(parametreRequest.get(i)).getClass());
             if(!(boolean)arrayMap.get(parametreRequest.get(i)) ){
                 return false;
             }
@@ -321,7 +317,6 @@ public class ChoiceAnnonce extends Fragment {
 
             @Override
             public void onClick(View view) {
-                Log.d("passage","Dans ChoiceAnnonce.ajoutBoutonRecherche.Onclick");
                 Bundle bundleRecherche = new Bundle();
 
                 bundleRecherche.putString("NOM_PAGE",bundleAnnonce.getString("NOM_PAGE"));

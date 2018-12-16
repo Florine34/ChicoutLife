@@ -70,7 +70,6 @@ public class FragmentToDoListAFaire extends Fragment {
         racine = tbToDolist.getParent();
         mAuth = FirebaseAuth.getInstance();
         mAuth.getCurrentUser();
-        //  Log.d("passage"," il est passer dans onCreate");
 
 
         //Adapters qui liste les taches a faire  et fait de l'utilisateur
@@ -78,7 +77,6 @@ public class FragmentToDoListAFaire extends Fragment {
         ListViewFait = getActivity().findViewById(R.id.linearfait2);
 
         createAdaptersTaches();//Gestion des donnees des adapters
-        // Log.d("passage"," qvqnt item click");
         /*Ecoute les item de l adapter pour changer la valeur dans le modele*/
         ListViewaFaire.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -89,7 +87,6 @@ public class FragmentToDoListAFaire extends Fragment {
 
                 racine.child("ToDoList").child(mAuth.getUid()).child("AFaire").child(tache.getCheminBdd()).removeValue();
                 racine.child("ToDoList").child(mAuth.getUid()).child("Fait").child(tache.getCheminBdd()).setValue(true);
-                //Log.d("passage"," usertodolist remove");
                 tache.toggleChecked();//TODO voir si utile
                 TacheViewHolder viewHolder = (TacheViewHolder) item.getTag();
                 viewHolder.getCheckBox().setChecked(tache.isCheck());
@@ -113,7 +110,6 @@ public class FragmentToDoListAFaire extends Fragment {
                 tachesaFaire = new ArrayList<>();
                 listAdapteraFaire = new TacheArrayAdapter(getActivity(),context,tachesaFaire);
 
-                Log.d("passage"," il est passer dans on DataChange a faire");
                 DataSnapshot tbToDoListUser = dataSnapshot.child("ToDoList").child(Objects.requireNonNull(mAuth.getUid()));//TODO mAuth.getUid() / modifier pour authentification user
                 DataSnapshot aFaire = tbToDoListUser.child("AFaire");
                 DataSnapshot dataTache = dataSnapshot.child("Taches");
@@ -134,7 +130,6 @@ public class FragmentToDoListAFaire extends Fragment {
                 }
 
                 ListViewaFaire.setAdapter(listAdapteraFaire);
-                Log.d("passage"," fin fct");
             }
 
             @Override

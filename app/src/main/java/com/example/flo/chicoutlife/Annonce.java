@@ -50,15 +50,12 @@ public class Annonce  extends AppCompatActivity {
         bundleAnnonce = intent.getExtras();
 
         if (bundleAnnonce != null){
-            Log.d("passage","Dans annonce intent non null");
           //  if (intent.hasExtra("CHEMIN_ANNONCE")){ // vérifie qu'une valeur est associée à la clé “edittext”
-                Log.d("passage","Dans annonce intent.hasextra CHEMIN ANNONCE");
                 ImageView imageAnnonce;
 
                 database = FirebaseDatabase.getInstance();
                 storage =  FirebaseStorage.getInstance();
                 annonce = database.getReference("Annonces").child(bundleAnnonce.getString("CHEMIN_ANNONCE"));
-                Log.d("passage","Dans annonce nom chemin : " + bundleAnnonce.getString("CHEMIN_ANNONCE"));
 
                 annonce.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -68,7 +65,6 @@ public class Annonce  extends AppCompatActivity {
                         String prix = (String) dataSnapshot.child("Prix").getValue();
                         idUser = (String) dataSnapshot.child("IdVendeur").getValue();
 
-                        Log.d("passage","Dans annonce titre " + titre +" description" + description);
                         TextView viewTitre = (TextView)findViewById(R.id.titreAnnonce);
                         viewTitre.setText(titre);
 
@@ -81,7 +77,6 @@ public class Annonce  extends AppCompatActivity {
                         final ImageView viewImage = (ImageView) findViewById(R.id.imageAnnonce);
 
                         String cheminImg = (String)dataSnapshot.child("Image").getValue();
-                        Log.d("chemin","chemin img " + cheminImg);
                         mStorageRef =  storage.getReference();
                         StorageReference imageRef = mStorageRef.child(cheminImg);
 

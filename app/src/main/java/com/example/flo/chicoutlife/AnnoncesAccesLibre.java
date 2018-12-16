@@ -32,7 +32,6 @@ public class AnnoncesAccesLibre extends AppCompatActivity {
     }
 
     public void refreshFragment(Bundle bundleRefresh){
-        Log.d("passage","Dans AnnoncesAccesLibre.refreshFragment");
         bundleRefresh.putString("NOM_ACTIVITE","AnnoncesAccesLibre");
         Fragment fragmentAnnonces = ChoiceAnnonce.newInstance(bundleRefresh);
         android.support.v4.app.FragmentManager fgr = getSupportFragmentManager();// ????

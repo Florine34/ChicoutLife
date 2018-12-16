@@ -73,7 +73,6 @@ public class TacheArrayAdapter extends ArrayAdapter<ToDo> {
             imageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.d("passage" , "dans tacheArrayAdapter onCLICK");
 
                     boolean tablette = fragmentActivity.getResources().getBoolean(R.bool.tablette);
                     switch (tache.getType()){

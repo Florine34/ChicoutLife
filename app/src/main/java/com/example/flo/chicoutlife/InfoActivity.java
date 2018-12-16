@@ -44,7 +44,6 @@ public class InfoActivity extends Fragment {
 
     public static Fragment newInstance(Bundle bundle){
         bundleInfo = bundle ;
-        Log.d("passage","Dans InfoActivity.newInstance(bundle) " + bundle.get("NOM_PAGE"));
         return new InfoActivity();
     }
 
@@ -83,7 +82,6 @@ public class InfoActivity extends Fragment {
             if(page != null) {
                 database = FirebaseDatabase.getInstance();
                 infoPage = database.getReference("InfosPages").child(page);
-                Log.d("passage", " dans infoActivity page : " + page);
                 infoPage.addValueEventListener(new ValueEventListener() {
 
                     @Override
@@ -94,7 +92,6 @@ public class InfoActivity extends Fragment {
 
 
                         TextView viewTitre = (TextView) ((getActivity())).findViewById(R.id.titreInfoPage);
-                        Log.d("passage", "titre: " + titre);
                         viewTitre.setText(titre);
 
                         TextView viewTexte = (TextView) getActivity().findViewById(R.id.contenuInfopage);

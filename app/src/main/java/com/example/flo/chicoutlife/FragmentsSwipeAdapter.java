@@ -37,7 +37,6 @@ public class FragmentsSwipeAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        Log.d("passage","Dans FragmentsSwipeAdapter dans getItem " );
         return fragmentList.get(position);
 
     }
@@ -68,7 +67,6 @@ public class FragmentsSwipeAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getItemPosition(Object object) {
-        Log.d("passage","Dans FragmentsSwipeAdapter.getItemPosition" );
         if (fragmentList.contains(object)) return fragmentList.indexOf(object);
         else return POSITION_NONE;
     }
