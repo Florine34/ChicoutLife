@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -43,6 +44,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import android.support.v4.util.ArrayMap;
+
+import static android.support.v7.widget.DividerItemDecoration.HORIZONTAL;
 
 public class ChoiceAnnonce extends Fragment {
 
@@ -102,6 +105,8 @@ public class ChoiceAnnonce extends Fragment {
         ajoutBoutonRecherche() ;
 
         //TODO faire en recevant des parametres cocher selon type si non general
+
+
         recyclerView = (RecyclerView) racine.findViewById(R.id.linearMiniaturesAnnonces);
 
         modelsAnnonces = fillWithAnnonce();
@@ -261,6 +266,7 @@ public class ChoiceAnnonce extends Fragment {
                     bundleAnnonceExtra.putString("TYPE_INTENT","accesbyintent");
                     bundleAnnonceExtra.putString("CHEMIN_ANNONCE",verticalList.get(position).getCheminAnnonceBdd());
                     bundleAnnonceExtra.putString("NOM_ACTIVITE",bundleAnnonce.getString("NOM_ACTIVITE"));
+
                     Intent intent = new Intent(context ,Annonce.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//sinon erreur
                     intent.putExtras(bundleAnnonceExtra);
