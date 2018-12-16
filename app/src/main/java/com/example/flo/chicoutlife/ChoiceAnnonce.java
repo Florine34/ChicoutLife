@@ -8,23 +8,18 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -34,18 +29,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import android.support.v4.util.ArrayMap;
 
-import static android.support.v7.widget.DividerItemDecoration.HORIZONTAL;
 
 public class ChoiceAnnonce extends Fragment {
 
@@ -233,7 +223,6 @@ public class ChoiceAnnonce extends Fragment {
 
         @Override
         public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            Log.d("passage","est onCreateViewHolder");
             View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.model_miniature_annonce,parent,false);
             return new MyViewHolder(itemView);
         }
@@ -310,7 +299,6 @@ public class ChoiceAnnonce extends Fragment {
         int nbrParam = parametreRequest.size();
         int i;
 
-        Log.d("passage","dansAnnonceValidateByParameter taille param " + parametreRequest.size());
         for(i= 0 ; i<nbrParam; i++){
             if(!(boolean)arrayMap.get(parametreRequest.get(i)) ){
                 return false;
@@ -325,7 +313,6 @@ public class ChoiceAnnonce extends Fragment {
 
             @Override
             public void onClick(View view) {
-                Log.d("passage","Dans ChoiceAnnonce.ajoutBoutonRecherche.Onclick");
                 Bundle bundleRecherche = new Bundle();
 
                 bundleRecherche.putString("NOM_PAGE",bundleAnnonce.getString("NOM_PAGE"));

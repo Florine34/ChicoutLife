@@ -1,12 +1,9 @@
 package com.example.flo.chicoutlife;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,12 +74,10 @@ public class TacheArrayAdapter extends ArrayAdapter<ToDo> {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("passage" , "dans tacheArrayAdapter onCLICK");
 
                 switch (tache.getType()){
                     case 0://Cas page informations
 
-                        Log.d("passage" , "Dans TacheArrayAdapter.ajoutListenerImageButton Cas infos");
                          communicationActivityMain(tache,"1");
                         break;
 

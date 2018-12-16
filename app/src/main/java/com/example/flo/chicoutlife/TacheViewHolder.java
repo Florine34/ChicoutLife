@@ -1,6 +1,5 @@
 package com.example.flo.chicoutlife;
 
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 

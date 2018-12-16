@@ -1,14 +1,10 @@
 package com.example.flo.chicoutlife;
 
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -35,11 +31,8 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 public class singin_activity extends AppCompatActivity {
@@ -82,12 +75,6 @@ public class singin_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(singin_activity.this.getApplicationContext());
         mAuth = FirebaseAuth.getInstance();
-
-        /*check the current user
-        if (mAuth.getCurrentUser() != null) {
-            startActivity(new Intent(singin_activity.this, Home_screen.class));
-            finish();
-        } */
 
         setContentView(R.layout.activity_singin_activity);
 
@@ -143,13 +130,7 @@ public class singin_activity extends AppCompatActivity {
                                 progressBar.setVisibility(View.GONE);
 
                                 if (task.isSuccessful()) {
-                                    // there was an error
                                     Log.d(TAG, "signInWithEmail:success");
-                                    /* Pas besoins de mettre ça vu que tu test si c'est connecter (ligne 166)
-                                    Toast.makeText(singin_activity.this,"Va a HOME avec EMAIL", Toast.LENGTH_LONG).show();
-                                    Intent intentAccueil = new Intent(singin_activity.this, Home_screen.class);
-                                    startActivity(intentAccueil);
-                                    finish();*/
 
                                 } else {
                                     Log.d(TAG, "singInWithEmail:Fail");

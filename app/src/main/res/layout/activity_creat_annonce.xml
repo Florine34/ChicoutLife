@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="144dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <TextView
-        android:id="@+id/titrePosteAnnonce"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Titre de votre annonce" />
+            android:id="@+id/titrePosteAnnonce"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/titre"
+            android:textStyle="bold"/>
 
         <EditText
             android:id="@+id/RecupTitre"
@@ -25,21 +32,26 @@
             android:id="@+id/descrAnnonce"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Description de votre annonce" />
+            android:text="@string/description"
+            android:textStyle="bold"/>
 
         <EditText
             android:id="@+id/RecupDescrAnnonce"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textLongMessage" />
+            android:lines="10"
+            android:minLines="1"
+            android:maxLines="5"
+            android:gravity="top|left"
+            android:inputType="textMultiLine" />
 
 
         <TextView
             android:id="@+id/prixArticle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Prix de votre article" />
+            android:text="@string/prix"
+            android:textStyle="bold"/>
 
         <EditText
             android:id="@+id/RecupPrixArticle"
@@ -48,17 +60,26 @@
             android:ems="10"
             android:inputType="number" />
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
         <TextView
             android:id="@+id/textAnnonce"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Photo de votre annonce" />
+            android:text="@string/photo"
+            android:layout_marginRight="10dp"
+            android:textStyle="bold"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/photoAnnonce"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Prendre une photo" />
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/appareil_photo"
+            android:text="@string/photo" />
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/article"
@@ -70,41 +91,68 @@
             android:id="@+id/tags"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Choisir la catégorie dans laquelle vous voulez que votre article apparaissent" />
+            android:text="@string/categorie"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"/>
 
-        <CheckBox
-            android:id="@+id/tag_appart"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Appartement"/>
+            android:orientation="horizontal">
 
-        <CheckBox
-            android:id="@+id/tag_electro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Electronique"/>
-        <CheckBox
-            android:id="@+id/tag_nourriture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Nourriture"/>
+            <CheckBox
+                android:id="@+id/tag_appart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingRight="50dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginBottom="10dp"
+                android:text="@string/appartement" />
 
-        <CheckBox
-            android:id="@+id/tag_vetement"
+            <CheckBox
+                android:id="@+id/tag_electro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/electronique"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Vetement"/>
+            android:orientation="horizontal">
+            <CheckBox
+                android:id="@+id/tag_nourriture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingRight="69dp"
+                android:layout_marginLeft="50dp"
+
+                android:text="@string/nourriture" />
+
+            <CheckBox
+                android:id="@+id/tag_vetement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/vetement" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/publierAnnonce"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Publier mon annonce" />
-
+            android:text="@string/publierAnnonce"
+            android:layout_marginTop="50dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:background="@drawable/buttons_form" />
 
     </LinearLayout>
+</ScrollView>
 </android.support.constraint.ConstraintLayout>

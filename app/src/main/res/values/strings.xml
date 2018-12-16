@@ -4,6 +4,7 @@
     <string name="email_id">adresse email</string>
     <string name="password">password</string>
     <string name="login">Se connecter</string>
+    <string name="deconnecter">Se déconnecter</string>
     <string name="failed">Authentication incorrecte</string>
     <string name="create_a_new_account">Créer un compte!</string>
     <string name="facebook_app_id">315866035682558</string>
@@ -40,6 +41,15 @@
     <string name="annonce">Annonce</string>
     <string name="contacter_vendeur">Contacter le vendeur</string>
     <string name="param_recherche">Paramètres recherche</string>
+
+    <!-- Annonces -->
+    <string name="publier_annonce">Publier une nouvelle annonce</string>
+    <string name="titre">Titre de votre annonce*</string>
+    <string name="description">Description de votre annonce*</string>
+    <string name="prix">Prix de votre article*</string>
+    <string name="photo">Prendre une photo de votre annonce*</string>
+    <string name="categorie">Choisir la catégorie dans laquelle vous voulez que votre article apparaisse*</string>
+    <string name="publierAnnonce">Publier mon annonce</string>
 
     <!-- Tags -->
     <string name="electronique">Electronique</string>

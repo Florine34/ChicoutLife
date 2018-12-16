@@ -8,18 +8,17 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-
-import com.google.android.gms.common.images.ImageManager;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -27,7 +26,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -39,6 +37,20 @@ public class CreateAnnonce  extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private static final int REQUEST_IMAGE = 100;
     private ImageView imageView;
+
+    private String[] titleTags = {
+            "Appartement",
+            "Electronique",
+            "Nourriture",
+            "Vetements"
+    };
+    private boolean[] etatTags = {
+            false,
+            false,
+            false,
+            false
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +70,7 @@ public class CreateAnnonce  extends AppCompatActivity {
         final String idVend = mAuth.getUid();
 
         // Récupère l'image
-        final Button photoAnnonce = (Button) findViewById(R.id.photoAnnonce);
+        final ImageButton photoAnnonce = (ImageButton) findViewById(R.id.photoAnnonce);
         imageView = (ImageView)findViewById(R.id.article);
         photoAnnonce.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -66,7 +78,7 @@ public class CreateAnnonce  extends AppCompatActivity {
                 startActivityForResult(intentPhoto, REQUEST_IMAGE);
             }
         });
-        final String imageArticle = UUID.randomUUID().toString();
+        final String imageArticle = UUID.randomUUID().toString()+".jpg";
 
         // Récupère le Prix
         final EditText textPrix = (EditText) findViewById(R.id.RecupPrixArticle);
@@ -77,27 +89,29 @@ public class CreateAnnonce  extends AppCompatActivity {
         final CheckBox nourriture = (CheckBox)findViewById(R.id.tag_nourriture);
         final CheckBox vetement = (CheckBox)findViewById(R.id.tag_vetement);
 
-        // Récupère le Titre de l'annonce
+         // Récupère le Titre de l'annonce
         final EditText textTitre = (EditText) findViewById(R.id.RecupTitre);
-
 
         // Bouton de validation pour la création d'une annonce
         final Button buttonValider = findViewById(R.id.publierAnnonce);
 
         buttonValider.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+                etatTags  = new boolean[]{appart.isChecked(), electro.isChecked(), nourriture.isChecked(), vetement.isChecked()};
                 FirebaseStorage storage = FirebaseStorage.getInstance();
 
                 // Create a storage reference from our app
                 StorageReference storageRef = storage.getReferenceFromUrl("gs://chicoutlife-37a65.appspot.com");
 
                 // Create a reference to "mountains.jpg"
-                StorageReference mountainsRef = storageRef.child(imageArticle+".jpg");
+                StorageReference mountainsRef = storageRef.child(imageArticle);
 
                 // Create a reference to 'images/mountains.jpg'
-                StorageReference mountainImagesRef = storageRef.child("images/"+imageArticle+".jpg");
+                StorageReference mountainImagesRef = storageRef.child("images/"+imageArticle);
 
                 // While the file names are the same, the references point to different files
+
                 mountainsRef.getName().equals(mountainImagesRef.getName());    // true
                 mountainsRef.getPath().equals(mountainImagesRef.getPath());    // false
 
@@ -124,10 +138,8 @@ public class CreateAnnonce  extends AppCompatActivity {
                     }
                 });
 
-
-                // Insert l'objet annonce dans fire base
-                writeNewRAnnonce(dateToday, textDescription.getText().toString(), idVend, imageArticle + ".jpg", textPrix.getText().toString(), appart.isChecked(), electro.isChecked(), nourriture.isChecked(), vetement.isChecked(), textTitre.getText().toString());
-                Intent intentCreateAnnonce = new Intent(CreateAnnonce.this, CreateAnnonce.class); // Renvoi vers une page de confirmation
+                writeNewRAnnonce(dateToday, textDescription.getText().toString(), idVend, imageArticle, textPrix.getText().toString(),textTitre.getText().toString());
+                Intent intentCreateAnnonce = new Intent(CreateAnnonce.this, Confirm_Create_Annoce.class); // Renvoi vers une page de confirmation
                 startActivity(intentCreateAnnonce);
                 finish();
             }
@@ -145,15 +157,51 @@ public class CreateAnnonce  extends AppCompatActivity {
         }
     }
 
-    private void writeNewRAnnonce(String dateAjout, String description, String idVendeur, String image, String prix, boolean tag_appartement, boolean tag_electonique, boolean tag_tag_nourriture, boolean tag_vetement, String titre) {
-        String key = image;
-        RAnnonce annonce = new RAnnonce(dateAjout, description, idVendeur, image, prix, tag_appartement, tag_electonique, tag_tag_nourriture, tag_vetement, titre);
+    private void writeNewRAnnonce(String dateAjout, String description, String idVendeur, String image, String prix, String titre) {
+        String key = image.substring(0,image.length()-4); // Tronquer le .jpg
+
+        RAnnonce annonce = new RAnnonce(dateAjout, description, idVendeur, image, prix,titre);
 
         Map<String, Object> annonceToAdd = annonce.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put(key,annonceToAdd);
         rAnnonceDatabase.updateChildren(childUpdates);
+
+        // tags
+        for(int i= 0; i< titleTags.length; i++){
+            FirebaseDatabase.getInstance().getReference("Annonces").child(key).child("Tags").child(titleTags[i]).setValue(etatTags[i]);
+        }
+    }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+
+        switch (item.getItemId()) {
+            case R.id.action_quit:
+                finish();
+                System.exit(0);
+                return true;
+            case R.id.action_goHome:
+                Intent intentAccueil = new Intent(CreateAnnonce.this, Home_screen.class);
+                startActivity(intentAccueil);
+                finish();
+                return true;
+            case R.id.action_goBack:
+
+                Intent intentRetour = new Intent(CreateAnnonce.this, RenseignementActivity.class); // TODO
+                startActivity(intentRetour);
+                finish();
+                return true;
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }
