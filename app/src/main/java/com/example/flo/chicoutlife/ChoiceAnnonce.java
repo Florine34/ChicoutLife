@@ -147,6 +147,7 @@ public class ChoiceAnnonce extends Fragment {
                                         /*Recuperation des donnes textes dans la base de donnee*/
                                         String modelTitre = (String) annonce.child("Titre").getValue();
                                         String modelDescription = (String) annonce.child("Description").getValue();
+                                        String modelPrix = (String) annonce.child("Prix").getValue();
                                         if (modelDescription.length() > 150) {
                                             modelDescription = modelDescription.substring(0, 149);
                                             modelDescription = modelDescription + "...";
@@ -158,9 +159,10 @@ public class ChoiceAnnonce extends Fragment {
                                         Bitmap imageAnnonce = null;
 
                                         /*Recuperation de l'image dans la base de donnee*/
+
                                         imageAnnonce = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                                         imageAnnonce = Bitmap.createScaledBitmap(imageAnnonce, 360, 240, false);
-                                        ModelAnnonce model = new ModelAnnonce(modelTitre, modelDescription, imageAnnonce, cheminAnnonceBdd);
+                                        ModelAnnonce model = new ModelAnnonce(modelTitre, modelDescription, imageAnnonce, cheminAnnonceBdd,modelPrix);
                                         modelsAnnonces.add(model);
 
                                         /*Sert pour le recyclerView , sinon la taille est initialiser a zero et le recycler ne se remplit pas*/
@@ -217,6 +219,7 @@ public class ChoiceAnnonce extends Fragment {
             ImageView imageViewAnnonce;
             TextView titre;
             TextView description;
+            TextView prix;
 
             public MyViewHolder(View view){
                 super(view);
@@ -224,6 +227,7 @@ public class ChoiceAnnonce extends Fragment {
                 imageViewAnnonce =(ImageView) view.findViewById(R.id.imageMiniatureAnnonce);
                 titre = (TextView) view.findViewById(R.id.titreMiniatureAnnonce);
                 description = (TextView) view.findViewById(R.id.descriptionMiniatureAnnonce);
+                prix =(TextView) view.findViewById(R.id.prixMiniatureAnnonce);
             }
         }
 
@@ -242,6 +246,7 @@ public class ChoiceAnnonce extends Fragment {
             holder.imageViewAnnonce.setImageBitmap(verticalList.get(position).getImageAnnonce());
             holder.titre.setText(verticalList.get(position).getModelTitre());
             holder.description.setText(verticalList.get(position).getModelDescription());
+            holder.prix.setText(verticalList.get(position).getModelPrix());
 
             /*Ajout du OnClick pour rediriger vers l'annonce*/
             final ModelAnnonce min = verticalList.get(position);
@@ -340,7 +345,7 @@ public class ChoiceAnnonce extends Fragment {
                         tableauParametre.add((String)item.getContentDescription());
                 }
                 bundleRecherche.putStringArrayList("TAB_PARAM",tableauParametre);
-                if(nomActiviteParent.equals("ToDoListInfosAnnonces")) {
+                if(nomActiviteParent!= null && nomActiviteParent.equals("ToDoListInfosAnnonces")) {
                     ((ToDoListInfosAnnonces) activityParent).reinstanciatePageAdapter(bundleRecherche);
                 }
                 else{

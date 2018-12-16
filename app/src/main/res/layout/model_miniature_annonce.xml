@@ -20,12 +20,22 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:text=""
-               android:id="@+id/titreMiniatureAnnonce"/>
+               android:id="@+id/titreMiniatureAnnonce"
+               android:textAlignment="center"
+               android:textSize="9dt"
+
+               />
            <TextView
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:id="@+id/descriptionMiniatureAnnonce"
                android:padding="5dp"/>
+
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/prixMiniatureAnnonce"
+               android:padding="8dp"/>
 
 
        </LinearLayout>

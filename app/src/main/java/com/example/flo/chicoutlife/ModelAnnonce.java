@@ -7,7 +7,16 @@ public class ModelAnnonce {
     private   String modelTitre;
     private String modelDescription;
     private String cheminAnnonceBdd;
+    private String modelPrix;
     private Bitmap imageAnnonce;
+
+    public ModelAnnonce(String modelTitre, String modelDescription, Bitmap imageAnnonce, String cheminAnnonceBdd, String modelPrix) {
+        this.modelTitre = modelTitre;
+        this.modelDescription = modelDescription;
+        this.imageAnnonce = imageAnnonce;
+        this.cheminAnnonceBdd = cheminAnnonceBdd;
+        this.modelPrix = modelPrix;
+    }
 
     public String getCheminAnnonceBdd() {
         return cheminAnnonceBdd;
@@ -43,7 +52,9 @@ public class ModelAnnonce {
     public void setModelDescription(String modelDescription) {
         this.modelDescription = modelDescription;
     }
-
+    public  String getModelPrix(){
+        return modelPrix;
+    }
     public Bitmap getImageAnnonce() {
         return imageAnnonce;
     }

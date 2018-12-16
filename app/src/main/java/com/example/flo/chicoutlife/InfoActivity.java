@@ -76,7 +76,8 @@ public class InfoActivity extends Fragment {
        // Bundle b = intentInfoActivity.getExtras();
 
         context = getContext();
-
+        String test = "truc.jpg";
+        String test2 = test.substring(0,test.length()-4);
         if(bundleInfo!=null)//On regarde si le bundle est null sinon InfoActivity Crah a la rotation en mode tablette a gauche du viewPager (mal fermer ?)
         {
             String page =(String) bundleInfo.get("NOM_PAGE");

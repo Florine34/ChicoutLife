@@ -76,6 +76,7 @@ public class ToDoListInfosAnnonces extends AppCompatActivity {
         ((FragmentsSwipeAdapter) adapterPages).addFragmentList(InfoActivity.newInstance(bundle));
         Log.d("passage", "est dans ToDoListInfosAnnocnes.reinstanciatePageAdapter " + bundle.getString("NOMBRE_PAGE"));
         if (bundle.getString("NOMBRE_PAGE") == "2") {
+            bundle.putString("NOM_ACTIVITE","ToDoListInfosAnnonces");
             ((FragmentsSwipeAdapter) adapterPages).addFragmentList(ChoiceAnnonce.newInstance(bundle));
         }
 
