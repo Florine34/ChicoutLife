@@ -9,10 +9,13 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -69,7 +72,7 @@ public class CreateAnnonce  extends AppCompatActivity {
         final String idVend = mAuth.getUid();
 
         // Récupère l'image
-        final Button photoAnnonce = (Button) findViewById(R.id.photoAnnonce);
+        final ImageButton photoAnnonce = (ImageButton) findViewById(R.id.photoAnnonce);
         imageView = (ImageView)findViewById(R.id.article);
         photoAnnonce.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -138,7 +141,7 @@ public class CreateAnnonce  extends AppCompatActivity {
                 });
 
                 writeNewRAnnonce(dateToday, textDescription.getText().toString(), idVend, imageArticle, textPrix.getText().toString(),textTitre.getText().toString());
-                Intent intentCreateAnnonce = new Intent(CreateAnnonce.this, CreateAnnonce.class); // Renvoi vers une page de confirmation
+                Intent intentCreateAnnonce = new Intent(CreateAnnonce.this, Confirm_Create_Annoce.class); // Renvoi vers une page de confirmation
                 startActivity(intentCreateAnnonce);
                 finish();
             }
@@ -170,6 +173,36 @@ public class CreateAnnonce  extends AppCompatActivity {
         // tags
         for(int i= 0; i< titleTags.length; i++){
             FirebaseDatabase.getInstance().getReference("Annonces").child(key).child("Tags").child(titleTags[i]).setValue(etatTags[i]);
+        }
+    }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+
+        switch (item.getItemId()) {
+            case R.id.action_quit:
+                finish();
+                System.exit(0);
+                return true;
+            case R.id.action_goHome:
+                Intent intentAccueil = new Intent(CreateAnnonce.this, Home_screen.class);
+                startActivity(intentAccueil);
+                finish();
+                return true;
+            case R.id.action_goBack:
+
+                Intent intentRetour = new Intent(CreateAnnonce.this, RenseignementActivity.class); // TODO
+                startActivity(intentRetour);
+                finish();
+                return true;
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
         }
     }
 

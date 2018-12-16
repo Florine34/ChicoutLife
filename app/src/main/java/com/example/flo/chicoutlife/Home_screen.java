@@ -17,8 +17,6 @@ public class Home_screen extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAuthListner;
-    private TextView mIdTextView;
-    private TextView mMailTextView;
 
     @Override
     protected void onStart() {

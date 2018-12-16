@@ -21,6 +21,7 @@
         <activity android:name=".ToDoListInfosAnnonces"/>
         <activity android:name=".Home_screen" />
         <activity android:name=".CreateAnnonce" />
+        <activity android:name=".Confirm_Create_Annoce" />
         <activity android:name=".singup_activity" />
 
         <activity android:name=".RenseignementActivity"

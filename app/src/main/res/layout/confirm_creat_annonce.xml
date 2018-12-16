@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -26,46 +25,37 @@
 
 
         <Button
-            android:id="@+id/renseignement_remplis"
+            android:id="@+id/publier_annonce"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Accéder à la TO DO LIST"
-            android:layout_marginBottom="60dp"
-            android:textSize="16dp"
+            android:text="@string/publier_annonce"
+            android:layout_marginBottom="20dp"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:padding="10dp"
             android:background="@drawable/buttons_form"/>
 
         <Button
-            android:id="@+id/acces_libre_annonces"
+            android:id="@+id/all_annonces"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/acceder_aux_annonces"
             android:layout_marginBottom="60dp"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:padding="10dp"
             android:background="@drawable/buttons_form"/>
 
-        <Button
-            android:id="@+id/renseignement"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Editer mes renseignements"
-            android:layout_marginBottom="10dp"
-            android:padding="5dp"
-            android:textSize="10dp"
-            android:background="@drawable/buttons_form2"/>
 
         <Button
             android:id="@+id/signout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Se déconnecter"
-            android:textSize="10dp"
+            android:text="@string/deconnecter"
+            android:textSize="10sp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/buttons_form2"/>
 
-        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>
