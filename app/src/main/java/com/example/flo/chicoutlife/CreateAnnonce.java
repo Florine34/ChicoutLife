@@ -38,8 +38,8 @@ public class CreateAnnonce  extends AppCompatActivity {
     private ImageView imageView;
 
     private String[] titleTags = {
-            "Electronique",
             "Appartement",
+            "Electronique",
             "Nourriture",
             "Vetements"
     };
@@ -157,11 +157,7 @@ public class CreateAnnonce  extends AppCompatActivity {
     }
 
     private void writeNewRAnnonce(String dateAjout, String description, String idVendeur, String image, String prix, String titre) {
-        String key = titre;
-        // tags
-        for(int i= 0; i< titleTags.length; i++){
-            FirebaseDatabase.getInstance().getReference("Annonces").child(key).child("Tags").child(titleTags[i]).setValue(etatTags[i]);
-        }
+        String key = image.substring(0,image.length()-4); // Tronquer le .jpg
 
         RAnnonce annonce = new RAnnonce(dateAjout, description, idVendeur, image, prix,titre);
 
@@ -170,6 +166,11 @@ public class CreateAnnonce  extends AppCompatActivity {
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put(key,annonceToAdd);
         rAnnonceDatabase.updateChildren(childUpdates);
+
+        // tags
+        for(int i= 0; i< titleTags.length; i++){
+            FirebaseDatabase.getInstance().getReference("Annonces").child(key).child("Tags").child(titleTags[i]).setValue(etatTags[i]);
+        }
     }
 
 }
