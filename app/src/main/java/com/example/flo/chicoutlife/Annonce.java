@@ -57,7 +57,7 @@ public class Annonce  extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         titre= (String)dataSnapshot.child("Titre").getValue();
                         String description = (String)dataSnapshot.child("Description").getValue();
-                        String prix = (String) dataSnapshot.child("Prix").getValue();
+                        String prix = (String) dataSnapshot.child("Prix").getValue()+" CAD";
                         idUser = (String) dataSnapshot.child("IdVendeur").getValue();
 
                         TextView viewTitre = (TextView)findViewById(R.id.titreAnnonce);
