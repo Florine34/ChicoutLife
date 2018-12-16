@@ -1,6 +1,5 @@
 package com.example.flo.chicoutlife;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -8,9 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -50,15 +46,11 @@ public class Annonce  extends AppCompatActivity {
         bundleAnnonce = intent.getExtras();
 
         if (bundleAnnonce != null){
-            Log.d("passage","Dans annonce intent non null");
-
-                Log.d("passage","Dans annonce intent.hasextra CHEMIN ANNONCE");
                 ImageView imageAnnonce;
 
                 database = FirebaseDatabase.getInstance();
                 storage =  FirebaseStorage.getInstance();
                 annonce = database.getReference("Annonces").child(bundleAnnonce.getString("CHEMIN_ANNONCE"));
-                Log.d("passage","Dans annonce nom chemin : " + bundleAnnonce.getString("CHEMIN_ANNONCE"));
 
                 annonce.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -68,7 +60,6 @@ public class Annonce  extends AppCompatActivity {
                         String prix = (String) dataSnapshot.child("Prix").getValue();
                         idUser = (String) dataSnapshot.child("IdVendeur").getValue();
 
-                        Log.d("passage","Dans annonce titre " + titre +" description" + description);
                         TextView viewTitre = (TextView)findViewById(R.id.titreAnnonce);
                         viewTitre.setText(titre);
 
@@ -81,7 +72,6 @@ public class Annonce  extends AppCompatActivity {
                         final ImageView viewImage = (ImageView) findViewById(R.id.imageAnnonce);
 
                         String cheminImg = (String)dataSnapshot.child("Image").getValue();
-                        Log.d("chemin","chemin img " + cheminImg);
                         mStorageRef =  storage.getReference();
                         StorageReference imageRef = mStorageRef.child(cheminImg);
 

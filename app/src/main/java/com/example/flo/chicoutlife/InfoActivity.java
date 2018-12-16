@@ -1,19 +1,13 @@
 package com.example.flo.chicoutlife;
 
-import android.app.Activity;
-import android.arch.lifecycle.OnLifecycleEvent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.SpannableString;
 import android.text.util.Linkify;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -25,9 +19,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
-import java.util.Objects;
 
 public class InfoActivity extends Fragment {
     ViewGroup racine;
@@ -44,7 +35,6 @@ public class InfoActivity extends Fragment {
 
     public static Fragment newInstance(Bundle bundle){
         bundleInfo = bundle ;
-        Log.d("passage","Dans InfoActivity.newInstance(bundle) " + bundle.get("NOM_PAGE"));
         return new InfoActivity();
     }
 
@@ -77,7 +67,6 @@ public class InfoActivity extends Fragment {
             if(page != null) {
                 database = FirebaseDatabase.getInstance();
                 infoPage = database.getReference("InfosPages").child(page);
-                Log.d("passage", " dans infoActivity page : " + page);
                 infoPage.addValueEventListener(new ValueEventListener() {
 
                     @Override
@@ -88,7 +77,6 @@ public class InfoActivity extends Fragment {
 
 
                         TextView viewTitre = (TextView) ((getActivity())).findViewById(R.id.titreInfoPage);
-                        Log.d("passage", "titre: " + titre);
                         viewTitre.setText(titre);
 
                         TextView viewTexte = (TextView) getActivity().findViewById(R.id.contenuInfopage);

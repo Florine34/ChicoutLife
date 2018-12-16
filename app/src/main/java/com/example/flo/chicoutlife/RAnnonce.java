@@ -1,10 +1,7 @@
 package com.example.flo.chicoutlife;
 
-import android.graphics.Bitmap;
 
 import com.google.firebase.database.Exclude;
-
-import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.Map;
 

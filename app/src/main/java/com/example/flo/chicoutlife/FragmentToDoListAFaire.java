@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +21,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class FragmentToDoListAFaire extends Fragment {
 
@@ -111,7 +109,6 @@ public class FragmentToDoListAFaire extends Fragment {
                 tachesaFaire = new ArrayList<>();
                 listAdapteraFaire = new TacheArrayAdapter(getActivity(),context,tachesaFaire);
 
-                Log.d("passage"," il est passer dans on DataChange a faire");
                 DataSnapshot tbToDoListUser = dataSnapshot.child("ToDoList").child((mAuth.getUid()));
                 DataSnapshot aFaire = tbToDoListUser.child("AFaire");
                 DataSnapshot dataTache = dataSnapshot.child("Taches");
@@ -132,7 +129,6 @@ public class FragmentToDoListAFaire extends Fragment {
                 }
 
                 ListViewaFaire.setAdapter(listAdapteraFaire);
-                Log.d("passage"," fin fct");
             }
 
             @Override

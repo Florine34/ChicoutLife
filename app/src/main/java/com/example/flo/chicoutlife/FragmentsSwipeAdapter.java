@@ -1,21 +1,14 @@
 package com.example.flo.chicoutlife;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.google.android.gms.common.server.converter.StringToIntConverter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.flo.chicoutlife.InfoActivity.intentInfoActivity;
 
 public class FragmentsSwipeAdapter extends FragmentPagerAdapter {
 
@@ -37,7 +30,6 @@ public class FragmentsSwipeAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        Log.d("passage","Dans FragmentsSwipeAdapter dans getItem " );
         return fragmentList.get(position);
 
     }
@@ -68,7 +60,6 @@ public class FragmentsSwipeAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getItemPosition(Object object) {
-        Log.d("passage","Dans FragmentsSwipeAdapter.getItemPosition" );
         if (fragmentList.contains(object)) return fragmentList.indexOf(object);
         else return POSITION_NONE;
     }
