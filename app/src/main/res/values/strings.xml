@@ -50,6 +50,7 @@
     <string name="photo">Prendre une photo de votre annonce*</string>
     <string name="categorie">Choisir la catégorie dans laquelle vous voulez que votre article apparaisse*</string>
     <string name="publierAnnonce">Publier mon annonce</string>
+    <string name="photo_vide">image_vide.jpg</string>
 
     <!-- Tags -->
     <string name="electronique">Electronique</string>

@@ -140,7 +140,7 @@ public class RenseignementActivity extends  AppCompatActivity { // Activity
             final ImageButton buttonDepart = findViewById(R.id.depart);
             buttonDepart.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    Intent intentAnnonce = new Intent(RenseignementActivity.this, CreateAnnonce.class);
+                    Intent intentAnnonce = new Intent(RenseignementActivity.this, Confirm_Create_Annoce.class);
                     startActivity(intentAnnonce);
                     finish();
                 }

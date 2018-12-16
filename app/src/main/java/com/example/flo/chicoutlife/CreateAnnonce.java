@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +17,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,6 +40,9 @@ public class CreateAnnonce  extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private static final int REQUEST_IMAGE = 100;
     private ImageView imageView;
+    boolean photoCapture = false;
+    String imageArticle;
+    String key;
 
     private String[] titleTags = {
             "Appartement",
@@ -74,11 +80,18 @@ public class CreateAnnonce  extends AppCompatActivity {
         imageView = (ImageView)findViewById(R.id.article);
         photoAnnonce.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                photoCapture = true;
                 Intent intentPhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE); // Renvoi vers une page de confirmation
                 startActivityForResult(intentPhoto, REQUEST_IMAGE);
             }
         });
-        final String imageArticle = UUID.randomUUID().toString()+".jpg";
+        if(photoCapture){
+            imageArticle = UUID.randomUUID().toString()+".jpg";
+        }
+        else {
+            imageArticle = getString(R.string.photo_vide);
+            imageView.setImageResource(R.drawable.image_vide);
+        }
 
         // Récupère le Prix
         final EditText textPrix = (EditText) findViewById(R.id.RecupPrixArticle);
@@ -121,7 +134,12 @@ public class CreateAnnonce  extends AppCompatActivity {
                 imageView.buildDrawingCache();
                 Bitmap bitmap = imageView.getDrawingCache();
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                if(bitmap!=null){
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                }
+
+
+
                 byte[] data = baos.toByteArray();
 
                 UploadTask uploadTask = mountainsRef.putBytes(data);
@@ -138,10 +156,15 @@ public class CreateAnnonce  extends AppCompatActivity {
                     }
                 });
 
-                writeNewRAnnonce(dateToday, textDescription.getText().toString(), idVend, imageArticle, textPrix.getText().toString(),textTitre.getText().toString());
-                Intent intentCreateAnnonce = new Intent(CreateAnnonce.this, Confirm_Create_Annoce.class); // Renvoi vers une page de confirmation
-                startActivity(intentCreateAnnonce);
-                finish();
+                if(!textDescription.getText().toString().equals("") && !textPrix.getText().toString().equals("") && !textTitre.getText().toString().equals("")) {
+                    writeNewRAnnonce(dateToday, textDescription.getText().toString(), idVend, imageArticle, textPrix.getText().toString(), textTitre.getText().toString());
+                    Intent intentCreateAnnonce = new Intent(CreateAnnonce.this, Confirm_Create_Annoce.class);
+                    startActivity(intentCreateAnnonce);
+                    finish();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Vous devez remplir tous les renseignements", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -158,7 +181,12 @@ public class CreateAnnonce  extends AppCompatActivity {
     }
 
     private void writeNewRAnnonce(String dateAjout, String description, String idVendeur, String image, String prix, String titre) {
-        String key = image.substring(0,image.length()-4); // Tronquer le .jpg
+        if(photoCapture){
+            key = image.substring(0,image.length()-4); // Tronquer le .jpg
+        }
+        else{
+            key = image.substring(0,image.length()-4)+titre;
+        }
 
         RAnnonce annonce = new RAnnonce(dateAjout, description, idVendeur, image, prix,titre);
 
@@ -193,7 +221,7 @@ public class CreateAnnonce  extends AppCompatActivity {
                 return true;
             case R.id.action_goBack:
 
-                Intent intentRetour = new Intent(CreateAnnonce.this, RenseignementActivity.class); // TODO
+                Intent intentRetour = new Intent(CreateAnnonce.this, Confirm_Create_Annoce.class); // TODO
                 startActivity(intentRetour);
                 finish();
                 return true;

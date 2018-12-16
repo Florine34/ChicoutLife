@@ -85,7 +85,7 @@
             android:id="@+id/article"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scaleType="centerInside" />
+            android:scaleType="centerInside"/>
 
         <TextView
             android:id="@+id/tags"
