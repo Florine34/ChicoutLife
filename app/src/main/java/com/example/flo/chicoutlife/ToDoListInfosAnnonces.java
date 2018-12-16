@@ -37,6 +37,7 @@ public class ToDoListInfosAnnonces extends AppCompatActivity {
         if(tablette){
 
             Bundle bundle = getIntent().getExtras();
+            bundle.putString("NOM_ACTIVITE","ToDoListInfosAnnonces");
 
             pages = findViewById(R.id.viewPagerOrientation);
             adapterPages = new FragmentsSwipeAdapter(getSupportFragmentManager(), bundle);

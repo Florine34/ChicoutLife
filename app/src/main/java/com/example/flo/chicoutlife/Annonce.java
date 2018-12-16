@@ -173,13 +173,19 @@ public class Annonce  extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.action_goBack:
-                Intent intentRetour = new Intent(Annonce.this,ToDoListInfosAnnonces.class);
-                Bundle bundleAnnonceExtra = new Bundle();
+                Intent intentRetour;
+                String nomActivite = bundleAnnonce.getString("NOM_ACTIVITE");
+                if( nomActivite!=null && nomActivite.equals("AnnoncesAccesLibre")){
+                    intentRetour = new Intent(Annonce.this,AnnoncesAccesLibre.class);
+                }
+                else {
+                    intentRetour = new Intent(Annonce.this, ToDoListInfosAnnonces.class);
+                    Bundle bundleAnnonceExtra = new Bundle();
 
-                bundleAnnonceExtra.putString("NOM_PAGE",bundleAnnonce.getString("NOM_PAGE"));
-                bundleAnnonceExtra.putString("NOMBRE_PAGE","2");
-                bundleAnnonceExtra.putString("TYPE_INTENT","accesbyintent");
-
+                    bundleAnnonceExtra.putString("NOM_PAGE", bundleAnnonce.getString("NOM_PAGE"));
+                    bundleAnnonceExtra.putString("NOMBRE_PAGE", "2");
+                    bundleAnnonceExtra.putString("TYPE_INTENT", "accesbyintent");
+                }
                 startActivity(intentRetour);
                 finish();
                 return true;

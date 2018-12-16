@@ -49,6 +49,7 @@
     <string name="rechercher">Rechercher</string>
     <string name="appartement">Appartement</string>
     <string name="vetement">Vetements</string>
+    <string name="acceder_aux_annonces">Accéder aux Annonces</string>
 
     <!-- Pays -->
     <string-array name="country_arrays">

@@ -59,7 +59,8 @@ public class ChoiceAnnonce extends Fragment {
     private static Intent intentAnnonce;
     ArrayList<String> tableauParametre;
     static Bundle bundleAnnonce;
-    static ToDoListInfosAnnonces activityParent;
+    static Activity activityParent;
+    private String nomActiviteParent;
 
     public static Fragment newInstance(){return new ChoiceAnnonce();}
 
@@ -93,7 +94,8 @@ public class ChoiceAnnonce extends Fragment {
         database = FirebaseDatabase.getInstance();
         storage =  FirebaseStorage.getInstance();
 
-        activityParent = (ToDoListInfosAnnonces) getActivity();//TODO getparent ???
+        activityParent = getActivity();//TODO getparent ???
+        nomActiviteParent = bundleAnnonce.getString("NOM_ACTIVITE");
         remplirTableauParametres();
 
         /*Ajout d'un listener pour recharger la page quand des parametres sont choisi*/
@@ -253,7 +255,7 @@ public class ChoiceAnnonce extends Fragment {
                     bundleAnnonceExtra.putString("NOMBRE_PAGE","2");
                     bundleAnnonceExtra.putString("TYPE_INTENT","accesbyintent");
                     bundleAnnonceExtra.putString("CHEMIN_ANNONCE",verticalList.get(position).getCheminAnnonceBdd());
-
+                    bundleAnnonceExtra.putString("NOM_ACTIVITE",bundleAnnonce.getString("NOM_ACTIVITE"));
                     Intent intent = new Intent(context ,Annonce.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//sinon erreur
                     intent.putExtras(bundleAnnonceExtra);
@@ -319,7 +321,7 @@ public class ChoiceAnnonce extends Fragment {
 
             @Override
             public void onClick(View view) {
-
+                Log.d("passage","Dans ChoiceAnnonce.ajoutBoutonRecherche.Onclick");
                 Bundle bundleRecherche = new Bundle();
 
                 bundleRecherche.putString("NOM_PAGE",bundleAnnonce.getString("NOM_PAGE"));
@@ -338,7 +340,12 @@ public class ChoiceAnnonce extends Fragment {
                         tableauParametre.add((String)item.getContentDescription());
                 }
                 bundleRecherche.putStringArrayList("TAB_PARAM",tableauParametre);
-                activityParent.reinstanciatePageAdapter(bundleRecherche);
+                if(nomActiviteParent.equals("ToDoListInfosAnnonces")) {
+                    ((ToDoListInfosAnnonces) activityParent).reinstanciatePageAdapter(bundleRecherche);
+                }
+                else{
+                    ((AnnoncesAccesLibre) activityParent).refreshFragment(bundleRecherche);
+                }
 
             }
         });

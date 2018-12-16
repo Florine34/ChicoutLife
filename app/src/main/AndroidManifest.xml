@@ -31,6 +31,7 @@
                 "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             />
         <activity android:name=".Annonce" />
+        <activity android:name=".AnnoncesAccesLibre"/>
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
 
 

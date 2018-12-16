@@ -44,6 +44,17 @@ public class Home_screen extends AppCompatActivity {
                 }
             }
         };
+        // Bouton Acces annonces
+
+        final Button buttonAnnonces = findViewById(R.id.acces_libre_annonces);
+        buttonAnnonces.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentAnnonces = new Intent(Home_screen.this,AnnoncesAccesLibre.class);
+                startActivity(intentAnnonces);
+                finish();
+            }
+        });
 
         // Bouton renseignement
         final Button buttonRenseignement = findViewById(R.id.renseignement);
