@@ -51,7 +51,7 @@ public class Annonce  extends AppCompatActivity {
 
         if (bundleAnnonce != null){
             Log.d("passage","Dans annonce intent non null");
-          //  if (intent.hasExtra("CHEMIN_ANNONCE")){ // vérifie qu'une valeur est associée à la clé “edittext”
+
                 Log.d("passage","Dans annonce intent.hasextra CHEMIN ANNONCE");
                 ImageView imageAnnonce;
 
@@ -118,9 +118,6 @@ public class Annonce  extends AppCompatActivity {
                     }
                     });
 
-
-
-            //}
         }
 
         // Bouton choose menu

@@ -63,15 +63,12 @@ public class FragmentToDoListFait extends Fragment {
         racine = tbToDolist.getParent();
         mAuth = FirebaseAuth.getInstance();
         mAuth.getCurrentUser();
-        //  Log.d("passage"," il est passer dans onCreate");
-
 
         //Adapters qui liste les taches fait de l'utilisateur
 
         ListViewFait = racineView.findViewById(R.id.linearfait2);
 
         createAdaptersTaches();//Gestion des donnees de l'adapteur
-
 
         ListViewFait.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -97,7 +94,6 @@ public class FragmentToDoListFait extends Fragment {
 
     /*Fonction qui remplit les adapters afaire et fait*/
     public void createAdaptersTaches(){
-        // taches = (ArrayList<Tache>) getLastNonConfigurationInstance();
 
         racine.addValueEventListener(new ValueEventListener() {//Liste des taches de l user
 
@@ -124,7 +120,6 @@ public class FragmentToDoListFait extends Fragment {
                 }
 
                 ListViewFait.setAdapter(listAdapterFait);
-                Log.d("passage"," fin fct");
             }
 
             @Override

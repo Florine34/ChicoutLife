@@ -59,8 +59,8 @@ public class FragmentsSwipeAdapter extends FragmentPagerAdapter {
 
     public void addFragmentList(Fragment newFragment){
         fragmentList.add(newFragment);
-       // notifyDataSetChanged();
     }
+
     public void removeFragmentAllList(){
         fragmentList = new ArrayList<>();
         notifyDataSetChanged();

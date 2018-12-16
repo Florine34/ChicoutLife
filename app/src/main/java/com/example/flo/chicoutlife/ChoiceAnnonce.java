@@ -79,7 +79,6 @@ public class ChoiceAnnonce extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-       // setContentView(R.layout.choix_annonces);
 
     }
 
@@ -97,7 +96,7 @@ public class ChoiceAnnonce extends Fragment {
         database = FirebaseDatabase.getInstance();
         storage =  FirebaseStorage.getInstance();
 
-        activityParent = getActivity();//TODO getparent ???
+        activityParent = getActivity();
         nomActiviteParent = bundleAnnonce.getString("NOM_ACTIVITE");
         remplirTableauParametres();
 
@@ -105,7 +104,6 @@ public class ChoiceAnnonce extends Fragment {
         ajoutBoutonRecherche() ;
 
         //TODO faire en recevant des parametres cocher selon type si non general
-
 
         recyclerView = (RecyclerView) racine.findViewById(R.id.linearMiniaturesAnnonces);
 
@@ -137,12 +135,9 @@ public class ChoiceAnnonce extends Fragment {
 
 
                     String cheminImg = (String)annonce.child("Image").getValue();
-                    if(!cheminImg.equals("")) {
-                        mStorageRef = storage.getReference();
-
+                    if((!cheminImg.equals("")) && (annonceValidateByParameter(mapTags, tableauParametre))) {
+                            mStorageRef = storage.getReference();
                             StorageReference imageRef = mStorageRef.child(cheminImg);
-
-                            if (annonceValidateByParameter(mapTags, tableauParametre)) {
 
                                 final long ONE_MEGABYTE = 4096 * 4096;
                                 imageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
@@ -181,7 +176,7 @@ public class ChoiceAnnonce extends Fragment {
                                         Log.e("passage", "failure dans choiceAnnonce " + exception.getMessage());
                                     }
                                 });
-                            }
+
 
 
 
@@ -318,7 +313,6 @@ public class ChoiceAnnonce extends Fragment {
 
         Log.d("passage","dansAnnonceValidateByParameter taille param " + parametreRequest.size());
         for(i= 0 ; i<nbrParam; i++){
-//            Log.d("passage" , "Dans annonceValidateByParameter" +arrayMap.get(parametreRequest.get(i)).getClass());
             if(!(boolean)arrayMap.get(parametreRequest.get(i)) ){
                 return false;
             }

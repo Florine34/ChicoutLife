@@ -37,7 +37,7 @@ public class InfoActivity extends Fragment {
     static Bundle bundleInfo;
 
 
-    public static Fragment newInstance(Intent intent){//TODO a supp
+    public static Fragment newInstance(Intent intent){
         intentInfoActivity = intent ;
         return new InfoActivity();
     }
@@ -52,10 +52,6 @@ public class InfoActivity extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         saved = savedInstanceState;
-
-       // setContentView(R.layout.info_activity);
-        
-
     }
 
     @Nullable
@@ -71,9 +67,6 @@ public class InfoActivity extends Fragment {
         super.onStart();
         FirebaseDatabase database;
         final DatabaseReference infoPage;
-
-        //Intent intent= getActivity().getIntent();
-       // Bundle b = intentInfoActivity.getExtras();
 
         context = getContext();
         String test = "truc.jpg";
