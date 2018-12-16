@@ -81,6 +81,7 @@ public class Annonce  extends AppCompatActivity {
                         final ImageView viewImage = (ImageView) findViewById(R.id.imageAnnonce);
 
                         String cheminImg = (String)dataSnapshot.child("Image").getValue();
+                        Log.d("chemin","chemin img " + cheminImg);
                         mStorageRef =  storage.getReference();
                         StorageReference imageRef = mStorageRef.child(cheminImg);
 
