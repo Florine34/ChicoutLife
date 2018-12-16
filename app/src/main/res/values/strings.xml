@@ -60,6 +60,9 @@
     <string name="appartement">Appartement</string>
     <string name="vetement">Vetements</string>
     <string name="acceder_aux_annonces">Accéder aux Annonces</string>
+    <string name="acc_der_la_to_do_list">Accéder à la TO DO LIST</string>
+    <string name="editer_mes_renseignements">Editer mes renseignements</string>
+    <string name="se_d_connecter">Se déconnecter</string>
 
     <!-- Pays -->
     <string-array name="country_arrays">
