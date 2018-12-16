@@ -127,62 +127,17 @@ public class ChoiceAnnonce extends Fragment {
                     DataSnapshot dataTags = annonce.child("Tags");
                     ArrayMap mapTags= new ArrayMap<>();
 
-
                     //Liste des tags de l'annonce en cours
                     for(DataSnapshot Tag : dataTags.getChildren()){
                             mapTags.put((String) Tag.getKey() , Tag.getValue());
                     }
 
-
+                    //Ajout de l'annonce
                     String cheminImg = (String)annonce.child("Image").getValue();
                     if((!cheminImg.equals("")) && (annonceValidateByParameter(mapTags, tableauParametre))) {
-                            mStorageRef = storage.getReference();
-                            StorageReference imageRef = mStorageRef.child(cheminImg);
-
-                                final long ONE_MEGABYTE = 4096 * 4096;
-                                imageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                                    @Override
-                                    public void onSuccess(byte[] bytes) {
-
-                                        /*Recuperation des donnes textes dans la base de donnee*/
-                                        String modelTitre = (String) annonce.child("Titre").getValue();
-                                        String modelDescription = (String) annonce.child("Description").getValue();
-                                        String modelPrix = (String) annonce.child("Prix").getValue();
-                                        if (modelDescription.length() > 150) {
-                                            modelDescription = modelDescription.substring(0, 149);
-                                            modelDescription = modelDescription + "...";
-                                        }
-                                        ;
-
-                                        /*Recuperation du chemin de l'annonce pour la redirection lors du OnClick*/
-                                        String cheminAnnonceBdd = annonce.getKey();
-                                        Bitmap imageAnnonce = null;
-
-                                        /*Recuperation de l'image dans la base de donnee*/
-
-                                        imageAnnonce = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                                        imageAnnonce = Bitmap.createScaledBitmap(imageAnnonce, 360, 240, false);
-                                        ModelAnnonce model = new ModelAnnonce(modelTitre, modelDescription, imageAnnonce, cheminAnnonceBdd,modelPrix);
-                                        modelsAnnonces.add(model);
-
-                                        /*Sert pour le recyclerView , sinon la taille est initialiser a zero et le recycler ne se remplit pas*/
-                                        verticalAdapter.notifyDataSetChanged();
-
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception exception) {
-                                        // Handle any errors
-                                        Log.e("passage", "failure dans choiceAnnonce " + exception.getMessage());
-                                    }
-                                });
-
-
-
-
+                            recuperationBaDDAjoutAnnonce(annonce,cheminImg); //Ajout a modelsAnnonces
                     }
                 }
-                Log.d("passage","taille din datachange" + modelsAnnonces.size());
 
                 LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
                 recyclerView.setLayoutManager(verticalLayoutManager);
@@ -195,10 +150,54 @@ public class ChoiceAnnonce extends Fragment {
 
             }
         });
-        //TODO remplir avec bdd realtime et storage
         return modelsAnnonces;
     }
 
+    public void recuperationBaDDAjoutAnnonce(final DataSnapshot annonce, String cheminImg){
+        mStorageRef = storage.getReference();
+        StorageReference imageRef = mStorageRef.child(cheminImg);
+
+        final long ONE_MEGABYTE = 4096 * 4096;
+        imageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+
+                /*Recuperation des donnes textes dans la base de donnee*/
+                String modelTitre = (String) annonce.child("Titre").getValue();
+                String modelDescription = (String) annonce.child("Description").getValue();
+                String modelPrix = (String) annonce.child("Prix").getValue();
+                if (modelDescription.length() > 150) {
+                    modelDescription = modelDescription.substring(0, 149);
+                    modelDescription = modelDescription + "...";
+                }
+                ;
+
+                /*Recuperation du chemin de l'annonce pour la redirection lors du OnClick*/
+                String cheminAnnonceBdd = annonce.getKey();
+                Bitmap imageAnnonce = null;
+
+                /*Recuperation de l'image dans la base de donnee*/
+
+                imageAnnonce = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                imageAnnonce = Bitmap.createScaledBitmap(imageAnnonce, 360, 240, false);
+                ModelAnnonce model = new ModelAnnonce(modelTitre, modelDescription, imageAnnonce, cheminAnnonceBdd,modelPrix);
+                modelsAnnonces.add(model);
+
+                /*Sert pour le recyclerView , sinon la taille est initialiser a zero et le recycler ne se remplit pas*/
+                verticalAdapter.notifyDataSetChanged();
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+                Log.e("passage", "failure dans choiceAnnonce " + exception.getMessage());
+            }
+        });
+
+
+
+    }
     public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.MyViewHolder>{
 
         List<ModelAnnonce> verticalList ;

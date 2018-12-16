@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import java.util.List;
 
@@ -40,15 +41,13 @@ public class TacheArrayAdapter extends ArrayAdapter<ToDo> {
         final ToDo tache = (ToDo) this.getItem(position);
         CheckBox checkBox;
         final ImageButton imageButton;
-
+        int id;
 
         if (convertView == null){
 
             convertView = inflater.inflate(R.layout.liste_adapter,null);
-
             checkBox = (CheckBox) convertView.findViewById(R.id.checkboxtaches);
             imageButton = (ImageButton) convertView.findViewById(R.id.imagebuttontaches);
-
             convertView.setTag(new TacheViewHolder(checkBox,imageButton));
 
         }
@@ -60,8 +59,7 @@ public class TacheArrayAdapter extends ArrayAdapter<ToDo> {
         }
             String text= tache.getToDoTache();
 
-
-            int id = getStringIdentifier(context, text);
+            id = getStringIdentifier(context, text);
             /*Checkbox*/
             checkBox.setTag(tache);
             checkBox.setText(context.getResources().getString(id));
@@ -70,45 +68,33 @@ public class TacheArrayAdapter extends ArrayAdapter<ToDo> {
             /*ImageButton*/
             imageButton.setId(id);
             //TODO  recup nom tache trouver correspondance ds bdd info pusher consequence, type 0 1 2
-            imageButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Log.d("passage" , "dans tacheArrayAdapter onCLICK");
-
-                    boolean tablette = fragmentActivity.getResources().getBoolean(R.bool.tablette);
-                    switch (tache.getType()){
-                        case 0://Cas page informations
-
-                            if(tablette == true){
-                                Log.d("passage" , "Dans TacheArrayAdapter Mode paysage et tablette que infos");
-                                communicationActivityMain(tache,"1");
-
-                            }else{
-                                communicationActivityMain(tache,"1");
-                                Log.d("passage" , "Mode portrait cas infos");
-
-                            }
-                            break;
-
-                        case 1://Cas page les deux
-                            if(tablette == true){
-                                Log.d("passage" , "Mode paysage et tablette infos et annonces nomtache " +tache.getCheminBdd()+ "type" + tache.getType());
-                                communicationActivityMain(tache,"2");
-
-                            }else{
-                                Log.d("passage" , "Mode portrait cas infos et annonces");
-                                communicationActivityMain(tache,"2");
-
-                            }
-                    }
-                }
-            });
-
-
+            ajoutListenerImageButton(imageButton,tache);
 
         return  convertView;
     }
 
+    public void ajoutListenerImageButton(ImageView imageButton, final ToDo tache){
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("passage" , "dans tacheArrayAdapter onCLICK");
+
+                switch (tache.getType()){
+                    case 0://Cas page informations
+
+                        Log.d("passage" , "Dans TacheArrayAdapter.ajoutListenerImageButton Cas infos");
+                         communicationActivityMain(tache,"1");
+                        break;
+
+                    case 1://Cas page les deux
+
+                        communicationActivityMain(tache,"2");
+                        break;
+                }
+            }
+        });
+
+    }
     public static int getStringIdentifier(Context context, String name) {
         return context.getResources().getIdentifier(name, "string", context.getPackageName());
     }

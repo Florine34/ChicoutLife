@@ -82,7 +82,6 @@ public class ToDoListInfosAnnonces extends AppCompatActivity {
 
         pages.setAdapter(adapterPages);
         adapterPages.startUpdate(pages);
-        Log.d("passage", "Dans ToDoListInfosAnnonces.reinstanciatePageAdapter nombre fragments support manager?" + getSupportFragmentManager().getFragments().size());
 
         Log.d("passage","est dans ToDoListInfosAnnocnes dans reinstanciatePageAdapter changement effectuer");
     }
@@ -113,22 +112,40 @@ public class ToDoListInfosAnnonces extends AppCompatActivity {
                     finish();
                     return true;
                 case R.id.action_goBack:
-                    if((!land && !infosAnnonces )|| (land && infosAnnonces)) {//cas portrait todolistjust
+                    if((!land && !infosAnnonces )) {//cas portrait todolistjust
+
                         Intent intentRetour = new Intent(ToDoListInfosAnnonces.this, Home_screen.class); // TODO
                         startActivity(intentRetour);
                         finish();
                         return true;
-                    }else if(!infosAnnonces){
+
+                    }else if(land && infosAnnonces) {
+
+                        Intent intentRetour;
+                        if(tablette){//Cas telephone, paysage
+                            intentRetour = new Intent(ToDoListInfosAnnonces.this, Home_screen.class);
+                        }else {//Cas paysage
+
+                            intentRetour = new Intent(ToDoListInfosAnnonces.this, ToDoListInfosAnnonces.class); 
+                        }
+                        startActivity(intentRetour);
+                        finish();
+                        return true;
+                    }
+
+                    else if(!infosAnnonces){//Cas paysage telephone
+
                         Intent intentAccueil2 = new Intent(ToDoListInfosAnnonces.this, Home_screen.class);
                         startActivity(intentAccueil2);
                         finish();
                         return true;
-                    }else {
+
+                    }else {//Cas portrait telephone sur frag infosannonce
+
                         Intent intentRetour = new Intent(ToDoListInfosAnnonces.this, ToDoListInfosAnnonces.class); // TODO
                         startActivity(intentRetour);
                         finish();
                         return true;
-
                     }
 
                 default:
