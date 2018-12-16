@@ -155,7 +155,7 @@ public class ChoiceAnnonce extends Fragment {
                 /*Recuperation des donnes textes dans la base de donnee*/
                 String modelTitre = (String) annonce.child("Titre").getValue();
                 String modelDescription = (String) annonce.child("Description").getValue();
-                String modelPrix = (String) annonce.child("Prix").getValue();
+                String modelPrix = (String) annonce.child("Prix").getValue() + "CAD";
                 if (modelDescription.length() > 150) {
                     modelDescription = modelDescription.substring(0, 149);
                     modelDescription = modelDescription + "...";

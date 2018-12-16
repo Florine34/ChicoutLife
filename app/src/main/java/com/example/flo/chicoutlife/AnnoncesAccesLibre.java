@@ -60,10 +60,18 @@ public class AnnoncesAccesLibre extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.action_goBack:
+                    Bundle bundleParent = getIntent().getExtras();
+                    String nomActivite =bundleParent.getString("NOM_ACTIVITE");
+                    if(nomActivite!=null && nomActivite.equals("Confirm_Create_Annoce")){//TODO REFACTOR
+                        Intent intentRetour = new Intent(AnnoncesAccesLibre.this, Confirm_Create_Annoce.class); // TODO
+                        startActivity(intentRetour);
+                        finish();
 
-                    Intent intentRetour = new Intent(AnnoncesAccesLibre.this, Home_screen.class); // TODO
-                    startActivity(intentRetour);
-                    finish();
+                    }else {
+                        Intent intentRetour = new Intent(AnnoncesAccesLibre.this, Home_screen.class); // TODO
+                        startActivity(intentRetour);
+                        finish();
+                    }
                     return true;
             default:
                 // If we got here, the user's action was not recognized.
