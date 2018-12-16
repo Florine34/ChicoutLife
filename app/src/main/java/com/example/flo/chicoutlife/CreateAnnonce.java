@@ -85,13 +85,9 @@ public class CreateAnnonce  extends AppCompatActivity {
                 startActivityForResult(intentPhoto, REQUEST_IMAGE);
             }
         });
-        if(photoCapture){
-            imageArticle = UUID.randomUUID().toString()+".jpg";
-        }
-        else {
-            imageArticle = getString(R.string.photo_vide);
-            imageView.setImageResource(R.drawable.image_vide);
-        }
+
+        //Image view de base afficher
+        imageView.setImageResource(R.drawable.image_vide);
 
         // Récupère le Prix
         final EditText textPrix = (EditText) findViewById(R.id.RecupPrixArticle);
@@ -110,8 +106,16 @@ public class CreateAnnonce  extends AppCompatActivity {
 
         buttonValider.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
+                Log.d("passage","Dans CreateAnnonce.OnCreate.buttonValidersetOnclick  photoCapture = " + photoCapture + "imageArticle chemin " + imageArticle);
                 etatTags  = new boolean[]{appart.isChecked(), electro.isChecked(), nourriture.isChecked(), vetement.isChecked()};
+                //initialisation chemin image dans bdd
+                if(photoCapture){
+                    imageArticle = UUID.randomUUID().toString()+".jpg";
+                }
+                else {
+                    imageArticle = getString(R.string.photo_vide);
+
+                }
                 FirebaseStorage storage = FirebaseStorage.getInstance();
 
                 // Create a storage reference from our app
@@ -127,6 +131,7 @@ public class CreateAnnonce  extends AppCompatActivity {
 
                 mountainsRef.getName().equals(mountainImagesRef.getName());    // true
                 mountainsRef.getPath().equals(mountainImagesRef.getPath());    // false
+
 
 
                 // Get the data from an ImageView as bytes
