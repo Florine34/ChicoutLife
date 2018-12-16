@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/idRechercherAnnonces"
                 android:text="@string/rechercher"
-                android:background="@drawable/box_orange"
+                android:background="@drawable/buttons_form"
                 android:layout_margin="5dp"/>
 
 

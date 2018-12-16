@@ -116,7 +116,7 @@ public class ToDoListInfosAnnonces extends AppCompatActivity {
                             intentRetour = new Intent(ToDoListInfosAnnonces.this, Home_screen.class);
                         }else {//Cas paysage
 
-                            intentRetour = new Intent(ToDoListInfosAnnonces.this, ToDoListInfosAnnonces.class); 
+                            intentRetour = new Intent(ToDoListInfosAnnonces.this, ToDoListInfosAnnonces.class);
                         }
                         startActivity(intentRetour);
                         finish();

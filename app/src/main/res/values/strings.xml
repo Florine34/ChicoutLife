@@ -61,6 +61,23 @@
     <string name="appartement">Appartement</string>
     <string name="vetement">Vetements</string>
     <string name="acceder_aux_annonces">Accéder aux Annonces</string>
+    <string name="acc_der_la_to_do_list">Accéder à la TO DO LIST</string>
+    <string name="editer_mes_renseignements">Editer mes renseignements</string>
+    <string name="se_d_connecter">Se déconnecter</string>
+    <string name="titreRenseignementArrivee">Renseignements pour votre arrivée</string>
+    <string name="QuestionPays">De quel pays venez vous ?</string>
+    <string name="QuestionDomaine">Quel est votre domaine d\'étude ?</string>
+    <string name="QuestionProgramme">Quel est votre programme d\'étude ?</string>
+    <string name="QuestionTrimestre">Quel est votre trimestre d\'admission ?</string>
+    <string name="automne">Automne</string>
+    <string name="hiver">Hiver</string>
+    <string name="ete">Été</string>
+    <string name="NombreSessions">Combien de session restez-vous ?</string>
+    <string name="QuestionPermisEtude">Avez-vous un Permis d\'étude ?</string>
+    <string name="QuestionEchange">Faites vous partie d\'un échange universitaire ?</string>
+    <string name="QuestionPresenceChicout">Êtes-vous déjà à Chicoutimi ?</string>
+    <string name="QuestionTravail">Souhaitez vous travailler pendant votre séjour ?</string>
+    <string name="to_do_list">TO DO List</string>
 
     <!-- Pays -->
     <string-array name="country_arrays">

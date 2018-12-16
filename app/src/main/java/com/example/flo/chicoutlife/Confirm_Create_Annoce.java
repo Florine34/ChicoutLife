@@ -35,6 +35,8 @@ public class Confirm_Create_Annoce extends AppCompatActivity {
         buttonAnnonces.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle bundleExtra = new Bundle();
+                bundleExtra.putString("NOM_ACTIVITE","Confirm_Create_Annoce");//TODO refactor ;
                 Intent intentAnnonces = new Intent(Confirm_Create_Annoce.this,AnnoncesAccesLibre.class);
                 startActivity(intentAnnonces);
                 finish();
