@@ -122,7 +122,9 @@ public class FragmentToDoListAFaire extends Fragment {
                     if (cheminTacheAFaire != null) {
                         dataTacheChild = dataTache.child(cheminTacheAFaire);
                         Tache t = dataTacheChild.getValue(Tache.class);
-                        tachesaFaire.add(new ToDo(t.getNom(),false,t.getType(),cheminTacheAFaire));
+                        if(t!=null) {
+                            tachesaFaire.add(new ToDo(t.getNom(), false, t.getType(), cheminTacheAFaire));
+                        }
 
                     }
 
