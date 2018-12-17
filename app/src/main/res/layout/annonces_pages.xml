@@ -47,7 +47,7 @@
                 android:id="@+id/contactVendeurBtn"
                 android:textAlignment="center"
                 android:text="@string/contacter_vendeur"
-                android:background="@drawable/box_orange"
+                android:background="@drawable/buttons_form"
                 />
         </LinearLayout>
 

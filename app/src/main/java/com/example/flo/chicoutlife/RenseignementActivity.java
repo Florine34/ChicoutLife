@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -47,10 +48,10 @@ public class RenseignementActivity extends  AppCompatActivity { // Activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Log.d("passage","renseignementActivity oncreate");
         intentValue = getIntent().getBooleanExtra(RenseignementActivity.INDEX_RENSEIGNEMENT, false);
         if (savedInstanceState != null)
-        {
+        {    Log.d("passage","renseignementActivity oncreate savedinstacestate diff null");
             intentValue = savedInstanceState.getBoolean("intentValue");
         }
 
@@ -135,7 +136,9 @@ public class RenseignementActivity extends  AppCompatActivity { // Activity
             addListenerOnButton();
 
         }else{
+
             setContentView(R.layout.renseignement_activity);
+            changeOrientation();
 
             final ImageButton buttonDepart = findViewById(R.id.depart);
             buttonDepart.setOnClickListener(new View.OnClickListener() {
@@ -219,6 +222,7 @@ public class RenseignementActivity extends  AppCompatActivity { // Activity
     public void onSaveInstanceState(Bundle outState) {
         outState.putBoolean("intentValue", getIntent().getBooleanExtra(RenseignementActivity.INDEX_RENSEIGNEMENT, false));
         super.onSaveInstanceState(outState);
+
     }
 
     @Override
@@ -227,18 +231,38 @@ public class RenseignementActivity extends  AppCompatActivity { // Activity
         // Je n'ai pas trouvé d'autre solution ... Désolée
         super.onConfigurationChanged(newConfig);
         int orientation = newConfig.orientation;
+        LinearLayout linearLayout = findViewById(R.id.contenantVignetteAD);
+        Log.d("passage","Dans RenseignementActivity onconfigurationchange" + orientation);
+        if(orientation == Configuration.ORIENTATION_LANDSCAPE ){
+            linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+        }else {
+            linearLayout.setOrientation(LinearLayout.VERTICAL);
+        }
+
         if (orientation == Configuration.ORIENTATION_PORTRAIT && intentValue == true) {
+            linearLayout.setOrientation(LinearLayout.VERTICAL);
             Intent intent = getIntent();
             finish();
             startActivity(intent);
         }
         else if (orientation == Configuration.ORIENTATION_LANDSCAPE && intentValue == true){
+            linearLayout.setOrientation(LinearLayout.HORIZONTAL);
             Intent intent = getIntent();
             finish();
             startActivity(intent);
         }
     }
 
+    public void changeOrientation(){
+        int orientation = getResources().getConfiguration().orientation;
+
+        LinearLayout linearLayout = findViewById(R.id.contenantVignetteAD);
+        if(orientation == Configuration.ORIENTATION_LANDSCAPE){
+            linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+        }else{
+            linearLayout.setOrientation(LinearLayout.VERTICAL);
+        }
+    }
     @Override
     //create the menu
     public boolean onCreateOptionsMenu(Menu menu) {
