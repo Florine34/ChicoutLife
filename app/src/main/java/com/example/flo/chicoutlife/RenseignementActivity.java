@@ -185,10 +185,16 @@ public class RenseignementActivity extends  AppCompatActivity { // Activity
                 RadioButton radioButton = (RadioButton) findViewById(radioGroup.getCheckedRadioButtonId());
 
                 EditText numberSession = (EditText) findViewById(R.id.numberText);
-
+                int nombreSession;
+                if(numberSession.getText().toString().equals("")){
+                    nombreSession = 0;
+                }
+                else {
+                   nombreSession = Integer.parseInt(numberSession.getText().toString());
+                }
                 mAuth = FirebaseAuth.getInstance();
                 writeNewRUser(mAuth.getCurrentUser().getEmail(), String.valueOf(spinnerPay.getSelectedItem()), String.valueOf(spinnerDomaine.getSelectedItem()), String.valueOf(spinProg.getSelectedItem()), String.valueOf(radioButton.getText()),
-                        Integer.parseInt(numberSession.getText().toString()), switchPE.isChecked(), switchEchange.isChecked(), switchIci.isChecked(), switchTravail.isChecked());
+                        nombreSession, switchPE.isChecked(), switchEchange.isChecked(), switchIci.isChecked(), switchTravail.isChecked());
 
                 Intent intentRenseignement = new Intent(RenseignementActivity.this, ToDoListInfosAnnonces.class);
                 intentRenseignement.putExtra(INDEX_RENSEIGNEMENT, false);
